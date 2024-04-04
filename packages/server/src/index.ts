@@ -1,11 +1,3 @@
-import 'reflect-metadata';
-
-import express from 'express';
-
-const app = express();
-
-app.get('/', (_req, res) => {
-  res.send('Hello World');
-});
+import { app } from './app';
 
 app.listen(3000);

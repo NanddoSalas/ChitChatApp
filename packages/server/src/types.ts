@@ -6,4 +6,4 @@ export interface PublicUserData {
   createdAt: string;
 }
 
-export type UserRoles = 'Basic' | 'Admin' | 'ServerAdmin';
+export type UserRole = 'Basic' | 'Admin' | 'ServerAdmin';

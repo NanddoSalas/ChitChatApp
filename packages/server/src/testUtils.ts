@@ -1,8 +1,8 @@
 import { faker } from '@faker-js/faker';
 import { User } from './entities';
-import { UserRoles } from './types';
+import { UserRole } from './types';
 
-const createUser = (role: UserRoles) => {
+const createUser = (role: UserRole) => {
   return User.create({
     name: faker.person.fullName(),
     email: faker.internet.email(),
