@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import {
   BaseEntity,
   Column,
@@ -6,6 +7,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { PublicUserData } from '../types';
 import { DirectMessage } from './DirectMessage';
 import { Invitation } from './Invitation';
 import { Member } from './Member';
@@ -18,34 +20,19 @@ export class User extends BaseEntity {
   id: number;
 
   @Column()
-  fullName: String;
+  name: string;
 
-  @Column()
-  displayName: String;
-
-  @Column()
-  avatar: String;
-
-  @Column()
-  role: String;
+  @Column({ default: 'Basic' })
+  role: string;
 
   @CreateDateColumn()
   createdAt: Date;
 
   @Column()
-  email: String;
+  email: string;
 
   @Column()
-  password: String;
-
-  @Column()
-  googleId: String;
-
-  @Column()
-  twitterId: String;
-
-  @Column()
-  githubId: String;
+  password: string;
 
   @OneToMany(() => Room, (room) => room.owner)
   createdRooms: Promise<Room>;
@@ -64,4 +51,25 @@ export class User extends BaseEntity {
 
   @OneToMany(() => DirectMessage, (directMessage) => directMessage.sendTo)
   receivedMessages: Promise<DirectMessage>;
+
+  setPassword(password: string) {
+    const salt = bcrypt.genSaltSync(10);
+    this.password = bcrypt.hashSync(password, salt);
+
+    return this;
+  }
+
+  validatePassword(password: string) {
+    return bcrypt.compareSync(password, this.password);
+  }
+
+  getPublicUserData(): PublicUserData {
+    return {
+      id: this.id,
+      name: this.name,
+      email: this.email,
+      createdAt: this.createdAt.toISOString(),
+      role: this.role,
+    };
+  }
 }
