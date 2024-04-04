@@ -5,3 +5,5 @@ export interface PublicUserData {
   email: string;
   createdAt: string;
 }
+
+export type UserRoles = 'Basic' | 'Admin' | 'ServerAdmin';
