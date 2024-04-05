@@ -1,4 +1,4 @@
-import { AdminRoleRequired } from './AdminRoleRequired';
-import { AuthRequired } from './AuthRequired';
+import { adminRoleRequired } from './adminRoleRequired';
+import { authRequired } from './authRequired';
 
-export { AdminRoleRequired, AuthRequired };
+export { adminRoleRequired, authRequired };

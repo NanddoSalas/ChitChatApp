@@ -1,7 +1,7 @@
 import { Middleware } from '../types';
 import { getUser } from '../utils';
 
-export const AuthRequired: Middleware = async (req, res, next) => {
+export const authRequired: Middleware = async (req, res, next) => {
   const accessToken = req.headers.authorization?.split(' ')[1];
 
   const user = await getUser(accessToken || '');
