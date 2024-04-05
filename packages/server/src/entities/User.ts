@@ -7,7 +7,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { PublicUserData } from '../types';
+import { PublicUserData, UserRole } from '../types';
 import { DirectMessage } from './DirectMessage';
 import { Invitation } from './Invitation';
 import { Member } from './Member';
@@ -23,7 +23,7 @@ export class User extends BaseEntity {
   name: string;
 
   @Column({ default: 'Basic' })
-  role: string;
+  role: UserRole;
 
   @CreateDateColumn()
   createdAt: Date;
