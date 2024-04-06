@@ -16,6 +16,9 @@ export class Invitation extends BaseEntity {
   @Column({ unique: true })
   code: string;
 
+  @Column()
+  createdById: number;
+
   @ManyToOne(() => User, (user) => user.generatedInvitations)
   createdBy: Promise<User>;
 

@@ -1,4 +1,10 @@
-import { BaseEntity, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Room } from './Room';
 import { User } from './User';
 
@@ -6,6 +12,12 @@ import { User } from './User';
 export class Member extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  userId: number;
+
+  @Column()
+  roomId: number;
 
   @ManyToOne(() => User, (user) => user.memberOf)
   user: User;

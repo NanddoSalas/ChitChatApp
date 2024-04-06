@@ -19,6 +19,9 @@ export class Room extends BaseEntity {
   @Column()
   name: String;
 
+  @Column()
+  ownerId: number;
+
   @ManyToOne(() => User, (user) => user.createdRooms)
   owner: Promise<User>;
 

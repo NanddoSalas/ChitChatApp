@@ -1,10 +1,16 @@
-import { Entity, ManyToOne } from 'typeorm';
+import { Column, Entity, ManyToOne } from 'typeorm';
 import { Message } from './Message';
 import { Room } from './Room';
 import { User } from './User';
 
 @Entity()
 export class RoomMessage extends Message {
+  @Column()
+  createdById: number;
+
+  @Column()
+  sendAtId: number;
+
   @ManyToOne(() => User, (user) => user.roomMessages)
   createdBy: Promise<User>;
 
