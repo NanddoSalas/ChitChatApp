@@ -20,8 +20,8 @@ export class Member extends BaseEntity {
   roomId: number;
 
   @ManyToOne(() => User, (user) => user.memberOf)
-  user: User;
+  user: Promise<User>;
 
   @ManyToOne(() => Room, (room) => room.members)
-  room: Room;
+  room: Promise<Room>;
 }
