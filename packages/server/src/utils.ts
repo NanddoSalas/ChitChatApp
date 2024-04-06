@@ -36,16 +36,6 @@ export const createInvitation = (user: User) => {
   return newInvitation.save();
 };
 
-export const createRoom = (name: string, owner: User, isPrivate: boolean) => {
-  const newRoom = Room.create();
-
-  newRoom.isPrivate = isPrivate;
-  newRoom.owner = Promise.resolve(owner);
-  newRoom.name = name;
-
-  return newRoom.save();
-};
-
 export const addUserToRoom = (user: User, room: Room) => {
   const newMember = Member.create();
 
@@ -53,6 +43,24 @@ export const addUserToRoom = (user: User, room: Room) => {
   newMember.user = Promise.resolve(user);
 
   return newMember.save();
+};
+
+export const createRoom = async (
+  name: string,
+  owner: User,
+  isPrivate: boolean,
+) => {
+  const newRoom = Room.create();
+
+  newRoom.isPrivate = isPrivate;
+  newRoom.owner = Promise.resolve(owner);
+  newRoom.name = name;
+
+  await newRoom.save();
+
+  await addUserToRoom(owner, newRoom);
+
+  return newRoom;
 };
 
 export const sendMessageAtRoom = (
