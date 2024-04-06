@@ -15,6 +15,12 @@ export interface PublicInvitationData {
   limit: number;
 }
 
+export interface PublicMessageData {
+  id: number;
+  body: String;
+  createdAt: string;
+}
+
 export type UserRole = 'Basic' | 'Admin' | 'ServerAdmin';
 
 export type Middleware = (
