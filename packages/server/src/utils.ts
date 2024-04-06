@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
-import { User } from './entities';
+import short from 'short-uuid';
+import { Invitation, User } from './entities';
 
 export const createAccesToken = async (user: User) => {
   const payload = {
@@ -23,4 +24,14 @@ export const getUser = async (accessToken: string) => {
   } catch (err) {
     return undefined;
   }
+};
+
+export const createInvitation = (user: User) => {
+  const newInvitation = Invitation.create();
+
+  newInvitation.code = short.generate();
+  newInvitation.createdBy = Promise.resolve(user);
+  newInvitation.limit = 5;
+
+  return newInvitation.save();
 };

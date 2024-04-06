@@ -42,6 +42,7 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "reflect-metadata": "^0.2.2",
+    "short-uuid": "^4.2.2",
     "typeorm": "^0.3.20",
     "yup": "^1.4.0"
   }
