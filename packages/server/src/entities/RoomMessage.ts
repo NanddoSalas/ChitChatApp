@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToOne } from 'typeorm';
+import { PublicMessageData } from '../types';
 import { Message } from './Message';
 import { Room } from './Room';
 import { User } from './User';
@@ -16,4 +17,13 @@ export class RoomMessage extends Message {
 
   @ManyToOne(() => Room, (room) => room.messages)
   sendAt: Promise<Room>;
+
+  getMessagePublicData(): PublicMessageData {
+    return {
+      id: this.id,
+      body: this.body,
+      createdAt: this.createdAt.toISOString(),
+      createdById: this.createdById,
+    };
+  }
 }

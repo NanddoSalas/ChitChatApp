@@ -19,6 +19,7 @@ export interface PublicMessageData {
   id: number;
   body: String;
   createdAt: string;
+  createdById: number;
 }
 
 export type UserRole = 'Basic' | 'Admin' | 'ServerAdmin';

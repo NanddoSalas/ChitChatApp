@@ -1,4 +1,5 @@
 import { Column, Entity, ManyToOne } from 'typeorm';
+import { PublicMessageData } from '../types';
 import { Message } from './Message';
 import { User } from './User';
 
@@ -15,4 +16,13 @@ export class DirectMessage extends Message {
 
   @ManyToOne(() => User, (user) => user.receivedMessages)
   sendTo: Promise<User>;
+
+  getMessagePublicData(): PublicMessageData {
+    return {
+      id: this.id,
+      body: this.body,
+      createdAt: this.createdAt.toISOString(),
+      createdById: this.createdById,
+    };
+  }
 }
