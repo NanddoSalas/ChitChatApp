@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import short from 'short-uuid';
-import { Invitation, User } from './entities';
+import { Invitation, Member, Room, RoomMessage, User } from './entities';
 
 export const createAccesToken = async (user: User) => {
   const payload = {
@@ -34,4 +34,37 @@ export const createInvitation = (user: User) => {
   newInvitation.limit = 5;
 
   return newInvitation.save();
+};
+
+export const createRoom = (name: string, owner: User, isPrivate: boolean) => {
+  const newRoom = Room.create();
+
+  newRoom.isPrivate = isPrivate;
+  newRoom.owner = Promise.resolve(owner);
+  newRoom.name = name;
+
+  return newRoom.save();
+};
+
+export const addUserToRoom = (user: User, room: Room) => {
+  const newMember = Member.create();
+
+  newMember.room = Promise.resolve(room);
+  newMember.user = Promise.resolve(user);
+
+  return newMember.save();
+};
+
+export const sendMessageAtRoom = (
+  user: User,
+  room: Room,
+  messageBody: string,
+) => {
+  const newRoomMessage = RoomMessage.create();
+
+  newRoomMessage.body = messageBody;
+  newRoomMessage.createdBy = Promise.resolve(user);
+  newRoomMessage.sendAt = Promise.resolve(room);
+
+  return newRoomMessage.save();
 };
