@@ -12,7 +12,7 @@ export class Invitation extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   code: string;
 
   @ManyToOne(() => User, (user) => user.generatedInvitations)
@@ -23,7 +23,4 @@ export class Invitation extends BaseEntity {
 
   @Column({ default: 0 })
   limit: number;
-
-  @Column()
-  expireDate: Date;
 }
