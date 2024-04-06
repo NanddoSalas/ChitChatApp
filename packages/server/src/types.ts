@@ -8,6 +8,13 @@ export interface PublicUserData {
   createdAt: string;
 }
 
+export interface PublicInvitationData {
+  id: number;
+  code: string;
+  uses: number;
+  limit: number;
+}
+
 export type UserRole = 'Basic' | 'Admin' | 'ServerAdmin';
 
 export type Middleware = (

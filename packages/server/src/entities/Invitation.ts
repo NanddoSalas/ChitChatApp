@@ -5,6 +5,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { PublicInvitationData } from '../types';
 import { User } from './User';
 
 @Entity()
@@ -23,4 +24,8 @@ export class Invitation extends BaseEntity {
 
   @Column({ default: 0 })
   limit: number;
+
+  getPublicData(): PublicInvitationData {
+    return { id: this.id, code: this.code, limit: this.limit, uses: this.uses };
+  }
 }
