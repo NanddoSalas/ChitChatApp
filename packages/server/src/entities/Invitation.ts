@@ -28,7 +28,7 @@ export class Invitation extends BaseEntity {
   @Column({ default: 0 })
   limit: number;
 
-  getPublicData(): PublicInvitationData {
+  getPublicInvitationData(): PublicInvitationData {
     return { id: this.id, code: this.code, limit: this.limit, uses: this.uses };
   }
 }
