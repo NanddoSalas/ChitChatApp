@@ -1,3 +1,5 @@
+import express from 'express';
+
 export interface PublicUserData {
   id: number;
   name: string;
@@ -13,3 +15,21 @@ export type Middleware = (
   res: express.Response,
   next: express.NextFunction,
 ) => void;
+
+export type RequestHandler = (
+  req: express.Request,
+  res: express.Response,
+) => void;
+
+export interface RetrieveUsersResponseData {
+  users: PublicUserData[];
+}
+
+export type UpdateUserRequestData = {
+  name: string;
+  email: string;
+};
+
+export type UpdateUserRoleRequestData = {
+  role: UserRole;
+};
