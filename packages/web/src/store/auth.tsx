@@ -37,6 +37,7 @@ interface Actions {
   ) => void;
   updateUser: (name: string, about: string) => void;
   updatePassword: (oldPassword: string, newPassword: string) => void;
+  signOut: () => void;
 }
 
 export interface AuthSlice extends State, Actions {}
@@ -57,4 +58,5 @@ export const createAuthSlice: StateCreator<AuthSlice> = () => ({
   disconnectOAuthProvider: () => {},
   updateUser: () => {},
   updatePassword: () => {},
+  signOut: () => {},
 });
