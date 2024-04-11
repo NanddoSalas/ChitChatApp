@@ -1,7 +1,9 @@
 import { useStore } from '../../../store';
+import { classNames } from '../../../utils';
 
 export const ProfileButton = () => {
   const navigate = useStore((state) => state.navigate);
+  const current = useStore((state) => state.navigation.path) === '/account';
 
   const handleClick = () => {
     navigate('/account', null);
@@ -10,7 +12,10 @@ export const ProfileButton = () => {
   return (
     <a
       href="#"
-      className="flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800"
+      className={classNames(
+        'flex items-center gap-x-4 px-6 py-3 text-sm font-semibold leading-6 text-white hover:bg-gray-800',
+        current ? 'bg-gray-800' : '',
+      )}
       onClick={handleClick}
     >
       <img
