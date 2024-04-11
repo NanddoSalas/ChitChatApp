@@ -41,3 +41,12 @@ export type Message = {
 };
 
 export type OAuthProvider = 'Google' | 'GitHub';
+
+export type NavigationPath =
+  | '/'
+  | '/account'
+  | '/invitations'
+  | '/users'
+  | '/rooms'
+  | '/user/:id'
+  | '/room/:id';

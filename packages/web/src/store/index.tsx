@@ -5,19 +5,21 @@ import {
   createDirectMessagesSlice,
 } from './directMessages';
 import { InvitationsSlice, createInvitationsSlice } from './invitations';
+import { NavigationSlice, createNavigationSlice } from './navigation';
 import { RoomMembersSlice, createRoomMembersSlice } from './roomMembers';
 import { RoomMessagesSlice, createRoomMessagesSlice } from './roomMessages';
 import { RoomsSlice, createRoomsSlice } from './rooms';
 import { UsersSlice, createUsersSlice } from './users';
 
-export const createStore = create<
+export const useStore = create<
   AuthSlice &
     UsersSlice &
     RoomsSlice &
     InvitationsSlice &
     RoomMembersSlice &
     RoomMessagesSlice &
-    DirectMessagesSlice
+    DirectMessagesSlice &
+    NavigationSlice
 >()((...a) => ({
   ...createAuthSlice(...a),
   ...createUsersSlice(...a),
@@ -26,4 +28,5 @@ export const createStore = create<
   ...createRoomMembersSlice(...a),
   ...createRoomMessagesSlice(...a),
   ...createDirectMessagesSlice(...a),
+  ...createNavigationSlice(...a),
 }));
