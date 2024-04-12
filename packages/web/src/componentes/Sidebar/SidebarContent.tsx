@@ -3,11 +3,11 @@ import {
   HashtagIcon,
   UserIcon,
 } from '@heroicons/react/24/outline';
+import { useStore } from '../../store';
 import { NavigationPath } from '../../store/types';
-import { SearchButton } from './components';
+import { RoomItem, SearchButton } from './components';
 import { NavigationItem } from './components/NavigationItem';
 import { ProfileButton } from './components/ProfileButton';
-import { RoomItem } from './components/RoomItem';
 import { UserItem } from './components/UserItem';
 
 const navigation = [
@@ -21,25 +21,10 @@ const navigation = [
   { name: 'Rooms', icon: HashtagIcon, current: false, href: '/rooms' },
 ];
 
-const rooms = [
-  { id: 1, name: 'Heroicons', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', initial: 'T', current: true },
-  { id: 3, name: 'Workcation', initial: 'W', current: false },
-];
-
-const users = [
-  { id: 1, name: 'Luis Fernando Cano Salas', initial: 'L', current: true },
-  { id: 2, name: 'Linus', initial: 'L', current: false },
-  { id: 3, name: 'Sean Frankil', initial: 'S', current: false },
-  {
-    id: 4,
-    name: 'This is a Fucking long namedsjfkldsjflksdjfk',
-    initial: 'A',
-    current: false,
-  },
-];
-
 export const SidebarContent = () => {
+  const users = useStore((state) => state.users.data);
+  const rooms = useStore((state) => state.rooms.data);
+
   return (
     <nav className="flex flex-1 flex-col">
       <ul role="list" className="flex flex-1 flex-col gap-y-7">
@@ -69,13 +54,13 @@ export const SidebarContent = () => {
           <div className=" font-semibold leading-6 text-gray-400">Rooms</div>
 
           <ul role="list" className="-mx-2 mt-2 space-y-1">
-            {rooms.map(({ id, name, current }) => (
+            {rooms?.map(({ id, name, isPrivate, haveAccess }) => (
               <li key={id}>
                 <RoomItem
                   id={id}
                   name={name}
-                  isPrivate={current}
-                  haveAccess={current}
+                  isPrivate={isPrivate}
+                  haveAccess={haveAccess}
                 />
               </li>
             ))}
@@ -88,9 +73,13 @@ export const SidebarContent = () => {
           </div>
 
           <ul role="list" className="-mx-2 mt-2 space-y-1">
-            {users.map(({ id, name, current }) => (
-              <li key={id}>
-                <UserItem id={id} name={name} isOnline={current} />
+            {users?.map((user) => (
+              <li key={user.id}>
+                <UserItem
+                  id={user.id}
+                  avatar={user.avatar}
+                  fullName={user.fullName}
+                />
               </li>
             ))}
           </ul>

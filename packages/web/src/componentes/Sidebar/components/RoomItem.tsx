@@ -17,7 +17,7 @@ export const RoomItem: React.FC<RoomItemProps> = ({
   id,
   name,
   isPrivate,
-  haveAccess,
+  ...props
 }) => {
   const count = getRandomInt(0, 5);
   const navigate = useStore((state) => state.navigate);
@@ -25,17 +25,21 @@ export const RoomItem: React.FC<RoomItemProps> = ({
   const isSelected =
     navigationPath.id === id && navigationPath.path === '/room/:id';
 
+  const haveAccess =
+    isPrivate === false ? true : props.haveAccess ? true : false;
+
   const handleClick = () => {
-    navigate('/room/:id', id);
+    if (haveAccess) {
+      navigate('/room/:id', id);
+    }
   };
 
   return (
     <a
       className={classNames(
-        isSelected
-          ? 'bg-gray-800 text-white'
-          : 'text-gray-400 hover:text-white hover:bg-gray-800',
+        isSelected ? 'bg-gray-800 text-white' : 'text-gray-400',
         'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
+        haveAccess ? 'hover:bg-gray-800 hover:text-white' : '',
       )}
       onClick={handleClick}
     >
@@ -51,13 +55,15 @@ export const RoomItem: React.FC<RoomItemProps> = ({
 
       {name}
 
-      {count ? (
-        <span
-          className="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700"
-          aria-hidden="true"
-        >
-          {count}+
-        </span>
+      {haveAccess ? (
+        count ? (
+          <span
+            className="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700"
+            aria-hidden="true"
+          >
+            {count}+
+          </span>
+        ) : null
       ) : null}
     </a>
   );
