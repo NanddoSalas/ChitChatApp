@@ -2,8 +2,9 @@ export type Role = 'ServerAdmin' | 'Admin' | 'Member';
 
 export type User = {
   id: number;
-  avatar: string | null;
+  avatar: string;
   fullName: string;
+  about: string;
   email: string;
   role: Role;
   joinedServer: Date;
@@ -49,4 +50,5 @@ export type NavigationPath =
   | '/users'
   | '/rooms'
   | '/users/:id'
-  | '/rooms/:id';
+  | '/rooms/:id'
+  | '/rooms/:id/members';
