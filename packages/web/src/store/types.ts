@@ -48,5 +48,5 @@ export type NavigationPath =
   | '/invitations'
   | '/users'
   | '/rooms'
-  | '/user/:id'
-  | '/room/:id';
+  | '/users/:id'
+  | '/rooms/:id';
