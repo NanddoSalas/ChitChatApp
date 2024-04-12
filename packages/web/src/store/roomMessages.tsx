@@ -16,6 +16,7 @@ interface Actions {
   retrieveRoomMessages: (roomid: number) => void;
   retrieveMoreRoomMessages: (roomId: number) => void;
   sendRoomMessage: (messageBody: string, roomId: number) => void;
+  touchRoom: (roomId: number) => void;
 }
 
 export interface RoomMessagesSlice extends Store, Actions {}
@@ -25,4 +26,5 @@ export const createRoomMessagesSlice: StateCreator<RoomMessagesSlice> = () => ({
   retrieveRoomMessages: () => {},
   retrieveMoreRoomMessages: () => {},
   sendRoomMessage: () => {},
+  touchRoom: () => {},
 });

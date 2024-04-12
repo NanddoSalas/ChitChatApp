@@ -16,6 +16,7 @@ interface Actions {
   retrieveDirectMessages: (userId: number) => void;
   retrieveMoreDirectMessages: (userId: number) => void;
   sendDirectMessage: (messageBody: string, userId: number) => void;
+  touchUser: (userId: number) => void;
 }
 
 export interface DirectMessagesSlice extends Store, Actions {}
@@ -27,4 +28,5 @@ export const createDirectMessagesSlice: StateCreator<
   retrieveDirectMessages: () => {},
   retrieveMoreDirectMessages: () => {},
   sendDirectMessage: () => {},
+  touchUser: () => {},
 });
