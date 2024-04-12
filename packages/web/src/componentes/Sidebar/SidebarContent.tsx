@@ -1,29 +1,13 @@
-import {
-  EnvelopeIcon,
-  HashtagIcon,
-  UserIcon,
-} from '@heroicons/react/24/outline';
 import { useStore } from '../../store';
-import { NavigationPath } from '../../store/types';
+import { AdminOptions } from './AdminOptions';
 import { RoomItem, SearchButton } from './components';
-import { NavigationItem } from './components/NavigationItem';
 import { ProfileButton } from './components/ProfileButton';
 import { UserItem } from './components/UserItem';
-
-const navigation = [
-  {
-    name: 'Invitations',
-    icon: EnvelopeIcon,
-    current: false,
-    href: '/invitations',
-  },
-  { name: 'Users', icon: UserIcon, current: false, href: '/users' },
-  { name: 'Rooms', icon: HashtagIcon, current: false, href: '/rooms' },
-];
 
 export const SidebarContent = () => {
   const users = useStore((state) => state.users.data);
   const rooms = useStore((state) => state.rooms.data);
+  const role = useStore((state) => state.auth.user?.role);
 
   return (
     <nav className="flex flex-1 flex-col">
@@ -32,23 +16,7 @@ export const SidebarContent = () => {
           <SearchButton />
         </li>
 
-        <li>
-          <div className="font-semibold leading-6 text-gray-400">
-            Admin Options
-          </div>
-
-          <ul role="list" className="-mx-2 space-y-1">
-            {navigation.map((item) => (
-              <li key={item.name}>
-                <NavigationItem
-                  name={item.name}
-                  icon={item.icon}
-                  href={item.href as NavigationPath}
-                />
-              </li>
-            ))}
-          </ul>
-        </li>
+        {role !== 'Member' ? <AdminOptions /> : null}
 
         <li>
           <div className=" font-semibold leading-6 text-gray-400">Rooms</div>
