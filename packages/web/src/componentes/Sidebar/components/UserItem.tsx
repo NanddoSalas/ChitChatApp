@@ -12,12 +12,12 @@ export const UserItem: React.FC<UserItemProps> = ({ id, avatar, fullName }) => {
   const navigate = useStore((state) => state.navigate);
   const navigationPath = useStore((state) => state.navigation);
   const isSelected =
-    navigationPath.id === id && navigationPath.path === '/user/:id';
+    navigationPath.id === id && navigationPath.path === '/users/:id';
 
   const isOnline = isSelected;
 
   const handleClick = () => {
-    navigate('/user/:id', id);
+    navigate('/users/:id', id);
   };
 
   return (

@@ -23,14 +23,14 @@ export const RoomItem: React.FC<RoomItemProps> = ({
   const navigate = useStore((state) => state.navigate);
   const navigationPath = useStore((state) => state.navigation);
   const isSelected =
-    navigationPath.id === id && navigationPath.path === '/room/:id';
+    navigationPath.id === id && navigationPath.path === '/rooms/:id';
 
   const haveAccess =
     isPrivate === false ? true : props.haveAccess ? true : false;
 
   const handleClick = () => {
     if (haveAccess) {
-      navigate('/room/:id', id);
+      navigate('/rooms/:id', id);
     }
   };
 
