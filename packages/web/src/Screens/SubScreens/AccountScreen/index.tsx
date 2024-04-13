@@ -26,7 +26,7 @@ const AccountScreen = () => {
           about={user.about}
           avatar={user.avatar}
           email={user.email}
-          fullName={user.email}
+          fullName={user.fullName}
           onSave={handleProfileSave}
         />
 
