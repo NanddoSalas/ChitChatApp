@@ -13,7 +13,7 @@ export type User = {
 export type Invitation = {
   id: number;
   inviteCode: string;
-  limit: number | null;
+  limit: number;
   uses: number;
   isRevoked: boolean;
   createdAt: Date;
