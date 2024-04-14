@@ -1,7 +1,10 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { XMarkIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
+import { useHotkeys } from 'react-hotkeys-hook';
 import { Fragment } from 'react/jsx-runtime';
+import { useStore } from '../../store';
+import { CommandPalette } from '../CommandPalette';
 import { Header } from './Header';
 import { SidebarContent } from './SidebarContent';
 import { SidebarContainer, StaticSidebarContainer } from './containers';
@@ -10,6 +13,8 @@ interface SidebarProps {}
 
 export const Sidebar: React.FC<SidebarProps> = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const openCommandPalette = useStore((state) => state.openCommandPalette);
+  useHotkeys('ctrl+k', () => openCommandPalette());
 
   return (
     <>
@@ -80,6 +85,8 @@ export const Sidebar: React.FC<SidebarProps> = () => {
       </StaticSidebarContainer>
 
       <Header onOpenSidebar={() => setIsOpen(true)} />
+
+      <CommandPalette />
     </>
   );
 };

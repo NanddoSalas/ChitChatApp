@@ -1,7 +1,10 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { useStore } from '../../../store';
 import { classNames } from '../../../utils';
 
 export const SearchButton = () => {
+  const open = useStore((state) => state.openCommandPalette);
+
   return (
     <button
       className={classNames(
@@ -10,6 +13,7 @@ export const SearchButton = () => {
         'text-gray-400 hover:text-gray-300',
         'flex justify-between items-center',
       )}
+      onClick={open}
     >
       <span className="flex items-center space-x-2.5">
         <MagnifyingGlassIcon className="w-5 h-5" />

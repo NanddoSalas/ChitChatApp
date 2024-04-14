@@ -1,6 +1,10 @@
 import { create } from 'zustand';
 import { AuthSlice, createAuthSlice } from './auth';
 import {
+  CommandPaletteSlice,
+  createCommandPaletteSlice,
+} from './commandPalette';
+import {
   DirectMessagesSlice,
   createDirectMessagesSlice,
 } from './directMessages';
@@ -19,7 +23,8 @@ export const useStore = create<
     RoomMembersSlice &
     RoomMessagesSlice &
     DirectMessagesSlice &
-    NavigationSlice
+    NavigationSlice &
+    CommandPaletteSlice
 >()((...a) => ({
   ...createAuthSlice(...a),
   ...createUsersSlice(...a),
@@ -29,4 +34,5 @@ export const useStore = create<
   ...createRoomMessagesSlice(...a),
   ...createDirectMessagesSlice(...a),
   ...createNavigationSlice(...a),
+  ...createCommandPaletteSlice(...a),
 }));
