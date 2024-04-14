@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand';
-import { OAuthProvider, User } from './types';
+import { OAuthProvider, User } from '../types/resources';
 
 interface State {
   auth: {
@@ -47,7 +47,7 @@ export const createAuthSlice: StateCreator<AuthSlice> = () => ({
     accessToken: null,
     user: null,
     fetching: false,
-    authMethods: null,
+    authMethods: { github: true, google: false, password: true },
   },
 
   signInWithPassword: () => {},

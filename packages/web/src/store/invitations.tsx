@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand';
-import { Invitation } from './types';
+import { Invitation } from '../types/resources';
 
 interface Store {
   invitations: {

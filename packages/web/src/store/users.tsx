@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand';
-import { User } from './types';
+import { User } from '../types/resources';
 
 interface Store {
   users: {

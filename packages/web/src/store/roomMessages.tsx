@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand';
-import { Message } from './types';
+import { Message } from '../types/resources';
 
 interface Store {
   roomMessages: {

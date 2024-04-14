@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand';
-import { Member } from './types';
+import { Member } from '../types/resources';
 
 interface Store {
   roomMembers: {

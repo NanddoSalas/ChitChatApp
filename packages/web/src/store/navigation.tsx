@@ -1,5 +1,5 @@
 import { StateCreator } from 'zustand';
-import { NavigationPath } from './types';
+import { NavigationPath } from '../types/resources';
 
 interface State {
   navigation: {
