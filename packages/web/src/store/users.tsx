@@ -10,11 +10,15 @@ interface Store {
 
 interface Actions {
   retrieveUsers: () => void;
+  getUser: (userId: number) => User | null;
 }
 
 export interface UsersSlice extends Store, Actions {}
 
-export const createUsersSlice: StateCreator<UsersSlice> = () => ({
+export const createUsersSlice: StateCreator<UsersSlice> = (set, get) => ({
   users: { data: null, fetching: false },
   retrieveUsers: () => {},
+  getUser: (userId) => {
+    return get().users.data?.find(({ id }) => id === userId) || null;
+  },
 });
