@@ -1,5 +1,5 @@
 import { useStore } from '../../../store';
-import { classNames, getRandomInt } from '../../../utils';
+import { classNames } from '../../../utils';
 
 interface UserItemProps {
   id: number;
@@ -8,11 +8,11 @@ interface UserItemProps {
 }
 
 export const UserItem: React.FC<UserItemProps> = ({ id, avatar, fullName }) => {
-  const count = getRandomInt(0, 5);
   const navigate = useStore((state) => state.navigate);
   const navigationPath = useStore((state) => state.navigation);
   const isSelected =
     navigationPath.id === id && navigationPath.path === '/users/:id';
+  const { unreadMessagesCount } = useStore((state) => state.directMessages[id]);
 
   const isOnline = isSelected;
 
@@ -58,12 +58,12 @@ export const UserItem: React.FC<UserItemProps> = ({ id, avatar, fullName }) => {
 
       <span className="truncate">{fullName}</span>
 
-      {count ? (
+      {unreadMessagesCount ? (
         <span
           className="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700"
           aria-hidden="true"
         >
-          {count}+
+          {unreadMessagesCount}+
         </span>
       ) : null}
     </a>
