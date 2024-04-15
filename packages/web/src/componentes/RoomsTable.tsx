@@ -1,5 +1,5 @@
 import { useStore } from '../store';
-import { RoomOptions } from './RoomOptions';
+import { RoomOptionsDropdown } from './RoomOptionsDrawer';
 
 export default function RoomsTable() {
   const rooms = useStore((state) => state.rooms.data);
@@ -83,7 +83,10 @@ export default function RoomsTable() {
                 </td>
 
                 <td className="whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium">
-                  <RoomOptions roomId={room.id} isPrivate={room.isPrivate} />
+                  <RoomOptionsDropdown
+                    roomId={room.id}
+                    isPrivate={room.isPrivate}
+                  />
                 </td>
               </tr>
             ))}
