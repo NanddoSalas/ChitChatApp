@@ -21,14 +21,14 @@ export default function InvitationsTable() {
 
               <th
                 scope="col"
-                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden md:table-cell"
+                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
                 Limit
               </th>
 
               <th
                 scope="col"
-                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden md:table-cell"
+                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
                 Uses
               </th>
@@ -44,7 +44,7 @@ export default function InvitationsTable() {
                 scope="col"
                 className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden md:table-cell"
               >
-                Is Revoked
+                Revoked
               </th>
 
               <th scope="col" className="relative py-3.5 pl-3 pr-4">
@@ -63,11 +63,13 @@ export default function InvitationsTable() {
                     </div>
                   </td>
 
-                  <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
-                    <div className="mt-1 text-gray-500">{invitation.limit}</div>
+                  <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                    <div className="mt-1 text-gray-500">
+                      {invitation.limit === 0 ? 'No Limit' : invitation.limit}
+                    </div>
                   </td>
 
-                  <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
+                  <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                     <div className="mt-1 text-gray-500">{invitation.uses}</div>
                   </td>
 
@@ -77,14 +79,22 @@ export default function InvitationsTable() {
                     </div>
                   </td>
 
+                  <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell ">
+                    <div className="mt-1 text-gray-500">
+                      {invitation.isRevoked ? 'True' : 'False'}
+                    </div>
+                  </td>
+
                   <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium">
-                    <button
-                      type="button"
-                      className="rounded-md bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
-                      onClick={() => handleRevokeInvitation(invitation.id)}
-                    >
-                      Revoke
-                    </button>
+                    {!invitation.isRevoked && (
+                      <button
+                        type="button"
+                        className="rounded-md bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                        onClick={() => handleRevokeInvitation(invitation.id)}
+                      >
+                        Revoke
+                      </button>
+                    )}
                   </td>
                 </tr>
               );

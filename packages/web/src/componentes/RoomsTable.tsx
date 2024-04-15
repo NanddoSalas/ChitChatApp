@@ -20,21 +20,21 @@ export default function RoomsTable() {
 
               <th
                 scope="col"
-                className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 "
+                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
               >
                 Admin
               </th>
 
               <th
                 scope="col"
-                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden md:table-cell"
               >
                 Created At
               </th>
 
               <th
                 scope="col"
-                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden md:table-cell"
               >
                 Type
               </th>
@@ -70,13 +70,13 @@ export default function RoomsTable() {
                   </div>
                 </td>
 
-                <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
                   <div className="mt-1 text-gray-500">
                     {room.createdAt.toDateString()}
                   </div>
                 </td>
 
-                <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
                   <div className="mt-1 text-gray-500">
                     {room.isPrivate ? 'Private' : 'Public'}
                   </div>
