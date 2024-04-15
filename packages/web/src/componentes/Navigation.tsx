@@ -1,5 +1,7 @@
 import AccountScreen from '../Screens/SubScreens/AccountScreen';
 import { HomeScreen } from '../Screens/SubScreens/HomeScreen';
+import InvitationsScreen from '../Screens/SubScreens/InvitationsScreen';
+import RoomMembersScreen from '../Screens/SubScreens/RoomMembersScreen';
 import RoomsScreen from '../Screens/SubScreens/RoomsScreen';
 import UsersScreen from '../Screens/SubScreens/UsersScreen';
 import { useStore } from '../store';
@@ -7,9 +9,9 @@ import { useStore } from '../store';
 export const Navigation = () => {
   const navigation = useStore((state) => state.navigation);
 
-  // if (navigation.path === '/invitations') {
-  //   return <InvitationsScreen />;
-  // }
+  if (navigation.path === '/invitations') {
+    return <InvitationsScreen />;
+  }
 
   if (navigation.path === '/users') {
     return <UsersScreen />;
@@ -31,9 +33,9 @@ export const Navigation = () => {
     return <AccountScreen />;
   }
 
-  // if (navigation.path === '/rooms/:id/members') {
-  //   return <RoomMembersScreen />;
-  // }
+  if (navigation.path === '/rooms/:id/members') {
+    return <RoomMembersScreen />;
+  }
 
   return <HomeScreen />;
 };
