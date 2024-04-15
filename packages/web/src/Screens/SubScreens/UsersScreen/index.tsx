@@ -1,5 +1,5 @@
 import { UsersTable } from '../../../componentes/UsersTable';
-import Heading from './Heading';
+import { Heading } from './Heading';
 
 const UsersScreen = () => {
   return (

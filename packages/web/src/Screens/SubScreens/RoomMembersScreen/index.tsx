@@ -1,5 +1,5 @@
 import RoomMembersTable from '../../../componentes/RoomMembersTable';
-import Heading from './Heading';
+import { Heading } from './Heading';
 
 const RoomMembersScreen = () => {
   return (

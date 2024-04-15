@@ -1,21 +1,7 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
-import { MagnifyingGlassIcon, PlusIcon } from '@heroicons/react/20/solid';
+import { PlusIcon } from '@heroicons/react/20/solid';
 import Breadcrumb from '../../../componentes/Breadcrumbs';
 
-export default function Heading() {
+export const Heading = () => {
   return (
     <div className="border-b border-gray-300 pb-5 sm:flex sm:items-center sm:justify-between">
       <Breadcrumb items={[{ name: 'Rooms', path: null }]} />
@@ -31,7 +17,7 @@ export default function Heading() {
           </span>
         </button>
 
-        <div className="mt-3 sm:ml-4 sm:mt-0">
+        {/* <div className="mt-3 sm:ml-4 sm:mt-0">
           <label htmlFor="mobile-search-room" className="sr-only">
             Search
           </label>
@@ -66,8 +52,8 @@ export default function Heading() {
               />
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
-}
+};

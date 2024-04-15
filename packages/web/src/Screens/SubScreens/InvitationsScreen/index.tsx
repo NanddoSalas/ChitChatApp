@@ -1,5 +1,5 @@
 import InvitationsTable from '../../../componentes/InvitationsTable';
-import Heading from './Heading';
+import { Heading } from './Heading';
 
 const InvitationsScreen = () => {
   return (
