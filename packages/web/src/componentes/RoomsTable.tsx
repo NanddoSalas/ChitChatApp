@@ -1,5 +1,5 @@
 import { useStore } from '../store';
-import RoomOptions from './RoomOptions';
+import { RoomOptions } from './RoomOptions';
 
 export default function RoomsTable() {
   const rooms = useStore((state) => state.rooms.data);
@@ -77,11 +77,13 @@ export default function RoomsTable() {
                 </td>
 
                 <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                  <div className="mt-1 text-gray-500">Public</div>
+                  <div className="mt-1 text-gray-500">
+                    {room.isPrivate ? 'Private' : 'Public'}
+                  </div>
                 </td>
 
-                <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium">
-                  <RoomOptions />
+                <td className="whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium">
+                  <RoomOptions roomId={room.id} isPrivate={room.isPrivate} />
                 </td>
               </tr>
             ))}
