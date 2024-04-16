@@ -1,9 +1,9 @@
 import { PlusIcon } from '@heroicons/react/20/solid';
-import Breadcrumb from '../../../componentes/Breadcrumbs';
-import { OpenDraweButton } from '../../../componentes/Drawer';
-import { Header } from '../../../componentes/Header';
-import { Heading } from '../../../componentes/Heading';
-import InvitationsTable from '../../../componentes/InvitationsTable';
+import Breadcrumb from '../../componentes/Breadcrumbs';
+import { OpenDraweButton } from '../../componentes/Drawer';
+import { Header } from '../../componentes/Header';
+import { Heading } from '../../componentes/Heading';
+import InvitationsTable from '../../componentes/InvitationsTable';
 
 const InvitationsScreen = () => {
   return (

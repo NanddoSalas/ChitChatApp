@@ -1,9 +1,9 @@
 import PlusIcon from '@heroicons/react/20/solid/PlusIcon';
-import Breadcrumb from '../../../componentes/Breadcrumbs';
-import { OpenDraweButton } from '../../../componentes/Drawer';
-import { Header } from '../../../componentes/Header';
-import { Heading } from '../../../componentes/Heading';
-import RoomMembersTable from '../../../componentes/RoomMembersTable';
+import Breadcrumb from '../../componentes/Breadcrumbs';
+import { OpenDraweButton } from '../../componentes/Drawer';
+import { Header } from '../../componentes/Header';
+import { Heading } from '../../componentes/Heading';
+import RoomMembersTable from '../../componentes/RoomMembersTable';
 
 const RoomMembersScreen = () => {
   return (

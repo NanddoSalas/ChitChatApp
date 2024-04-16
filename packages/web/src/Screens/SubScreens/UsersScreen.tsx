@@ -1,8 +1,8 @@
-import Breadcrumb from '../../../componentes/Breadcrumbs';
-import { OpenDraweButton } from '../../../componentes/Drawer';
-import { Header } from '../../../componentes/Header';
-import { Heading } from '../../../componentes/Heading';
-import { UsersTable } from '../../../componentes/UsersTable';
+import Breadcrumb from '../../componentes/Breadcrumbs';
+import { OpenDraweButton } from '../../componentes/Drawer';
+import { Header } from '../../componentes/Header';
+import { Heading } from '../../componentes/Heading';
+import { UsersTable } from '../../componentes/UsersTable';
 
 const UsersScreen = () => {
   return (

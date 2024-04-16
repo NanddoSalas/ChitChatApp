@@ -1,10 +1,10 @@
-import Breadcrumb from '../../../componentes/Breadcrumbs';
-import { OpenDraweButton } from '../../../componentes/Drawer';
-import { Header } from '../../../componentes/Header';
-import { Heading } from '../../../componentes/Heading';
-import { ProfileSection } from '../../../componentes/Sections/ProfileSection';
-import { UpdatePasswordSection } from '../../../componentes/Sections/UpdatePasswordSection';
-import { useStore } from '../../../store';
+import Breadcrumb from '../../componentes/Breadcrumbs';
+import { OpenDraweButton } from '../../componentes/Drawer';
+import { Header } from '../../componentes/Header';
+import { Heading } from '../../componentes/Heading';
+import { ProfileSection } from '../../componentes/Sections/ProfileSection';
+import { UpdatePasswordSection } from '../../componentes/Sections/UpdatePasswordSection';
+import { useStore } from '../../store';
 
 const AccountScreen = () => {
   const auth = useStore((state) => state.auth);

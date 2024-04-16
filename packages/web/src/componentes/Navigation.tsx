@@ -1,9 +1,11 @@
-import AccountScreen from '../Screens/SubScreens/AccountScreen';
-import { HomeScreen } from '../Screens/SubScreens/HomeScreen';
-import InvitationsScreen from '../Screens/SubScreens/InvitationsScreen';
-import RoomMembersScreen from '../Screens/SubScreens/RoomMembersScreen';
-import RoomsScreen from '../Screens/SubScreens/RoomsScreen';
-import UsersScreen from '../Screens/SubScreens/UsersScreen';
+import {
+  AccountScreen,
+  HomeScreen,
+  InvitationsScreen,
+  RoomMembersScreen,
+  RoomsScreen,
+  UsersScreen,
+} from '../Screens/SubScreens';
 import { useStore } from '../store';
 
 export const Navigation = () => {
