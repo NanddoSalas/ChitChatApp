@@ -28,10 +28,8 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
   return (
     <a
       className={classNames(
-        current
-          ? 'bg-gray-800 text-white'
-          : 'text-gray-400 hover:text-white hover:bg-gray-800',
-        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
+        'btn btn-block btn-outline flex justify-start',
+        current ? 'btn-active' : 'text-gray-400 border-0',
       )}
       onClick={handleClick}
     >

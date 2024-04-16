@@ -35,11 +35,11 @@ export const RoomItem: React.FC<RoomItemProps> = ({
   };
 
   return (
-    <a
+    <button
       className={classNames(
-        isSelected ? 'bg-gray-800 text-white' : 'text-gray-400',
-        'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold',
-        haveAccess ? 'hover:bg-gray-800 hover:text-white' : '',
+        'btn btn-block btn-outline flex justify-start',
+        isSelected ? 'btn-active' : 'text-gray-400 border-0',
+        haveAccess ? '' : 'no-animation',
       )}
       onClick={handleClick}
     >
@@ -65,6 +65,6 @@ export const RoomItem: React.FC<RoomItemProps> = ({
           </span>
         ) : null
       ) : null}
-    </a>
+    </button>
   );
 };
