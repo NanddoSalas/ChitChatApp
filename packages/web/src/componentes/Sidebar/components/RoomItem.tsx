@@ -35,36 +35,38 @@ export const RoomItem: React.FC<RoomItemProps> = ({
   };
 
   return (
-    <button
-      className={classNames(
-        'btn btn-block btn-outline flex justify-start',
-        isSelected ? 'btn-active' : 'text-gray-400 border-0',
-        haveAccess ? '' : 'no-animation',
-      )}
-      onClick={handleClick}
-    >
-      {isPrivate ? (
-        haveAccess ? (
-          <LockOpenIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
+    <label htmlFor="sidebar-drawer">
+      <a
+        className={classNames(
+          'btn btn-block btn-outline flex justify-start',
+          isSelected ? 'btn-active' : 'text-gray-400 border-0',
+          haveAccess ? '' : 'no-animation',
+        )}
+        onClick={handleClick}
+      >
+        {isPrivate ? (
+          haveAccess ? (
+            <LockOpenIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
+          ) : (
+            <LockClosedIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
+          )
         ) : (
-          <LockClosedIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
-        )
-      ) : (
-        <HashtagIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
-      )}
+          <HashtagIcon className="h-5 w-5 shrink-0" aria-hidden="true" />
+        )}
 
-      {name}
+        {name}
 
-      {haveAccess ? (
-        unreadMessagesCount ? (
-          <span
-            className="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700"
-            aria-hidden="true"
-          >
-            {unreadMessagesCount}+
-          </span>
-        ) : null
-      ) : null}
-    </button>
+        {haveAccess ? (
+          unreadMessagesCount ? (
+            <span
+              className="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700"
+              aria-hidden="true"
+            >
+              {unreadMessagesCount}+
+            </span>
+          ) : null
+        ) : null}
+      </a>
+    </label>
   );
 };

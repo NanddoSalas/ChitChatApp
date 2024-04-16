@@ -26,16 +26,18 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
   };
 
   return (
-    <a
-      className={classNames(
-        'btn btn-block btn-outline flex justify-start',
-        current ? 'btn-active' : 'text-gray-400 border-0',
-      )}
-      onClick={handleClick}
-    >
-      <Icon className="h-6 w-6 shrink-0" aria-hidden="true" />
+    <label htmlFor="sidebar-drawer">
+      <a
+        className={classNames(
+          'btn btn-block btn-outline flex justify-start',
+          current ? 'btn-active' : 'text-gray-400 border-0',
+        )}
+        onClick={handleClick}
+      >
+        <Icon className="h-6 w-6 shrink-0" aria-hidden="true" />
 
-      {name}
-    </a>
+        {name}
+      </a>
+    </label>
   );
 };

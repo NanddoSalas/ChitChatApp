@@ -12,7 +12,7 @@ export const Drawer: React.FC<DrawerProps> = ({ content, side }) => {
 
       <div className="drawer-content h-dvh">{content}</div>
 
-      <div className="drawer-side">
+      <div className="drawer-side lg:hidden">
         <label htmlFor="sidebar-drawer" className="drawer-overlay"></label>
 
         {side}
