@@ -3,7 +3,7 @@ import Breadcrumb from '../../../componentes/Breadcrumbs';
 
 export const Heading = () => {
   return (
-    <div className="border-b border-gray-300 pb-5 sm:flex sm:items-center sm:justify-between">
+    <div className="border-b border-gray-300 pb-5 flex items-center justify-between">
       <Breadcrumb items={[{ name: 'Invitations', path: null }]} />
 
       <div className="flex">
@@ -13,6 +13,7 @@ export const Heading = () => {
         >
           <span className="flex space-x-1">
             <PlusIcon className="h-5 w-5" aria-hidden="true" />
+
             <span>Generate Invite Code</span>
           </span>
         </button>
