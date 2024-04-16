@@ -1,6 +1,6 @@
 import { useStore } from '../../../store';
 import { NavigationPath } from '../../../types/resources';
-import { classNames } from '../../../utils';
+import { NavItemContainer } from './NavItemContainer';
 
 interface NavigationItemProps {
   name: string;
@@ -26,18 +26,10 @@ export const NavigationItem: React.FC<NavigationItemProps> = ({
   };
 
   return (
-    <label htmlFor="sidebar-drawer">
-      <a
-        className={classNames(
-          'btn btn-block btn-outline flex justify-start',
-          current ? 'btn-active' : 'text-gray-400 border-0',
-        )}
-        onClick={handleClick}
-      >
-        <Icon className="h-6 w-6 shrink-0" aria-hidden="true" />
+    <NavItemContainer onClick={handleClick} selected={current}>
+      <Icon className="h-6 w-6 shrink-0" aria-hidden="true" />
 
-        {name}
-      </a>
-    </label>
+      {name}
+    </NavItemContainer>
   );
 };
