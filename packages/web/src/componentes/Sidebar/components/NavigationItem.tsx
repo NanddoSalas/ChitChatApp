@@ -1,5 +1,5 @@
 import { useStore } from '../../../store';
-import { NavigationPath } from '../../../store/types';
+import { NavigationPath } from '../../../types/resources';
 import { classNames } from '../../../utils';
 
 interface NavigationItemProps {
