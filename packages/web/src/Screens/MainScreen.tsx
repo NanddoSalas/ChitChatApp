@@ -1,14 +1,29 @@
+import { Drawer } from '../componentes/Drawer';
 import { Navigation } from '../componentes/Navigation';
-import Sidebar from '../componentes/Sidebar';
+import {
+  DrawerSidebarContainer,
+  Sidebar,
+  SidebarContainer,
+} from '../componentes/Sidebar';
 
 export const MainScreen = () => {
-  return (
-    <div>
-      <Sidebar />
+  const DraweContent = () => (
+    <>
+      <SidebarContainer>
+        <Sidebar />
+      </SidebarContainer>
 
-      <main className="lg:pl-72 h-dvh">
+      <main className="lg:pl-72 h-dvh flex flex-col">
         <Navigation />
       </main>
-    </div>
+    </>
   );
+
+  const DrawerSide = () => (
+    <DrawerSidebarContainer>
+      <Sidebar />
+    </DrawerSidebarContainer>
+  );
+
+  return <Drawer content={<DraweContent />} side={<DrawerSide />} />;
 };
