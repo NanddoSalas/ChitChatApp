@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { classNames } from '../../utils';
 
 interface ProfileSectionProps {
   avatar: string;
@@ -27,6 +26,7 @@ export const ProfileSection: React.FC<ProfileSectionProps> = (props) => {
         <h2 className="text-base font-semibold leading-7 text-gray-900">
           Profile Information
         </h2>
+
         <p className="mt-1 text-sm leading-6 text-gray-600">
           This information will be displayed publicly so be careful what you
           share.
@@ -52,10 +52,7 @@ export const ProfileSection: React.FC<ProfileSectionProps> = (props) => {
               )}
 
               <div>
-                <button
-                  type="button"
-                  className="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                >
+                <button className="btn btn-outline btn-sm lg:btn-md" disabled>
                   Change avatar
                 </button>
 
@@ -66,81 +63,57 @@ export const ProfileSection: React.FC<ProfileSectionProps> = (props) => {
             </div>
 
             <div className="sm:col-span-3">
-              <label
-                htmlFor="full-name"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Full name
-              </label>
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">Full Name</span>
+                </div>
 
-              <div className="mt-2">
                 <input
                   type="text"
-                  name="full-name"
-                  id="full-name"
-                  autoComplete="full-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  className="input input-bordered w-full max-w-xs"
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                 />
-              </div>
+              </label>
             </div>
 
             <div className="sm:col-span-3">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Email
-              </label>
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">Email</span>
+                </div>
 
-              <div className="mt-2">
                 <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  type="text"
+                  className="input input-bordered w-full max-w-xs"
                   value={props.email}
                   disabled
                 />
-              </div>
+              </label>
             </div>
 
             <div className="col-span-full">
-              <label
-                htmlFor="about"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                About
-              </label>
+              <label className="form-control">
+                <div className="label">
+                  <span className="label-text">About</span>
+                </div>
 
-              <div className="mt-2">
                 <textarea
-                  id="about"
-                  name="about"
-                  rows={3}
-                  className={classNames(
-                    'block w-full rounded-md border-0 py-1.5',
-                    'text-gray-900 shadow-sm ring-1 ring-inset',
-                    'ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset',
-                    'focus:ring-indigo-600 sm:text-sm sm:leading-6',
-                  )}
+                  className="textarea textarea-bordered h-24"
                   value={about}
                   onChange={(e) => setAbout(e.target.value)}
-                />
-              </div>
-              <p className="mt-3 text-sm leading-6 text-gray-600">
-                Write a few sentences about yourself.
-              </p>
+                  rows={3}
+                ></textarea>
+              </label>
+
+              <p className="mt-3">Write a few sentences about yourself.</p>
             </div>
           </div>
         </div>
 
         <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
           <button
-            type="button"
-            className="text-sm font-semibold leading-6 text-gray-900"
+            className="btn btn-neutral btn-outline btn-sm lg:btn-md"
             disabled={!isModified}
             onClick={handleCancel}
           >
@@ -148,13 +121,7 @@ export const ProfileSection: React.FC<ProfileSectionProps> = (props) => {
           </button>
 
           <button
-            type="submit"
-            className={classNames(
-              'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold',
-              'text-white shadow-sm  focus-visible:outline focus-visible:outline-2',
-              'focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
-              isModified ? 'hover:bg-indigo-500' : '',
-            )}
+            className="btn btn-neutral btn-sm lg:btn-md"
             disabled={!isModified}
             onClick={handleSave}
           >

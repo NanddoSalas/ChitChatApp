@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Input } from '../Input';
 
 interface UpdatePasswordSectionProps {
   hasPassword: boolean;
@@ -46,64 +45,57 @@ export const UpdatePasswordSection: React.FC<UpdatePasswordSectionProps> = ({
         <div className="px-4 py-6 sm:p-8">
           <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
-              <label
-                htmlFor="new-password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                New password
-              </label>
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">New Password</span>
+                </div>
 
-              <div className="mt-2">
-                <Input
-                  type="password"
+                <input
+                  type="text"
+                  className="input input-bordered w-full max-w-xs"
                   value={password}
-                  onChange={(value) => setPassword(value)}
+                  onChange={(e) => setPassword(e.target.value)}
                   disabled={!hasPassword}
                 />
-              </div>
+              </label>
             </div>
 
             <div className="sm:col-span-3">
-              <label
-                htmlFor="confirm-password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Confirm password
-              </label>
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">Confirm Password</span>
+                </div>
 
-              <div className="mt-2">
-                <Input
+                <input
                   type="password"
+                  className="input input-bordered w-full max-w-xs"
                   value={password2}
-                  onChange={(value) => setPassword2(value)}
+                  onChange={(e) => setPassword2(e.target.value)}
                 />
-              </div>
+              </label>
             </div>
 
             <div className="sm:col-span-3">
-              <label
-                htmlFor="current-password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Current password
-              </label>
+              <label className="form-control w-full max-w-xs">
+                <div className="label">
+                  <span className="label-text">Current Password</span>
+                </div>
 
-              <div className="mt-2">
-                <Input
+                <input
                   type="password"
+                  className="input input-bordered w-full max-w-xs"
                   value={oldPassword}
-                  onChange={(value) => setOldPassword(value)}
+                  onChange={(e) => setOldPassword(e.target.value)}
                   disabled={!hasPassword}
                 />
-              </div>
+              </label>
             </div>
 
             <div className="sm:col-span-3">
               <div className="flex justify-end h-full items-end">
                 <div className="space-x-6">
                   <button
-                    type="button"
-                    className="text-sm font-semibold leading-6 text-gray-900"
+                    className="btn btn-neutral btn-outline btn-sm lg:btn-md"
                     onClick={handleCancel}
                     disabled={!isModified}
                   >
@@ -111,8 +103,7 @@ export const UpdatePasswordSection: React.FC<UpdatePasswordSectionProps> = ({
                   </button>
 
                   <button
-                    type="submit"
-                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    className="btn btn-neutral btn-sm lg:btn-md"
                     onClick={handleSave}
                     disabled={!isModified}
                   >
