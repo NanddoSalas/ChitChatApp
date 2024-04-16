@@ -53,7 +53,7 @@ export const Sidebar = () => {
           </ul>
         </li>
 
-        <li className="-mx-6 mt-auto hidden lg:block">
+        <li className="-mx-6 mt-auto">
           <ProfileButton />
         </li>
       </ul>
