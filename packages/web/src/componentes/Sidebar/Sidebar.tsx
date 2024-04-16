@@ -19,7 +19,7 @@ export const Sidebar = () => {
         {role !== 'Member' ? <AdminOptions /> : null}
 
         <li>
-          <div className=" font-semibold leading-6 text-gray-400">Rooms</div>
+          <div className="font-semibold leading-6 text-gray-200">Rooms</div>
 
           <ul role="list" className="-mx-2 mt-2 space-y-1">
             {rooms?.map(({ id, name, isPrivate, haveAccess }) => (
@@ -36,7 +36,7 @@ export const Sidebar = () => {
         </li>
 
         <li>
-          <div className="font-semibold leading-6 text-gray-400">
+          <div className="font-semibold leading-6 text-gray-200">
             Direct Messages
           </div>
 

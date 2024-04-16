@@ -8,7 +8,7 @@ import { NavigationItem } from './NavigationItem';
 export const AdminOptions = () => {
   return (
     <li>
-      <div className="font-semibold leading-6 text-gray-400">Administrate</div>
+      <div className="font-semibold leading-6 text-gray-200">Administrate</div>
 
       <ul role="list" className="-mx-2 space-y-1">
         <li>
