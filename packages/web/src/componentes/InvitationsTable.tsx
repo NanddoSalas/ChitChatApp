@@ -85,11 +85,10 @@ export default function InvitationsTable() {
                     </div>
                   </td>
 
-                  <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium">
+                  <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right">
                     {!invitation.isRevoked && (
                       <button
-                        type="button"
-                        className="rounded-md bg-red-600 px-2.5 py-1.5 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                        className="btn btn-neutral btn-outline btn-sm lg:btn-md"
                         onClick={() => handleRevokeInvitation(invitation.id)}
                       >
                         Revoke
