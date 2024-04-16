@@ -1,3 +1,5 @@
+import { useHotkeys } from 'react-hotkeys-hook';
+import { CommandPalette } from '../componentes/CommandPalette';
 import { Drawer } from '../componentes/Drawer';
 import { Navigation } from '../componentes/Navigation';
 import {
@@ -5,8 +7,13 @@ import {
   Sidebar,
   SidebarContainer,
 } from '../componentes/Sidebar';
+import { useStore } from '../store';
 
 export const MainScreen = () => {
+  const openCommandPalette = useStore((state) => state.openCommandPalette);
+
+  useHotkeys('ctrl+k', openCommandPalette, { preventDefault: true });
+
   const DraweContent = () => (
     <>
       <SidebarContainer>
@@ -16,6 +23,8 @@ export const MainScreen = () => {
       <main className="lg:pl-72 h-dvh flex flex-col">
         <Navigation />
       </main>
+
+      <CommandPalette />
     </>
   );
 
