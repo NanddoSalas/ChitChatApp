@@ -1,4 +1,4 @@
-export const StaticSidebarContainer: React.FC<{
+export const SidebarContainer: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   return (

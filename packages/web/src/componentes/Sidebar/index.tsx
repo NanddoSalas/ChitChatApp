@@ -1,3 +1,5 @@
+import { DrawerSidebarContainer } from './DrawerSidebarContainer';
 import { Sidebar } from './Sidebar';
+import { SidebarContainer } from './SidebarContainer';
 
-export default Sidebar;
+export { DrawerSidebarContainer, Sidebar, SidebarContainer };

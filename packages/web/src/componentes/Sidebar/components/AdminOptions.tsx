@@ -3,7 +3,7 @@ import {
   HashtagIcon,
   UserIcon,
 } from '@heroicons/react/24/outline';
-import { NavigationItem } from './components';
+import { NavigationItem } from './NavigationItem';
 
 export const AdminOptions = () => {
   return (
