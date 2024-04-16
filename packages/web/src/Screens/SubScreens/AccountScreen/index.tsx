@@ -1,3 +1,5 @@
+import { OpenDraweButton } from '../../../componentes/Drawer';
+import { Header } from '../../../componentes/Header';
 import { ProfileSection } from '../../../componentes/Sections/ProfileSection';
 import { UpdatePasswordSection } from '../../../componentes/Sections/UpdatePasswordSection';
 import { useStore } from '../../../store';
@@ -18,24 +20,28 @@ const AccountScreen = () => {
   };
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 bg-gray-100 h-full overflow-x-auto space-y-4 sm:space-y-6 lg:space-y-8">
-      <Heading />
+    <>
+      <Header start={<OpenDraweButton />} />
 
-      <div className="space-y-10 divide-y divide-gray-900/10 !mt-0">
-        <ProfileSection
-          about={user.about}
-          avatar={user.avatar}
-          email={user.email}
-          fullName={user.fullName}
-          onSave={handleProfileSave}
-        />
+      <div className="p-4 sm:p-6 lg:p-8 bg-gray-100 space-y-4 sm:space-y-6 lg:space-y-8 flex-1">
+        <Heading />
 
-        <UpdatePasswordSection
-          onSave={handleUpdatePassword}
-          hasPassword={hasPassword}
-        />
+        <div className="space-y-10 divide-y divide-gray-900/10 !mt-0">
+          <ProfileSection
+            about={user.about}
+            avatar={user.avatar}
+            email={user.email}
+            fullName={user.fullName}
+            onSave={handleProfileSave}
+          />
+
+          <UpdatePasswordSection
+            onSave={handleUpdatePassword}
+            hasPassword={hasPassword}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
