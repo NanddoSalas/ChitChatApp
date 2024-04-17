@@ -4,6 +4,7 @@ import { Header } from '../../componentes/Header';
 import { Heading } from '../../componentes/Heading';
 import { ProfileSection } from '../../componentes/Sections/ProfileSection';
 import { UpdatePasswordSection } from '../../componentes/Sections/UpdatePasswordSection';
+import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 import { useStore } from '../../store';
 
 const AccountScreen = () => {
@@ -21,10 +22,10 @@ const AccountScreen = () => {
   };
 
   return (
-    <>
+    <SubScreenContainer>
       <Header start={<OpenDraweButton />} />
 
-      <div className="p-4 sm:p-6 lg:p-8 bg-gray-100 space-y-4 sm:space-y-6 lg:space-y-8 flex-1">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 lg:space-y-8 flex-1">
         <Heading
           start={<Breadcrumb items={[{ name: 'Account', path: null }]} />}
         />
@@ -44,7 +45,7 @@ const AccountScreen = () => {
           />
         </div>
       </div>
-    </>
+    </SubScreenContainer>
   );
 };
 

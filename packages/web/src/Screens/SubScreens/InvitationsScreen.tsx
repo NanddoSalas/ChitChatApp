@@ -4,13 +4,14 @@ import { OpenDraweButton } from '../../componentes/Drawer';
 import { Header } from '../../componentes/Header';
 import { Heading } from '../../componentes/Heading';
 import InvitationsTable from '../../componentes/InvitationsTable';
+import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 
 const InvitationsScreen = () => {
   return (
-    <>
+    <SubScreenContainer>
       <Header start={<OpenDraweButton />} />
 
-      <div className="p-4 sm:p-6 lg:p-8 bg-gray-100 space-y-4 sm:space-y-6 lg:space-y-8 flex-1">
+      <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 lg:space-y-8 flex-1">
         <Heading
           start={<Breadcrumb items={[{ name: 'Invitations', path: null }]} />}
           end={
@@ -25,7 +26,7 @@ const InvitationsScreen = () => {
 
         <InvitationsTable />
       </div>
-    </>
+    </SubScreenContainer>
   );
 };
 
