@@ -9,10 +9,8 @@ export const SubScreenContainer: React.FC<SubScreenContainerProps> = ({
   children,
 }) => {
   return (
-    <Scrollbars>
-      <main className="lg:pl-72 h-dvh flex flex-col bg-gray-100">
-        {children}
-      </main>
-    </Scrollbars>
+    <main className="lg:pl-72 h-dvh flex flex-col bg-gray-100">
+      <Scrollbars>{children}</Scrollbars>
+    </main>
   );
 };
