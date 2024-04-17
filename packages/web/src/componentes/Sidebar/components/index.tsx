@@ -1,7 +1,7 @@
-import { NavigationItem } from './NavigationItem';
+import { AdminOptionItem } from './AdminOptionItem';
 import { ProfileButton } from './ProfileButton';
 import { RoomItem } from './RoomItem';
 import { SearchButton } from './SearchButton';
 import { UserItem } from './UserItem';
 
-export { NavigationItem, ProfileButton, RoomItem, SearchButton, UserItem };
+export { AdminOptionItem, ProfileButton, RoomItem, SearchButton, UserItem };

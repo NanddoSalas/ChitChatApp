@@ -2,7 +2,7 @@ import { useStore } from '../../../store';
 import { NavigationPath } from '../../../types/resources';
 import { NavItemContainer } from './NavItemContainer';
 
-interface NavigationItemProps {
+interface AdminOptionItemProps {
   name: string;
   icon: React.ForwardRefExoticComponent<
     Omit<React.SVGProps<SVGSVGElement>, 'ref'> & {
@@ -13,7 +13,7 @@ interface NavigationItemProps {
   href: NavigationPath;
 }
 
-export const NavigationItem: React.FC<NavigationItemProps> = ({
+export const AdminOptionItem: React.FC<AdminOptionItemProps> = ({
   name,
   icon: Icon,
   href,

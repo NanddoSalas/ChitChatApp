@@ -3,16 +3,16 @@ import {
   HashtagIcon,
   UserIcon,
 } from '@heroicons/react/24/outline';
-import { NavigationItem } from './NavigationItem';
+import { AdminOptionItem } from './AdminOptionItem';
 
 export const AdminOptions = () => {
   return (
     <li>
-      <div className="font-semibold leading-6 text-gray-200">Administrate</div>
+      <div className="font-semibold leading-6 text-gray-200">Admin Options</div>
 
       <ul role="list" className="-mx-2 space-y-1">
         <li>
-          <NavigationItem
+          <AdminOptionItem
             name={'Invitations'}
             icon={EnvelopeIcon}
             href={'/invitations'}
@@ -20,11 +20,11 @@ export const AdminOptions = () => {
         </li>
 
         <li>
-          <NavigationItem name={'Users'} icon={UserIcon} href={'/users'} />
+          <AdminOptionItem name={'Users'} icon={UserIcon} href={'/users'} />
         </li>
 
         <li>
-          <NavigationItem name={'Rooms'} icon={HashtagIcon} href={'/rooms'} />
+          <AdminOptionItem name={'Rooms'} icon={HashtagIcon} href={'/rooms'} />
         </li>
       </ul>
     </li>
