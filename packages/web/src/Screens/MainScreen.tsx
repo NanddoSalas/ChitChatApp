@@ -1,3 +1,4 @@
+import Scrollbars from 'react-custom-scrollbars-2';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { CommandPalette } from '../componentes/CommandPalette';
 import { Drawer } from '../componentes/Drawer';
@@ -20,9 +21,11 @@ export const MainScreen = () => {
         <Sidebar />
       </SidebarContainer>
 
-      <main className="lg:pl-72 h-dvh flex flex-col">
-        <Navigation />
-      </main>
+      <Scrollbars>
+        <main className="lg:pl-72 h-dvh flex flex-col">
+          <Navigation />
+        </main>
+      </Scrollbars>
 
       <CommandPalette />
     </>
