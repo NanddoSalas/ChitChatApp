@@ -1,4 +1,5 @@
 import { useStore } from '../store';
+import { Avatar } from './Avatar';
 
 export const UsersTable = () => {
   const users = useStore((state) => state.users.data);
@@ -61,11 +62,7 @@ export const UsersTable = () => {
                 <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
                   <div className="flex items-center">
                     <div className="h-11 w-11 flex-shrink-0">
-                      <img
-                        className="h-11 w-11 rounded-full"
-                        src={user.avatar}
-                        alt=""
-                      />
+                      <Avatar avatar={user.avatar} size="lg" />
                     </div>
 
                     <div className="ml-4">

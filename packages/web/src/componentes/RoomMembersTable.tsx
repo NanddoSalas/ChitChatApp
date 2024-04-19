@@ -1,4 +1,5 @@
 import { useStore } from '../store';
+import { Avatar } from './Avatar';
 
 export default function RoomMembersTable() {
   const roomId = useStore((state) => state.navigation.id!);
@@ -56,18 +57,13 @@ export default function RoomMembersTable() {
                 <tr key={user.email}>
                   <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
                     <div className="flex items-center">
-                      <div className="h-11 w-11 flex-shrink-0">
-                        <img
-                          className="h-11 w-11 rounded-full"
-                          src={user?.avatar}
-                          alt=""
-                        />
-                      </div>
+                      <Avatar avatar={user.avatar} size="lg" />
 
                       <div className="ml-4">
                         <div className="font-medium text-gray-900">
                           {user.fullName}
                         </div>
+
                         <div className="mt-1 text-gray-500 md:hidden">
                           {user.email}
                         </div>

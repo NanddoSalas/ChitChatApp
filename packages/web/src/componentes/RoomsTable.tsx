@@ -1,4 +1,5 @@
 import { useStore } from '../store';
+import { Avatar } from './Avatar';
 import { RoomOptionsDropdown } from './RoomOptionsDrawer';
 
 export default function RoomsTable() {
@@ -54,13 +55,10 @@ export default function RoomsTable() {
 
                 <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                   <div className="flex items-center">
-                    <div className="h-11 w-11 flex-shrink-0">
-                      <img
-                        className="h-11 w-11 rounded-full"
-                        src={getUser(room.adminId)?.avatar}
-                        alt=""
-                      />
-                    </div>
+                    <Avatar
+                      avatar={getUser(room.adminId)?.avatar || ''}
+                      size="lg"
+                    />
 
                     <div className="ml-4">
                       <div className="font-medium text-gray-900">
