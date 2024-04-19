@@ -1,10 +1,6 @@
 import { create } from 'zustand';
 import { AuthSlice, createAuthSlice } from './auth';
 import {
-  CommandPaletteSlice,
-  createCommandPaletteSlice,
-} from './commandPalette';
-import {
   DirectMessagesSlice,
   createDirectMessagesSlice,
 } from './directMessages';
@@ -13,6 +9,7 @@ import { NavigationSlice, createNavigationSlice } from './navigation';
 import { RoomMembersSlice, createRoomMembersSlice } from './roomMembers';
 import { RoomMessagesSlice, createRoomMessagesSlice } from './roomMessages';
 import { RoomsSlice, createRoomsSlice } from './rooms';
+import { SearchBarSlice, createSearchBarSlice } from './searchBar';
 import { UsersSlice, createUsersSlice } from './users';
 
 export const useStore = create<
@@ -24,7 +21,7 @@ export const useStore = create<
     RoomMessagesSlice &
     DirectMessagesSlice &
     NavigationSlice &
-    CommandPaletteSlice
+    SearchBarSlice
 >()((...a) => ({
   ...createAuthSlice(...a),
   ...createUsersSlice(...a),
@@ -34,5 +31,5 @@ export const useStore = create<
   ...createRoomMessagesSlice(...a),
   ...createDirectMessagesSlice(...a),
   ...createNavigationSlice(...a),
-  ...createCommandPaletteSlice(...a),
+  ...createSearchBarSlice(...a),
 }));

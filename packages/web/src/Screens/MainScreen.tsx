@@ -1,7 +1,7 @@
 import { useHotkeys } from 'react-hotkeys-hook';
-import { CommandPalette } from '../componentes/CommandPalette';
 import { Drawer } from '../componentes/Drawer';
 import { Navigation } from '../componentes/Navigation';
+import { SearchBar } from '../componentes/SearchBar';
 import {
   DrawerSidebarContainer,
   Sidebar,
@@ -10,9 +10,9 @@ import {
 import { useStore } from '../store';
 
 export const MainScreen = () => {
-  const openCommandPalette = useStore((state) => state.openCommandPalette);
+  const openSearchBar = useStore((state) => state.openSearchBar);
 
-  useHotkeys('ctrl+k', openCommandPalette, { preventDefault: true });
+  useHotkeys('ctrl+k', openSearchBar, { preventDefault: true });
 
   const DraweContent = () => (
     <>
@@ -22,7 +22,7 @@ export const MainScreen = () => {
 
       <Navigation />
 
-      <CommandPalette />
+      <SearchBar />
     </>
   );
 

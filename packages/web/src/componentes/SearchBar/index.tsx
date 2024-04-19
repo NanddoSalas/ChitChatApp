@@ -11,18 +11,18 @@ export type NavItem = {
   path: NavigationPath;
 };
 
-export const CommandPalette = () => {
+export const SearchBar = () => {
   const { query, setQuery, filteredUsers, filteredRooms, filteredOptions } =
     useSearch();
   const navigate = useStore((state) => state.navigate);
   const {
-    closeCommandPalette,
-    commandPalette: { isOpen },
+    closeSearchBar,
+    searchBar: { isOpen },
   } = useStore((state) => state);
 
   const handleNavigation = (item: NavItem) => {
     navigate(item.path, item.id);
-    closeCommandPalette();
+    closeSearchBar();
   };
 
   return (
@@ -32,7 +32,7 @@ export const CommandPalette = () => {
       afterLeave={() => setQuery('')}
       appear
     >
-      <Dialog as="div" className="relative z-10" onClose={closeCommandPalette}>
+      <Dialog as="div" className="relative z-10" onClose={closeSearchBar}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"

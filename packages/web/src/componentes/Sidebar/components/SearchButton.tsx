@@ -3,7 +3,7 @@ import { useStore } from '../../../store';
 import { classNames } from '../../../utils';
 
 export const SearchButton = () => {
-  const open = useStore((state) => state.openCommandPalette);
+  const open = useStore((state) => state.openSearchBar);
 
   return (
     <button
