@@ -6,10 +6,10 @@ interface HeadingProps {
 
 export const Heading: React.FC<HeadingProps> = ({ start, center, end }) => (
   <div className="navbar border-b border-gray-300 pb-5 flex items-center justify-between">
-    {start && <div className="navbar-start">{start}</div>}
+    <div className="navbar-start">{start}</div>
 
-    {center && <div className="navbar-center">{center}</div>}
+    <div className="navbar-center">{center}</div>
 
-    {end && <div className="navbar-end">{end}</div>}
+    <div className="navbar-end">{end}</div>
   </div>
 );
