@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
-export default function MessageBox() {
+interface MessageBoxProps {
+  target: 'user' | 'room';
+  targetId: number;
+}
+
+export const MessageBox: React.FC<MessageBoxProps> = () => {
   const [value, setValue] = useState('');
 
   const handleSendMessage = () => {
@@ -49,4 +54,4 @@ export default function MessageBox() {
       </div>
     </div>
   );
-}
+};
