@@ -6,6 +6,7 @@ import {
   RoomsScreen,
   UsersScreen,
 } from '../Screens/SubScreens';
+import { ChatScreen } from '../Screens/SubScreens/ChatScreen';
 import { useStore } from '../store';
 
 export const Navigation = () => {
@@ -23,13 +24,13 @@ export const Navigation = () => {
     return <RoomsScreen />;
   }
 
-  // if (navigation.path === '/rooms/:id') {
-  //   return <Chat />;
-  // }
+  if (navigation.path === '/rooms/:id') {
+    return <ChatScreen />;
+  }
 
-  // if (navigation.path === '/users/:id') {
-  //   return <Chat />;
-  // }
+  if (navigation.path === '/users/:id') {
+    return <ChatScreen />;
+  }
 
   if (navigation.path === '/account') {
     return <AccountScreen />;
