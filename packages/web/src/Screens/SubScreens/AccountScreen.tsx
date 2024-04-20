@@ -6,6 +6,7 @@ import { ProfileSection } from '../../componentes/Sections/ProfileSection';
 import { SocialLoginSection } from '../../componentes/Sections/SocialLoginSection';
 import { UpdatePasswordSection } from '../../componentes/Sections/UpdatePasswordSection';
 import { SubScreenContainer } from '../../componentes/SubScreenContainer';
+import { SubScreenLayout } from '../../componentes/SubScreenLayout';
 import { useStore } from '../../store';
 
 const AccountScreen = () => {
@@ -30,7 +31,7 @@ const AccountScreen = () => {
     <SubScreenContainer>
       <Header start={<OpenDraweButton />} />
 
-      <div className="p-4 sm:p-6 lg:p-8 space-y-4 sm:space-y-6 lg:space-y-8 flex-1">
+      <SubScreenLayout>
         <Heading
           start={<Breadcrumb items={[{ name: 'Account', path: null }]} />}
         />
@@ -55,7 +56,7 @@ const AccountScreen = () => {
             hasPassword={hasPassword}
           />
         </div>
-      </div>
+      </SubScreenLayout>
     </SubScreenContainer>
   );
 };
