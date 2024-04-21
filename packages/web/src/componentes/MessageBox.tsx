@@ -30,7 +30,7 @@ export const MessageBox: React.FC<MessageBoxProps> = () => {
     <div className="flex justify-end items-center">
       <textarea
         className="textarea textarea-bordered w-full resize-none pr-[72px] overflow-hidden"
-        placeholder="Add your message..."
+        placeholder="Type your message..."
         rows={2}
         value={value}
         onChange={handleChange}
