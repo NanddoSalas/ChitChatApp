@@ -19,7 +19,11 @@ export const MessagesList: React.FC<MessagesListProps> = ({
   );
 
   return (
-    <Scrollbars>
+    <Scrollbars
+      renderView={(props) => <div {...props} className="flex flex-col" />}
+    >
+      <div className="flex-1" />
+
       {messages?.map((message) => (
         <MessageItem
           message={message}
