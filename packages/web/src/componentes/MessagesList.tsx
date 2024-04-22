@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import Scrollbars from 'react-custom-scrollbars-2';
 import { useStore } from '../store';
 import { MessageItem } from './MessageItem';
@@ -18,9 +19,16 @@ export const MessagesList: React.FC<MessagesListProps> = ({
       : state.directMessages[targetId].data,
   );
 
+  const ref = useRef<Scrollbars>(null);
+
+  useEffect(() => {
+    ref.current?.scrollToBottom();
+  }, [target, targetId]);
+
   return (
     <Scrollbars
       renderView={(props) => <div {...props} className="flex flex-col" />}
+      ref={ref}
     >
       <div className="flex-1" />
 
