@@ -1,13 +1,16 @@
 import { useStore } from '../../store';
+import { Skeleton } from '../Skeleton';
 import { RoomItem, SearchButton } from './components';
 import { AdminOptions } from './components/AdminOptions';
 import { ProfileButton } from './components/ProfileButton';
 import { UserItem } from './components/UserItem';
 
 export const Sidebar = () => {
-  const users = useStore((state) => state.users.data);
-  const rooms = useStore((state) => state.rooms.data);
   const role = useStore((state) => state.auth.user?.role);
+  const users = useStore((state) => state.users);
+  const rooms = useStore((state) => state.rooms);
+
+  const fetching = users.fetching && rooms.fetching;
 
   return (
     <nav className="flex flex-1 flex-col">
@@ -16,22 +19,34 @@ export const Sidebar = () => {
           <SearchButton />
         </li>
 
-        {role !== 'Member' ? <AdminOptions /> : null}
+        {role !== 'Member' ? <AdminOptions fetching={fetching} /> : null}
 
         <li>
           <div className="font-semibold leading-6 text-gray-200">Rooms</div>
 
           <ul role="list" className="-mx-2 mt-2 space-y-1">
-            {rooms?.map(({ id, name, isPrivate, haveAccess }) => (
-              <li key={id}>
-                <RoomItem
-                  id={id}
-                  name={name}
-                  isPrivate={isPrivate}
-                  haveAccess={haveAccess}
-                />
-              </li>
-            ))}
+            {fetching ? (
+              <>
+                <li>
+                  <Skeleton square />
+                </li>
+
+                <li>
+                  <Skeleton square />
+                </li>
+              </>
+            ) : (
+              rooms.data?.map(({ id, name, isPrivate, haveAccess }) => (
+                <li key={id}>
+                  <RoomItem
+                    id={id}
+                    name={name}
+                    isPrivate={isPrivate}
+                    haveAccess={haveAccess}
+                  />
+                </li>
+              ))
+            )}
           </ul>
         </li>
 
@@ -41,15 +56,31 @@ export const Sidebar = () => {
           </div>
 
           <ul role="list" className="-mx-2 mt-2 space-y-1">
-            {users?.map((user) => (
-              <li key={user.id}>
-                <UserItem
-                  id={user.id}
-                  avatar={user.avatar}
-                  fullName={user.fullName}
-                />
-              </li>
-            ))}
+            {fetching ? (
+              <>
+                <li>
+                  <Skeleton />
+                </li>
+
+                <li>
+                  <Skeleton />
+                </li>
+
+                <li>
+                  <Skeleton />
+                </li>
+              </>
+            ) : (
+              users.data?.map((user) => (
+                <li key={user.id}>
+                  <UserItem
+                    id={user.id}
+                    avatar={user.avatar}
+                    fullName={user.fullName}
+                  />
+                </li>
+              ))
+            )}
           </ul>
         </li>
 
