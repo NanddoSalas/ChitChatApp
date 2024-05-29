@@ -21,7 +21,7 @@ public class UserMapper implements RowMapper<User> {
         user.setAvatar(rs.getString("avatar"));
         user.setAbout(rs.getString("about"));
         user.setRole(rs.getString("server_role"));
-        user.setJoinedDate(rs.getString("joined_date"));
+        user.setCreationDate(rs.getString("creation_date"));
         user.setPassword(rs.getString("encrypted_password"));
         user.setGoogleId(rs.getString("google_id"));
         user.setGithubId(rs.getString("github_id"));

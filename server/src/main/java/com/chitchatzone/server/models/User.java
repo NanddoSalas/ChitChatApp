@@ -13,7 +13,7 @@ public class User {
     private String avatar;
     private String about;
     private String role;
-    private String joinedDate;
+    private String creationDate;
     private String password;
     private String googleId;
     private String githubId;
@@ -66,12 +66,12 @@ public class User {
         this.role = role;
     }
 
-    public String getJoinedDate() {
-        return joinedDate;
+    public String getCreationDate() {
+        return creationDate;
     }
 
-    public void setJoinedDate(String joinedDate) {
-        this.joinedDate = joinedDate;
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 
     public String getPassword() {

@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS
     avatar VARCHAR(256) DEFAULT '' NOT NULL,
     about VARCHAR(256) DEFAULT '' NOT NULL,
     server_role VARCHAR(16) DEFAULT 'Member' NOT NULL,
-    joined_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     encrypted_password VARCHAR(128),
     google_id VARCHAR(128) UNIQUE,
     github_id VARCHAR(128) UNIQUE
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS
   members (
     room_id INT REFERENCES rooms (id) NOT NULL,
     user_id INT REFERENCES users (id) NOT NULL,
-    member_since TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     PRIMARY KEY (room_id, user_id)
   );
 
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS
     id serial PRIMARY KEY,
     sender_id INT REFERENCES users (id) NOT NULL,
     room_id INT REFERENCES rooms (id) NOT NULL,
-    sended_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     body VARCHAR(256) NOT NULL
   );
 
@@ -67,6 +67,6 @@ CREATE TABLE IF NOT EXISTS
     id serial PRIMARY KEY,
     sender_id INT REFERENCES users (id) NOT NULL,
     receiver_id INT REFERENCES users (id) NOT NULL,
-    sended_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     body VARCHAR(256) NOT NULL
   );
