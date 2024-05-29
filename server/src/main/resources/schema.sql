@@ -54,19 +54,19 @@ CREATE TABLE IF NOT EXISTS
 
 CREATE TABLE IF NOT EXISTS
   room_messages (
+    id serial PRIMARY KEY,
     sender_id INT REFERENCES users (id) NOT NULL,
     room_id INT REFERENCES rooms (id) NOT NULL,
     sended_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    body VARCHAR(256) NOT NULL,
-    PRIMARY KEY (sender_id, room_id)
+    body VARCHAR(256) NOT NULL
   );
 
 
 CREATE TABLE IF NOT EXISTS
   direct_messages (
+    id serial PRIMARY KEY,
     sender_id INT REFERENCES users (id) NOT NULL,
     receiver_id INT REFERENCES users (id) NOT NULL,
     sended_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    body VARCHAR(256) NOT NULL,
-    PRIMARY KEY (sender_id, receiver_id)
+    body VARCHAR(256) NOT NULL
   );
