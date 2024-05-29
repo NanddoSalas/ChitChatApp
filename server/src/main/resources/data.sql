@@ -15,7 +15,9 @@ INSERT INTO
     avatar,
     about,
     server_role,
-    encrypted_password
+    encrypted_password,
+    google_id,
+    github_id
   )
 VALUES
   (
@@ -24,7 +26,9 @@ VALUES
     'https://randomuser.me/api/portraits/men/1.jpg',
     'I am John',
     'ServerAdmin',
-    'encrypted_pass_123'
+    'encrypted_pass_123',
+    NULL,
+    NULL
   ),
   (
     'Jane Smith',
@@ -32,7 +36,9 @@ VALUES
     'https://randomuser.me/api/portraits/women/2.jpg',
     'I am Jane',
     'Admin',
-    'encrypted_pass_456'
+    'encrypted_pass_456',
+    NULL,
+    NULL
   ),
   (
     'Alice Johnson',
@@ -40,7 +46,9 @@ VALUES
     'https://randomuser.me/api/portraits/women/3.jpg',
     'I am Alice',
     'Member',
-    'encrypted_pass_789'
+    'encrypted_pass_789',
+    NULL,
+    NULL
   ),
   (
     'Bob Brown',
@@ -48,7 +56,9 @@ VALUES
     'https://randomuser.me/api/portraits/men/4.jpg',
     'I am Bob',
     'Member',
-    'encrypted_pass_101'
+    'encrypted_pass_101',
+    NULL,
+    NULL
   );
 
 
