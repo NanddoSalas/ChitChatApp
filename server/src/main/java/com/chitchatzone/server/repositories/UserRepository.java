@@ -8,20 +8,19 @@ import org.springframework.stereotype.Repository;
 import com.chitchatzone.server.models.User;
 import com.chitchatzone.server.repositories.mappers.UserMapper;
 
+import lombok.AllArgsConstructor;
+
 @Repository
+@AllArgsConstructor
 public class UserRepository {
 
-    private final JdbcTemplate template;
-    private final UserMapper mapper;
+  private final JdbcTemplate template;
+  private final UserMapper mapper;
 
-    public UserRepository(JdbcTemplate template, UserMapper mapper) {
-        this.template = template;
-        this.mapper = mapper;
-    }
+  public List<User> findAll() {
+    String sql = "select * from users;";
 
-    public List<User> findAll() {
-        String sql = "select * from users;";
+    return template.query(sql, mapper);
+  }
 
-        return template.query(sql, mapper);
-    }
 }

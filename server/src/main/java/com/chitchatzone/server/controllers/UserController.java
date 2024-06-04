@@ -10,15 +10,13 @@ import com.chitchatzone.server.dtos.ResponseDTO;
 import com.chitchatzone.server.dtos.UserDTO;
 import com.chitchatzone.server.services.UserService;
 
+import lombok.AllArgsConstructor;
 
 @RestController
+@AllArgsConstructor
 public class UserController {
 
     private final UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("/users")
     public ResponseEntity<ResponseDTO> retrieveUsers() {

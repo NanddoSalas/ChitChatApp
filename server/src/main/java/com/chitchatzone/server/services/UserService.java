@@ -8,14 +8,13 @@ import com.chitchatzone.server.dtos.UserDTO;
 import com.chitchatzone.server.models.User;
 import com.chitchatzone.server.repositories.UserRepository;
 
+import lombok.AllArgsConstructor;
+
 @Service
+@AllArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public List<UserDTO> retrieveUsers() {
         List<User> users = userRepository.findAll();
