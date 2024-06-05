@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.chitchatzone.server.dtos.ResponseDTO;
+import com.chitchatzone.server.exceptions.EmailAlreadyInUseException;
+import com.chitchatzone.server.exceptions.InvalidInvitationCodeException;
 
 
 @RestControllerAdvice
@@ -39,4 +41,24 @@ public class GlobalControllerExceptionHandler {
 
         return ResponseDTO.badRequest(errors);
     }
+
+    @ExceptionHandler(EmailAlreadyInUseException.class)
+    public ResponseEntity<ResponseDTO> handleEmailAlreadyInUseException(
+            EmailAlreadyInUseException ex) {
+        Map<String, String> errors = new HashMap<>();
+
+        errors.put("email", "Email already in use");
+
+        return ResponseDTO.badRequest(errors);
+    }
+
+    @ExceptionHandler(InvalidInvitationCodeException.class)
+    public ResponseEntity<ResponseDTO> handleInvalidInvitationCodeException() {
+        Map<String, String> errors = new HashMap<>();
+
+        errors.put("inviteCode", "Invalid invitation code");
+
+        return ResponseDTO.badRequest(errors);
+    }
+
 }
