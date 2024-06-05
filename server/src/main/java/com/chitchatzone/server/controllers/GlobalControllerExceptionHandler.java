@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,4 +31,12 @@ public class GlobalControllerExceptionHandler {
         return ResponseDTO.badRequest(errors);
     }
 
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ResponseDTO> handleBadCredentialsException(BadCredentialsException ex) {
+        Map<String, String> errors = new HashMap<>();
+
+        errors.put("message", "Invalid credentials");
+
+        return ResponseDTO.badRequest(errors);
+    }
 }
