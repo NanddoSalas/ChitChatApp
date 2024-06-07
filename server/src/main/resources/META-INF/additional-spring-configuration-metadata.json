@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "Secret Key",
+      "type": "java.lang.String",
+      "description": "String used to build SecretKey bean"
+    }
+  ]
+}
