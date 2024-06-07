@@ -26,7 +26,7 @@ VALUES
     'https://randomuser.me/api/portraits/men/1.jpg',
     'I am John',
     'ServerAdmin',
-    'encrypted_pass_123',
+    '$2a$10$KJA.HlSfLW35KO38oEUSK.JmCVNxPSxXGvCsyGgMk.VkNWBUi7/je',
     NULL,
     NULL
   ),
@@ -36,7 +36,7 @@ VALUES
     'https://randomuser.me/api/portraits/women/2.jpg',
     'I am Jane',
     'Admin',
-    'encrypted_pass_456',
+    '$2a$10$KJA.HlSfLW35KO38oEUSK.JmCVNxPSxXGvCsyGgMk.VkNWBUi7/je',
     NULL,
     NULL
   ),
@@ -46,7 +46,7 @@ VALUES
     'https://randomuser.me/api/portraits/women/3.jpg',
     'I am Alice',
     'Member',
-    'encrypted_pass_789',
+    '$2a$10$KJA.HlSfLW35KO38oEUSK.JmCVNxPSxXGvCsyGgMk.VkNWBUi7/je',
     NULL,
     NULL
   ),
@@ -56,7 +56,7 @@ VALUES
     'https://randomuser.me/api/portraits/men/4.jpg',
     'I am Bob',
     'Member',
-    'encrypted_pass_101',
+    '$2a$10$KJA.HlSfLW35KO38oEUSK.JmCVNxPSxXGvCsyGgMk.VkNWBUi7/je',
     NULL,
     NULL
   );
