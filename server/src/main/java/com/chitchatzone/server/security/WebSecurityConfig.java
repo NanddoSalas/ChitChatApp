@@ -90,7 +90,7 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    JwtEncoder jwtEncoder(SecretKey secretKey) {
+    public JwtEncoder jwtEncoder(SecretKey secretKey) {
         JWKSource<SecurityContext> immutableSecret = new ImmutableSecret<>(secretKey);
 
         return new NimbusJwtEncoder(immutableSecret);
