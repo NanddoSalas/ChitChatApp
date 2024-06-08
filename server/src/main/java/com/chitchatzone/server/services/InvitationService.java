@@ -23,7 +23,7 @@ public class InvitationService {
 
     private final InvitationRepository invitationRepository;
 
-    public List<InvitationDTO> retrieveInvitationsFromAuthenticatedUser() {
+    public List<InvitationDTO> retrieveInvitations() {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();

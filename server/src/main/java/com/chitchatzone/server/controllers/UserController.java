@@ -21,7 +21,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<ResponseDTO> retrieveUsers() {
         List<UserDTO> userDTOs = userService.retrieveUsers();
 

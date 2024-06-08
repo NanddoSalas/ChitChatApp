@@ -29,8 +29,7 @@ public class InvitationController {
 
     @GetMapping("")
     public ResponseEntity<ResponseDTO> retrieveInvitation() {
-        List<InvitationDTO> invitationDTOs =
-                invitationService.retrieveInvitationsFromAuthenticatedUser();
+        List<InvitationDTO> invitationDTOs = invitationService.retrieveInvitations();
 
         return ResponseDTO.ok(invitationDTOs);
     }

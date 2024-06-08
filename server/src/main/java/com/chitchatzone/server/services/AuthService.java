@@ -9,7 +9,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
-import com.chitchatzone.server.JwtService;
 import com.chitchatzone.server.dtos.SignInDTO;
 import com.chitchatzone.server.dtos.SignInForm;
 import com.chitchatzone.server.dtos.SignUpForm;

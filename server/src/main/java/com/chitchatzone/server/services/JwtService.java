@@ -1,4 +1,4 @@
-package com.chitchatzone.server;
+package com.chitchatzone.server.services;
 
 import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.Jwt;
