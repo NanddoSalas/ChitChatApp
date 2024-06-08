@@ -62,6 +62,9 @@ public class WebSecurityConfig {
 
                         .requestMatchers("/auth/**").permitAll()
 
+                        .requestMatchers(HttpMethod.PUT, "/users/{id}/role")
+                        .hasAuthority("ServerAdmin")
+
                         .requestMatchers("/invitations").hasAnyAuthority("ServerAdmin", "Admin")
 
                         .anyRequest().authenticated());
