@@ -45,14 +45,26 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable()).cors(cors -> cors.disable())
+        http
+
+                .csrf(csrf -> csrf.disable())
+
+                .cors(cors -> cors.disable())
+
                 .logout((logout) -> logout.disable())
+
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+
                 .sessionManagement(
                         (session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/auth/**")
-                        .permitAll().requestMatchers("/invitations")
-                        .hasAnyAuthority("ServerAdmin", "Admin").anyRequest().authenticated());
+
+                .authorizeHttpRequests(authorize -> authorize
+
+                        .requestMatchers("/auth/**").permitAll()
+
+                        .requestMatchers("/invitations").hasAnyAuthority("ServerAdmin", "Admin")
+
+                        .anyRequest().authenticated());
 
         return http.build();
     }
