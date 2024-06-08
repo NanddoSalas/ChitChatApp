@@ -50,7 +50,8 @@ public class WebSecurityConfig {
                 .sessionManagement(
                         (session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize.requestMatchers("/auth/**")
-                        .permitAll().anyRequest().authenticated())
+                        .permitAll().requestMatchers("/invitations")
+                        .hasAnyAuthority("ServerAdmin", "Admin").anyRequest().authenticated())
                 .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
 
         return http.build();
@@ -98,7 +99,8 @@ public class WebSecurityConfig {
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
 
-        JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter =
+                new JwtGrantedAuthoritiesConverter();
         grantedAuthoritiesConverter.setAuthorityPrefix("");
 
         JwtAuthenticationConverter authConverter = new JwtAuthenticationConverter();
