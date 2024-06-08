@@ -3,7 +3,6 @@ package com.chitchatzone.server.repositories;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -28,8 +27,19 @@ public class UserRepository {
     return template.query(sql, mapper);
   }
 
-  public InvitedUser addUser(String fullName, String email, String password, String inviteCode)
-      throws DataAccessException {
+  public Optional<User> findById(int userId) {
+    String sql = "select * from users where id = ?;";
+
+    List<User> users = template.query(sql, mapper, userId);
+
+    if (!users.isEmpty()) {
+      return Optional.of(users.get(0));
+    }
+
+    return Optional.empty();
+  }
+
+  public InvitedUser addUser(String fullName, String email, String password, String inviteCode) {
     String sql = """
         WITH u AS (
           INSERT INTO users (full_name, email, encrypted_password)
@@ -87,6 +97,30 @@ public class UserRepository {
     } else {
       return Optional.of(users.get(0));
     }
+  }
+
+  public boolean updateProfile(int userId, String fullName, String about) {
+    String sql = "update users set full_name = ?, about = ? where id = ?;";
+
+    int affectedRows = template.update(sql, fullName, about, userId);
+
+    return affectedRows == 1;
+  }
+
+  public boolean updatePassword(int userId, String newPassword) {
+    String sql = "update users set encrypted_password = ? where id = ?;";
+
+    int affectedRows = template.update(sql, newPassword, userId);
+
+    return affectedRows == 1;
+  }
+
+  public boolean updateRole(int userId, String newRole) {
+    String sql = "update users set server_role = ? where id = ?;";
+
+    int affectedRows = template.update(sql, newRole, userId);
+
+    return affectedRows == 1;
   }
 
 }
