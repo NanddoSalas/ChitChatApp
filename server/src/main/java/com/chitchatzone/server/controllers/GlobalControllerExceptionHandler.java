@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.chitchatzone.server.dtos.ResponseDTO;
 import com.chitchatzone.server.exceptions.EmailAlreadyInUseException;
 import com.chitchatzone.server.exceptions.InvalidInvitationCodeException;
-
+import com.chitchatzone.server.exceptions.InvalidOldPasswordException;
 
 @RestControllerAdvice
 public class GlobalControllerExceptionHandler {
@@ -28,7 +28,6 @@ public class GlobalControllerExceptionHandler {
             String errorMessage = error.getDefaultMessage();
             errors.put(fieldName, errorMessage);
         });
-
 
         return ResponseDTO.badRequest(errors);
     }
@@ -57,6 +56,15 @@ public class GlobalControllerExceptionHandler {
         Map<String, String> errors = new HashMap<>();
 
         errors.put("inviteCode", "Invalid invitation code");
+
+        return ResponseDTO.badRequest(errors);
+    }
+
+    @ExceptionHandler(InvalidOldPasswordException.class)
+    public ResponseEntity<ResponseDTO> handleInvalidOldPasswordException() {
+        Map<String, String> errors = new HashMap<>();
+
+        errors.put("oldPassword", "Invalid old password");
 
         return ResponseDTO.badRequest(errors);
     }
