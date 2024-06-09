@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS
 
 CREATE TABLE IF NOT EXISTS
   members (
-    room_id INT REFERENCES rooms (id) NOT NULL,
+    room_id INT REFERENCES rooms (id) ON DELETE CASCADE NOT NULL,
     user_id INT REFERENCES users (id) NOT NULL,
     creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     PRIMARY KEY (room_id, user_id)
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS
   room_messages (
     id serial PRIMARY KEY,
     sender_id INT REFERENCES users (id) NOT NULL,
-    room_id INT REFERENCES rooms (id) NOT NULL,
+    room_id INT REFERENCES rooms (id) ON DELETE CASCADE NOT NULL,
     creation_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     body VARCHAR(256) NOT NULL
   );
