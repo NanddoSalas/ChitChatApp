@@ -12,6 +12,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -66,6 +67,17 @@ public class WebSecurityConfig {
                         .hasAuthority("ServerAdmin")
 
                         .requestMatchers("/invitations").hasAnyAuthority("ServerAdmin", "Admin")
+
+                        .requestMatchers(HttpMethod.GET, "/rooms").permitAll()
+
+                        .requestMatchers(HttpMethod.POST, "/rooms")
+                        .hasAnyAuthority("ServerAdmin", "Admin")
+
+                        .requestMatchers(HttpMethod.PUT, "/rooms/{id}")
+                        .hasAnyAuthority("ServerAdmin", "Admin")
+
+                        .requestMatchers(HttpMethod.DELETE, "/rooms/{id}")
+                        .hasAnyAuthority("ServerAdmin", "Admin")
 
                         .anyRequest().authenticated());
 
