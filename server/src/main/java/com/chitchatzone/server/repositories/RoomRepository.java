@@ -70,7 +70,7 @@ public class RoomRepository {
     }
 
     public boolean updateRoom(int roomId, int creatorId, String name, boolean isPrivate) {
-        String sql = "update rooms set name = ?, private = ? where id = ?, creator_id = ?;";
+        String sql = "update rooms set room_name = ?, private = ? where id = ? and creator_id = ?;";
 
         int affectedRows = template.update(sql, name, isPrivate, roomId, creatorId);
 
