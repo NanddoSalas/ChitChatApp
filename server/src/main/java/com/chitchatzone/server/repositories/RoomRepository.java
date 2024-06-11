@@ -85,4 +85,16 @@ public class RoomRepository {
         return affectedRows == 1;
     }
 
+    public boolean isUserOwnerOfRoom(int userId, int roomId) {
+        String sql = """
+                SELECT EXISTS (
+                    SELECT *
+                    FROM rooms
+                    WHERE id = ?
+                      AND creator_id = ?
+                  );""";
+
+        return template.queryForObject(sql, Boolean.class, roomId, userId);
+    }
+
 }
