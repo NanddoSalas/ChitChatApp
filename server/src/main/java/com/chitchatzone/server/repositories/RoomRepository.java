@@ -30,7 +30,8 @@ public class RoomRepository {
                   END has_access
                 FROM rooms r
                   LEFT JOIN members m ON m.room_id = r.id
-                  AND m.user_id = ?;""";
+                  AND m.user_id = ?;
+                  """;
 
         return template.query(sql, mapper, userId);
     }
@@ -54,7 +55,8 @@ public class RoomRepository {
                 )
                 SELECT *,
                   TRUE has_access
-                FROM r;""";
+                FROM r;
+                """;
 
         return template.query(sql, mapper, name, creatorId, isPrivate, creatorId).get(0);
     }
@@ -82,7 +84,8 @@ public class RoomRepository {
                     FROM rooms
                     WHERE id = ?
                       AND creator_id = ?
-                  );""";
+                  );
+                  """;
 
         return template.queryForObject(sql, Boolean.class, roomId, userId);
     }

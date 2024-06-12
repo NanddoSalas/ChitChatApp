@@ -24,7 +24,8 @@ public class MemberRepository {
                     FROM members
                     WHERE room_id = ?
                       AND user_id = ?
-                  );""";
+                  );
+                  """;
 
         return template.queryForObject(sql, Boolean.class, roomId, userId);
     }
