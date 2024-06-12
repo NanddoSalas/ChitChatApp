@@ -8,8 +8,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
-import com.chitchatzone.server.dtos.CreateRoomForm;
-import com.chitchatzone.server.dtos.UpdateRoomForm;
+import com.chitchatzone.server.forms.CreateRoomForm;
+import com.chitchatzone.server.forms.UpdateRoomForm;
 import com.chitchatzone.server.models.Room;
 import com.chitchatzone.server.repositories.RoomRepository;
 

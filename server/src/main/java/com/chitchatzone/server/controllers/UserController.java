@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chitchatzone.server.dtos.ResponseDTO;
-import com.chitchatzone.server.dtos.UpdatePasswordForm;
-import com.chitchatzone.server.dtos.UpdateProfileForm;
-import com.chitchatzone.server.dtos.UpdateRoleForm;
 import com.chitchatzone.server.dtos.UserDTO;
+import com.chitchatzone.server.forms.UpdatePasswordForm;
+import com.chitchatzone.server.forms.UpdateProfileForm;
+import com.chitchatzone.server.forms.UpdateRoleForm;
 import com.chitchatzone.server.services.UserService;
 
 import jakarta.validation.Valid;

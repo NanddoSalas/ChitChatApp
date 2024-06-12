@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chitchatzone.server.dtos.CreateInvitationForm;
 import com.chitchatzone.server.dtos.InvitationDTO;
 import com.chitchatzone.server.dtos.ResponseDTO;
+import com.chitchatzone.server.forms.CreateInvitationForm;
 import com.chitchatzone.server.services.InvitationService;
 
 import jakarta.validation.Valid;

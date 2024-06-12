@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chitchatzone.server.dtos.CreateRoomForm;
 import com.chitchatzone.server.dtos.ResponseDTO;
-import com.chitchatzone.server.dtos.UpdateRoomForm;
+import com.chitchatzone.server.forms.CreateRoomForm;
+import com.chitchatzone.server.forms.UpdateRoomForm;
 import com.chitchatzone.server.models.Room;
 import com.chitchatzone.server.services.RoomService;
 

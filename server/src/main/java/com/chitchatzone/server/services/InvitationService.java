@@ -10,8 +10,8 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
 import com.aventrix.jnanoid.jnanoid.NanoIdUtils;
-import com.chitchatzone.server.dtos.CreateInvitationForm;
 import com.chitchatzone.server.dtos.InvitationDTO;
+import com.chitchatzone.server.forms.CreateInvitationForm;
 import com.chitchatzone.server.models.Invitation;
 import com.chitchatzone.server.repositories.InvitationRepository;
 

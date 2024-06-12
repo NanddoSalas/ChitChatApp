@@ -1,4 +1,4 @@
-package com.chitchatzone.server.dtos;
+package com.chitchatzone.server.forms;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

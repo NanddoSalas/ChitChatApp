@@ -10,11 +10,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
-import com.chitchatzone.server.dtos.UpdatePasswordForm;
-import com.chitchatzone.server.dtos.UpdateProfileForm;
-import com.chitchatzone.server.dtos.UpdateRoleForm;
 import com.chitchatzone.server.dtos.UserDTO;
 import com.chitchatzone.server.exceptions.InvalidOldPasswordException;
+import com.chitchatzone.server.forms.UpdatePasswordForm;
+import com.chitchatzone.server.forms.UpdateProfileForm;
+import com.chitchatzone.server.forms.UpdateRoleForm;
 import com.chitchatzone.server.models.User;
 import com.chitchatzone.server.repositories.UserRepository;
 

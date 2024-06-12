@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chitchatzone.server.dtos.AddUserToRoomForm;
 import com.chitchatzone.server.dtos.ResponseDTO;
+import com.chitchatzone.server.forms.AddUserToRoomForm;
 import com.chitchatzone.server.models.Member;
 import com.chitchatzone.server.services.MemberService;
 
