@@ -42,18 +42,18 @@ public class RoomController {
         return ResponseDTO.ok(room);
     }
 
-    @PutMapping("{id}")
+    @PutMapping("{roomId}")
     public ResponseEntity<ResponseDTO> updateRoom(
-            @PathVariable String id,
+            @PathVariable String roomId,
             @Valid @RequestBody UpdateRoomForm form) {
-        roomService.updateRoom(Integer.parseInt(id), form);
+        roomService.updateRoom(Integer.parseInt(roomId), form);
 
         return ResponseDTO.ok(null);
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<ResponseDTO> deleteRoom(@PathVariable String id) {
-        roomService.deleteRoom(Integer.parseInt(id));
+    @DeleteMapping("{roomId}")
+    public ResponseEntity<ResponseDTO> deleteRoom(@PathVariable String roomId) {
+        roomService.deleteRoom(Integer.parseInt(roomId));
 
         return ResponseDTO.ok(null);
     }

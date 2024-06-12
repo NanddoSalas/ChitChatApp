@@ -34,30 +34,30 @@ public class UserController {
         return ResponseDTO.ok(userDTOs);
     }
 
-    @PutMapping("{id}/profile")
+    @PutMapping("{userId}/profile")
     public ResponseEntity<ResponseDTO> updateProfile(
-            @PathVariable String id,
+            @PathVariable String userId,
             @Valid @RequestBody UpdateProfileForm form) throws NumberFormatException, Exception {
-        userService.updateProfile(Integer.parseInt(id), form);
+        userService.updateProfile(Integer.parseInt(userId), form);
 
         return ResponseDTO.ok(null);
     }
 
-    @PutMapping("{id}/password")
+    @PutMapping("{userId}/password")
     public ResponseEntity<ResponseDTO> updatePassword(
-            @PathVariable String id,
+            @PathVariable String userId,
             @Valid @RequestBody UpdatePasswordForm form)
             throws Exception {
-        userService.updatePassword(Integer.parseInt(id), form);
+        userService.updatePassword(Integer.parseInt(userId), form);
 
         return ResponseDTO.ok(null);
     }
 
-    @PutMapping("{id}/role")
+    @PutMapping("{userId}/role")
     public ResponseEntity<ResponseDTO> updateRole(
-            @PathVariable String id,
+            @PathVariable String userId,
             @Valid @RequestBody UpdateRoleForm form) {
-        userService.updateRole(Integer.parseInt(id), form);
+        userService.updateRole(Integer.parseInt(userId), form);
 
         return ResponseDTO.ok(null);
     }

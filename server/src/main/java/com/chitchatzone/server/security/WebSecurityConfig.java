@@ -63,7 +63,7 @@ public class WebSecurityConfig {
 
                         .requestMatchers("/auth/**").permitAll()
 
-                        .requestMatchers(HttpMethod.PUT, "/users/{id}/role")
+                        .requestMatchers(HttpMethod.PUT, "/users/{userId}/role")
                         .hasAuthority("ServerAdmin")
 
                         .requestMatchers("/invitations").hasAnyAuthority("ServerAdmin", "Admin")
@@ -73,10 +73,10 @@ public class WebSecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/rooms")
                         .hasAnyAuthority("ServerAdmin", "Admin")
 
-                        .requestMatchers(HttpMethod.PUT, "/rooms/{id}")
+                        .requestMatchers(HttpMethod.PUT, "/rooms/{roomId}")
                         .hasAnyAuthority("ServerAdmin", "Admin")
 
-                        .requestMatchers(HttpMethod.DELETE, "/rooms/{id}")
+                        .requestMatchers(HttpMethod.DELETE, "/rooms/{roomId}")
                         .hasAnyAuthority("ServerAdmin", "Admin")
 
                         .anyRequest().authenticated());

@@ -41,9 +41,9 @@ public class InvitationController {
         return ResponseDTO.ok(invitationDTO);
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<ResponseDTO> revokeInvitation(@PathVariable String id) {
-        invitationService.revokeInvitation(Integer.parseInt(id));
+    @DeleteMapping("{invitationId}")
+    public ResponseEntity<ResponseDTO> revokeInvitation(@PathVariable String invitationId) {
+        invitationService.revokeInvitation(Integer.parseInt(invitationId));
 
         return ResponseEntity.ok(null);
     }
