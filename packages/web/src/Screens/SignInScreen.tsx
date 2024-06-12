@@ -1,4 +1,11 @@
-export const LoginScreen = () => {
+import { useState } from 'react';
+
+export const SignInScreen = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handlePasswordSignIn = () => {};
+
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-50">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -25,6 +32,8 @@ export const LoginScreen = () => {
                 type="email"
                 className="input input-bordered w-full"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </label>
 
@@ -37,10 +46,17 @@ export const LoginScreen = () => {
                 type="password"
                 className="input input-bordered w-full"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </label>
 
-            <button className="btn btn-block btn-outline">Sign in</button>
+            <button
+              className="btn btn-block btn-outline"
+              onClick={handlePasswordSignIn}
+            >
+              Sign in
+            </button>
           </div>
 
           <div>
