@@ -38,15 +38,7 @@ public class MemberRepository {
     public Member addMember(int userId, int roomId) {
         String sql = "insert into members (room_id, user_id) values (?, ?) RETURNING *;";
 
-        List<Member> members = template.query(sql, mapper, roomId, userId);
-
-        if (!members.isEmpty()) {
-            return members.get(0);
-        }
-
-        // todo: handle posible insertion error
-
-        return null;
+        return template.query(sql, mapper, roomId, userId).get(0);
     }
 
     public boolean deleteMember(int userId, int roomId) {

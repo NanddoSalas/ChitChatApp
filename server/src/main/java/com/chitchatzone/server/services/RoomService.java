@@ -30,26 +30,23 @@ public class RoomService {
         return roomRepository.findAll(sub);
     }
 
-    // todo: change room for room dto
-
-    public Room createRoom(CreateRoomForm createRoomForm) {
+    public Room createRoom(CreateRoomForm form) {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();
         int sub = Integer.parseInt(jwt.getSubject());
 
-        return roomRepository.createRoom(sub, createRoomForm.getName(), createRoomForm.isPrivate());
+        return roomRepository.createRoom(sub, form.getName(), form.isPrivate());
 
     }
 
-    public void updateRoom(int roomId, UpdateRoomForm updateRoomForm) {
+    public void updateRoom(int roomId, UpdateRoomForm form) {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();
         int sub = Integer.parseInt(jwt.getSubject());
 
-        roomRepository.updateRoom(roomId, sub, updateRoomForm.getName(),
-                updateRoomForm.isPrivate());
+        roomRepository.updateRoom(roomId, sub, form.getName(), form.isPrivate());
     }
 
     public void deleteRoom(int roomId) {

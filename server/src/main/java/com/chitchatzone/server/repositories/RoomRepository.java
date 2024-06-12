@@ -56,17 +56,7 @@ public class RoomRepository {
                   TRUE has_access
                 FROM r;""";
 
-
-
-        List<Room> rooms = template.query(sql, mapper, name, creatorId, isPrivate, creatorId);
-
-        if (!rooms.isEmpty()) {
-            return rooms.get(0);
-        }
-
-        // todo: handle posible insertion error
-
-        return null;
+        return template.query(sql, mapper, name, creatorId, isPrivate, creatorId).get(0);
     }
 
     public boolean updateRoom(int roomId, int creatorId, String name, boolean isPrivate) {

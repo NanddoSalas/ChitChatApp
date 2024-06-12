@@ -33,24 +33,20 @@ public class UserService {
         return users.stream().map((user) -> user.toDTO()).toList();
     }
 
-    public void updateProfile(int userId, UpdateProfileForm updateProfileForm) {
+    public void updateProfile(int userId, UpdateProfileForm form) throws Exception {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();
         int sub = Integer.parseInt(jwt.getSubject());
 
         if (userId == sub) {
-            userRepository.updateProfile(userId, updateProfileForm.getFullName(),
-                    updateProfileForm.getAbout());
-
+            userRepository.updateProfile(userId, form.getFullName(), form.getAbout());
         } else {
-            // todo: handle when user tries to update someone else's profile
+            throw new Exception("update someone else's profile not allowed");
         }
-
     }
 
-    public void updatePassword(int userId, UpdatePasswordForm updatePasswordForm)
-            throws InvalidOldPasswordException {
+    public void updatePassword(int userId, UpdatePasswordForm form) throws Exception {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();
@@ -59,26 +55,23 @@ public class UserService {
         if (userId == sub) {
             Optional<User> user = userRepository.findById(userId);
 
-            if (user.isPresent()) {
-                String oldPassword = updatePasswordForm.getOldPassword();
-                String newPassword = updatePasswordForm.getNewPassword();
-                String oldEncryptedPassword = user.get().getPassword();
-                String newEncryptedPassword = encoder.encode(newPassword);
+            String oldPassword = form.getOldPassword();
+            String newPassword = form.getNewPassword();
+            String oldEncryptedPassword = user.get().getPassword();
+            String newEncryptedPassword = encoder.encode(newPassword);
 
-                if (encoder.matches(oldPassword, oldEncryptedPassword)) {
-                    userRepository.updatePassword(userId, newEncryptedPassword);
-                } else {
-                    throw new InvalidOldPasswordException("Invalid old password");
-                }
+            if (encoder.matches(oldPassword, oldEncryptedPassword)) {
+                userRepository.updatePassword(userId, newEncryptedPassword);
             } else {
-                // no way
+                throw new InvalidOldPasswordException("Invalid old password");
             }
+
         } else {
-            // todo: handle when user tries to update someone else's password
+            throw new Exception("update someone else's password not allowed");
         }
     }
 
-    public void updateRole(int userId, UpdateRoleForm updateRoleForm) {
+    public void updateRole(int userId, UpdateRoleForm form) {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();
@@ -88,7 +81,7 @@ public class UserService {
             return;
         }
 
-        userRepository.updateRole(userId, updateRoleForm.getRole());
+        userRepository.updateRole(userId, form.getRole());
     }
 
 }

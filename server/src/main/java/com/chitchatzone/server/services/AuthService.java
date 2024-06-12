@@ -29,10 +29,9 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
-
-    public SignInDTO signIn(SignInForm signInForm) {
+    public SignInDTO signIn(SignInForm form) {
         Authentication authReq = UsernamePasswordAuthenticationToken
-                .unauthenticated(signInForm.getEmail(), signInForm.getPassword());
+                .unauthenticated(form.getEmail(), form.getPassword());
         Authentication authRes = this.authenticationManager.authenticate(authReq);
 
         MyUserPrincipal principal = (MyUserPrincipal) authRes.getPrincipal();
@@ -47,11 +46,14 @@ public class AuthService {
         return signInDTO;
     }
 
-    public void signUp(SignUpForm signUpForm)
+    public void signUp(SignUpForm form)
             throws EmailAlreadyInUseException, InvalidInvitationCodeException {
         try {
-            userRepository.addUser(signUpForm.getFullName(), signUpForm.getEmail(),
-                    encoder.encode(signUpForm.getPassword()), signUpForm.getInviteCode());
+            userRepository.addUser(
+                    form.getFullName(),
+                    form.getEmail(),
+                    encoder.encode(form.getPassword()),
+                    form.getInviteCode());
         } catch (DataAccessException e) {
             if (e.getClass() == DuplicateKeyException.class) {
                 throw new EmailAlreadyInUseException("Email already in use");

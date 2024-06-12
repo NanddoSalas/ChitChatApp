@@ -21,8 +21,6 @@ import com.chitchatzone.server.services.RoomService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
-
-
 @RestController
 @RequestMapping("/rooms")
 @AllArgsConstructor
@@ -33,26 +31,30 @@ public class RoomController {
     @GetMapping("")
     public ResponseEntity<ResponseDTO> retrieveRooms() {
         List<Room> rooms = roomService.retrieveRooms();
+
         return ResponseDTO.ok(rooms);
     }
 
     @PostMapping("")
-    public ResponseEntity<ResponseDTO> createRoom(
-            @Valid @RequestBody CreateRoomForm createRoomForm) {
-        Room room = roomService.createRoom(createRoomForm);
+    public ResponseEntity<ResponseDTO> createRoom(@Valid @RequestBody CreateRoomForm form) {
+        Room room = roomService.createRoom(form);
+
         return ResponseDTO.ok(room);
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<ResponseDTO> updateRoom(@PathVariable String id,
-            @Valid @RequestBody UpdateRoomForm updateRoomForm) {
-        roomService.updateRoom(Integer.parseInt(id), updateRoomForm);
+    public ResponseEntity<ResponseDTO> updateRoom(
+            @PathVariable String id,
+            @Valid @RequestBody UpdateRoomForm form) {
+        roomService.updateRoom(Integer.parseInt(id), form);
+
         return ResponseDTO.ok(null);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<ResponseDTO> deleteRoom(@PathVariable String id) {
         roomService.deleteRoom(Integer.parseInt(id));
+
         return ResponseDTO.ok(null);
     }
 

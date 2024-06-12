@@ -27,23 +27,28 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("")
-    public ResponseEntity<ResponseDTO> retrieveRoomMembers(@PathVariable String roomId) {
+    public ResponseEntity<ResponseDTO> retrieveRoomMembers(@PathVariable String roomId)
+            throws NumberFormatException, Exception {
         List<Member> members = memberService.retrieveRoomMembers(Integer.parseInt(roomId));
+
         return ResponseDTO.ok(members);
     }
 
     @PostMapping("")
-    public ResponseEntity<ResponseDTO> addUserToRoom(@PathVariable String roomId,
-            @Valid @RequestBody AddUserToRoomForm addUserToRoomForm) throws Exception {
-        Member member = memberService.addUserToRoom(Integer.parseInt(roomId),
-                addUserToRoomForm.getUserId());
+    public ResponseEntity<ResponseDTO> addUserToRoom(
+            @PathVariable String roomId,
+            @Valid @RequestBody AddUserToRoomForm form) throws Exception {
+        Member member = memberService.addUserToRoom(Integer.parseInt(roomId), form.getUserId());
+
         return ResponseDTO.ok(member);
     }
 
     @DeleteMapping("{userId}")
-    public ResponseEntity<ResponseDTO> kickUserOutOfARoom(@PathVariable String roomId,
+    public ResponseEntity<ResponseDTO> kickUserOutOfARoom(
+            @PathVariable String roomId,
             @PathVariable String userId) throws NumberFormatException, Exception {
         memberService.kickUserOutOfARoom(Integer.parseInt(roomId), Integer.parseInt(userId));
+
         return ResponseDTO.ok(null);
     }
 

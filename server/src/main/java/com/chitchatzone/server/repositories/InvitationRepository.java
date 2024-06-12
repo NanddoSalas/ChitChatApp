@@ -24,23 +24,13 @@ public class InvitationRepository {
     }
 
     public Invitation addInvitation(String inviteCode, int limit, int creatorId) {
-        String sql =
-                "insert into invitations (invite_code, max_uses, creator_id) values (?, ?, ?) RETURNING *;";
+        String sql = "insert into invitations (invite_code, max_uses, creator_id) values (?, ?, ?) RETURNING *;";
 
-        List<Invitation> invitations = template.query(sql, mapper, inviteCode, limit, creatorId);
-
-        if (!invitations.isEmpty()) {
-            return invitations.get(0);
-        }
-
-        // todo: handle posible insertion error
-
-        return null;
+        return template.query(sql, mapper, inviteCode, limit, creatorId).get(0);
     }
 
     public void revokeInvitation(int invitationId, int creatorId) {
-        String sql =
-                "update invitations set revoked = true where id = ? and creator_id = ? and revoked = false;";
+        String sql = "update invitations set revoked = true where id = ? and creator_id = ? and revoked = false;";
 
         template.update(sql, invitationId, creatorId);
     }

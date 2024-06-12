@@ -1,6 +1,5 @@
 package com.chitchatzone.server.services;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.core.Authentication;
@@ -22,7 +21,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final RoomRepository roomRepository;
 
-    public List<Member> retrieveRoomMembers(int roomId) {
+    public List<Member> retrieveRoomMembers(int roomId) throws Exception {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();
@@ -31,7 +30,7 @@ public class MemberService {
         boolean isMember = memberRepository.isUserMemberOfRoom(sub, roomId);
 
         if (!isMember) {
-            return new ArrayList<>();
+            throw new Exception("Not authorized to see room members");
         }
 
         return memberRepository.findAllByRoomId(roomId);
@@ -46,7 +45,6 @@ public class MemberService {
         boolean isOwner = roomRepository.isUserOwnerOfRoom(sub, roomId);
 
         if (!isOwner) {
-            // todo: throw not authorized
             throw new Exception("Not authorized to modify that resource");
         }
 
@@ -62,7 +60,6 @@ public class MemberService {
         boolean isOwner = roomRepository.isUserOwnerOfRoom(sub, roomId);
 
         if (!isOwner) {
-            // todo: throw not authorized
             throw new Exception("Not authorized to modify that resource");
         }
 

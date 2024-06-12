@@ -19,7 +19,6 @@ import com.chitchatzone.server.services.InvitationService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
-
 @RestController
 @RequestMapping("/invitations")
 @AllArgsConstructor
@@ -36,14 +35,16 @@ public class InvitationController {
 
     @PostMapping("")
     public ResponseEntity<ResponseDTO> createInvitation(
-            @Valid @RequestBody CreateInvitationForm createInvitationForm) {
-        InvitationDTO invitationDTO = invitationService.createInvitation(createInvitationForm);
+            @Valid @RequestBody CreateInvitationForm form) {
+        InvitationDTO invitationDTO = invitationService.createInvitation(form);
+
         return ResponseDTO.ok(invitationDTO);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<ResponseDTO> revokeInvitation(@PathVariable String id) {
         invitationService.revokeInvitation(Integer.parseInt(id));
+
         return ResponseEntity.ok(null);
     }
 

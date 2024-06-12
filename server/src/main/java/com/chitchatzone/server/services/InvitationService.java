@@ -34,20 +34,17 @@ public class InvitationService {
         return invitations.stream().map((invitation) -> invitation.toDTO()).toList();
     }
 
-    public InvitationDTO createInvitation(CreateInvitationForm createInvitationForm) {
+    public InvitationDTO createInvitation(CreateInvitationForm form) {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();
         int userId = Integer.parseInt(jwt.getSubject());
 
         Random random = new Random();
-        char[] alphabet =
-                "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
+        char[] alphabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".toCharArray();
         String inviteCode = NanoIdUtils.randomNanoId(random, alphabet, 16);
 
-
-        Invitation invitation = invitationRepository.addInvitation(inviteCode,
-                createInvitationForm.getLimit(), userId);
+        Invitation invitation = invitationRepository.addInvitation(inviteCode, form.getLimit(), userId);
 
         return invitation.toDTO();
     }

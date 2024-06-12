@@ -24,15 +24,16 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    public ResponseEntity<ResponseDTO> signUp(@Valid @RequestBody SignUpForm signUpForm)
+    public ResponseEntity<ResponseDTO> signUp(@Valid @RequestBody SignUpForm form)
             throws EmailAlreadyInUseException, InvalidInvitationCodeException {
-        authService.signUp(signUpForm);
+        authService.signUp(form);
+
         return ResponseDTO.ok(null);
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<ResponseDTO> signIn(@Valid @RequestBody SignInForm signInForm) {
-        return ResponseDTO.ok(authService.signIn(signInForm));
+    public ResponseEntity<ResponseDTO> signIn(@Valid @RequestBody SignInForm form) {
+        return ResponseDTO.ok(authService.signIn(form));
     }
 
 }

@@ -19,11 +19,13 @@ public class JwtService {
 
     public Jwt generateAccessToken(User user) {
 
-        JwtClaimsSet claims = JwtClaimsSet.builder().subject(String.valueOf(user.getId()))
-                .claim("scope", user.getRole()).claim("email", user.getEmail()).build();
+        JwtClaimsSet claims = JwtClaimsSet.builder()
+                .subject(String.valueOf(user.getId()))
+                .claim("scope", user.getRole())
+                .claim("email", user.getEmail())
+                .build();
 
         JwsHeader jwsHeader = JwsHeader.with(() -> "HS256").build();
-
 
         return jwtEncoder.encode(JwtEncoderParameters.from(jwsHeader, claims));
     }

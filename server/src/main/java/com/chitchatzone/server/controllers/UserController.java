@@ -15,7 +15,6 @@ import com.chitchatzone.server.dtos.UpdatePasswordForm;
 import com.chitchatzone.server.dtos.UpdateProfileForm;
 import com.chitchatzone.server.dtos.UpdateRoleForm;
 import com.chitchatzone.server.dtos.UserDTO;
-import com.chitchatzone.server.exceptions.InvalidOldPasswordException;
 import com.chitchatzone.server.services.UserService;
 
 import jakarta.validation.Valid;
@@ -36,24 +35,30 @@ public class UserController {
     }
 
     @PutMapping("{id}/profile")
-    public ResponseEntity<ResponseDTO> updateProfile(@PathVariable String id,
-            @Valid @RequestBody UpdateProfileForm updateProfileForm) {
-        userService.updateProfile(Integer.parseInt(id), updateProfileForm);
+    public ResponseEntity<ResponseDTO> updateProfile(
+            @PathVariable String id,
+            @Valid @RequestBody UpdateProfileForm form) throws NumberFormatException, Exception {
+        userService.updateProfile(Integer.parseInt(id), form);
+
         return ResponseDTO.ok(null);
     }
 
     @PutMapping("{id}/password")
-    public ResponseEntity<ResponseDTO> updatePassword(@PathVariable String id,
-            @Valid @RequestBody UpdatePasswordForm updatePasswordForm)
-            throws NumberFormatException, InvalidOldPasswordException {
-        userService.updatePassword(Integer.parseInt(id), updatePasswordForm);
+    public ResponseEntity<ResponseDTO> updatePassword(
+            @PathVariable String id,
+            @Valid @RequestBody UpdatePasswordForm form)
+            throws Exception {
+        userService.updatePassword(Integer.parseInt(id), form);
+
         return ResponseDTO.ok(null);
     }
 
     @PutMapping("{id}/role")
-    public ResponseEntity<ResponseDTO> updateRole(@PathVariable String id,
-            @Valid @RequestBody UpdateRoleForm updateRoleForm) {
-        userService.updateRole(Integer.parseInt(id), updateRoleForm);
+    public ResponseEntity<ResponseDTO> updateRole(
+            @PathVariable String id,
+            @Valid @RequestBody UpdateRoleForm form) {
+        userService.updateRole(Integer.parseInt(id), form);
+
         return ResponseDTO.ok(null);
     }
 
