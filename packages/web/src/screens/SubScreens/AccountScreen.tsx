@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { AuthContext } from '../../AuthContext';
 import Breadcrumb from '../../componentes/Breadcrumbs';
 import { OpenDraweButton } from '../../componentes/Drawer';
 import { Header } from '../../componentes/Header';
@@ -7,16 +9,13 @@ import { SocialLoginSection } from '../../componentes/Sections/SocialLoginSectio
 import { UpdatePasswordSection } from '../../componentes/Sections/UpdatePasswordSection';
 import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 import { SubScreenLayout } from '../../componentes/SubScreenLayout';
-import { useStore } from '../../store';
 
 const AccountScreen = () => {
-  const auth = useStore((state) => state.auth);
-  const user = auth.user!;
-  const {
-    password: hasPassword,
-    github: hasGitHub,
-    google: hasGoogle,
-  } = auth.authMethods!;
+  const { user } = useContext(AuthContext);
+
+  const hasPassword = true;
+  const hasGitHub = false;
+  const hasGoogle = false;
 
   const handleProfileSave = (fullName: string, about: string) => {
     console.log(fullName);
@@ -38,10 +37,10 @@ const AccountScreen = () => {
 
         <div className="space-y-10 divide-y divide-gray-900/10 !mt-0">
           <ProfileSection
-            about={user.about}
-            avatar={user.avatar}
-            email={user.email}
-            fullName={user.fullName}
+            about={user!.about}
+            avatar={user!.avatar}
+            email={user!.email}
+            fullName={user!.fullName}
             onSave={handleProfileSave}
           />
 
