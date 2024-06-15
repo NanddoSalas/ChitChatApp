@@ -29,8 +29,8 @@ export const Dropdown: React.FC<DropdownProps> = ({ options }) => (
       tabIndex={0}
       className="dropdown-content z-[1] menu p-2 shadow-2xl bg-base-200 rounded-box w-52 mr-12"
     >
-      {options.map((option) => (
-        <li>
+      {options.map((option, i) => (
+        <li key={i}>
           <a href="#" onClick={option.onClick}>
             {option.icon}
 
