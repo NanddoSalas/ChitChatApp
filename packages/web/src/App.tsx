@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { useState } from 'react';
 import { AuthContextProvider } from './AuthContext';
+import { Router } from './Router';
 
 function App() {
   const [queryClient] = useState(
@@ -19,6 +20,8 @@ function App() {
     <AuthContextProvider>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
+
+        <Router />
       </QueryClientProvider>
     </AuthContextProvider>
   );
