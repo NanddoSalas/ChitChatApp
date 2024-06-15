@@ -10,7 +10,7 @@ import {
 } from '../componentes/Sidebar';
 import { useStore } from '../store';
 
-export const MainScreen = () => {
+export const DashboardScreen = () => {
   const openSearchBar = useStore((state) => state.openSearchBar);
 
   const retrieveUsers = useStore((state) => state.retrieveUsers);
