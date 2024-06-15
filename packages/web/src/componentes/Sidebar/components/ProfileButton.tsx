@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { AuthContext } from '../../../AuthContext';
 import { useStore } from '../../../store';
 import { classNames } from '../../../utils';
 import { Avatar } from '../../Avatar';
@@ -5,7 +7,7 @@ import { Avatar } from '../../Avatar';
 export const ProfileButton = () => {
   const navigate = useStore((state) => state.navigate);
   const current = useStore((state) => state.navigation.path) === '/account';
-  const { fullName, avatar } = useStore((state) => state.auth.user!);
+  const { user } = useContext(AuthContext);
 
   const handleClick = () => {
     navigate('/account', null);
@@ -20,10 +22,10 @@ export const ProfileButton = () => {
       )}
       onClick={handleClick}
     >
-      <Avatar avatar={avatar} />
+      <Avatar avatar={user!.avatar} />
 
       <span className="sr-only">Your profile</span>
-      <span aria-hidden="true">{fullName}</span>
+      <span aria-hidden="true">{user!.fullName}</span>
     </a>
   );
 };
