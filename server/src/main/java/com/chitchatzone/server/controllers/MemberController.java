@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chitchatzone.server.dtos.MemberDTO;
 import com.chitchatzone.server.dtos.ResponseDTO;
 import com.chitchatzone.server.forms.AddUserToRoomForm;
 import com.chitchatzone.server.models.Member;
@@ -29,9 +30,9 @@ public class MemberController {
     @GetMapping("")
     public ResponseEntity<ResponseDTO> retrieveRoomMembers(@PathVariable String roomId)
             throws NumberFormatException, Exception {
-        List<Member> members = memberService.retrieveRoomMembers(Integer.parseInt(roomId));
+        List<MemberDTO> memberDTOs = memberService.retrieveRoomMembers(Integer.parseInt(roomId));
 
-        return ResponseDTO.ok(members);
+        return ResponseDTO.ok(memberDTOs);
     }
 
     @PostMapping("")

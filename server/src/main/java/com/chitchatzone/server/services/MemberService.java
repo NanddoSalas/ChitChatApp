@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
+import com.chitchatzone.server.dtos.MemberDTO;
 import com.chitchatzone.server.models.Member;
 import com.chitchatzone.server.repositories.MemberRepository;
 import com.chitchatzone.server.repositories.RoomRepository;
@@ -21,7 +22,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final RoomRepository roomRepository;
 
-    public List<Member> retrieveRoomMembers(int roomId) throws Exception {
+    public List<MemberDTO> retrieveRoomMembers(int roomId) throws Exception {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();
@@ -33,7 +34,9 @@ public class MemberService {
             throw new Exception("Not authorized to see room members");
         }
 
-        return memberRepository.findAllByRoomId(roomId);
+        List<Member> members = memberRepository.findAllByRoomId(roomId);
+
+        return members.stream().map(member -> member.toDTO()).toList();
     }
 
     public Member addUserToRoom(int roomId, int userId) throws Exception {
