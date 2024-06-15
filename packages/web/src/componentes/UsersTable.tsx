@@ -1,8 +1,11 @@
-import { useStore } from '../store';
+import { useAuthQuery } from '../hooks/useAuthQuery';
+import { User } from '../types/api/resources';
 import { Avatar } from './Avatar';
 
 export const UsersTable = () => {
-  const users = useStore((state) => state.users.data);
+  const { data: usersData } = useAuthQuery<User[], Error>({
+    queryKey: ['/users'],
+  });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleMakeAdmin = (userId: number) => {};
@@ -57,7 +60,7 @@ export const UsersTable = () => {
           </thead>
 
           <tbody className="divide-y divide-gray-200 bg-white">
-            {users?.map((user) => (
+            {usersData?.map((user) => (
               <tr key={user.email}>
                 <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
                   <div className="flex items-center">
@@ -81,9 +84,7 @@ export const UsersTable = () => {
                 </td>
 
                 <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
-                  <div className="mt-1 text-gray-500">
-                    {user.joinedServer.toDateString()}
-                  </div>
+                  <div className="mt-1 text-gray-500">{user.creationDate}</div>
                 </td>
 
                 <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden xl:table-cell ">

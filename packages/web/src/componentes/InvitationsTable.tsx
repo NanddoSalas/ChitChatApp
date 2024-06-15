@@ -1,7 +1,10 @@
-import { useStore } from '../store';
+import { useAuthQuery } from '../hooks/useAuthQuery';
+import { Invitation } from '../types/api/resources';
 
 export default function InvitationsTable() {
-  const invitations = useStore((state) => state.invitations.data);
+  const { data: invitationsData } = useAuthQuery<Invitation[], Error>({
+    queryKey: ['/invitations'],
+  });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleRevokeInvitation = (invitationId: number) => {};
@@ -54,7 +57,7 @@ export default function InvitationsTable() {
           </thead>
 
           <tbody className="divide-y divide-gray-200 bg-white">
-            {invitations?.map((invitation) => {
+            {invitationsData?.map((invitation) => {
               return (
                 <tr key={invitation.id}>
                   <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
@@ -65,7 +68,9 @@ export default function InvitationsTable() {
 
                   <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                     <div className="mt-1 text-gray-500">
-                      {invitation.limit === 0 ? 'No Limit' : invitation.limit}
+                      {invitation.maxUses === 0
+                        ? 'No Limit'
+                        : invitation.maxUses}
                     </div>
                   </td>
 
@@ -75,18 +80,18 @@ export default function InvitationsTable() {
 
                   <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell ">
                     <div className="mt-1 text-gray-500">
-                      {invitation.createdAt.toDateString()}
+                      {invitation.creatioDate}
                     </div>
                   </td>
 
                   <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell ">
                     <div className="mt-1 text-gray-500">
-                      {invitation.isRevoked ? 'True' : 'False'}
+                      {invitation.revoked ? 'True' : 'False'}
                     </div>
                   </td>
 
                   <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right">
-                    {!invitation.isRevoked && (
+                    {!invitation.revoked && (
                       <button
                         className="btn btn-neutral btn-outline btn-sm lg:btn-md"
                         onClick={() => handleRevokeInvitation(invitation.id)}
