@@ -4,7 +4,7 @@ import {
   TrashIcon,
   UsersIcon,
 } from '@heroicons/react/20/solid';
-import { useStore } from '../store';
+import { useNavigate } from '@tanstack/react-router';
 import { Dropdown } from './Dropdown';
 
 interface RoomOptionsDropdownProps {
@@ -16,9 +16,11 @@ export const RoomOptionsDropdown: React.FC<RoomOptionsDropdownProps> = ({
   roomId,
   isPrivate,
 }) => {
-  const navigate = useStore((state) => state.navigate);
+  const navigate = useNavigate();
 
-  const handleManageMembers = () => navigate('/rooms/:id/members', roomId);
+  const handleManageMembers = () => {
+    navigate({ to: `/rooms/${roomId}/members` });
+  };
 
   const handleMakePrivate = () => {};
   const handleMakePublic = () => {};
