@@ -1,4 +1,4 @@
-import { useStore } from '../../../store';
+import { useLocation, useNavigate } from '@tanstack/react-router';
 import { NavigationPath } from '../../../types/resources';
 import { NavItemContainer } from './NavItemContainer';
 
@@ -18,11 +18,13 @@ export const AdminOptionItem: React.FC<AdminOptionItemProps> = ({
   icon: Icon,
   href,
 }) => {
-  const navigate = useStore((state) => state.navigate);
-  const current = useStore((state) => state.navigation.path) === href;
+  const current = useLocation().pathname === href;
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(href, null);
+    if (!current) {
+      navigate({ to: href });
+    }
   };
 
   return (
