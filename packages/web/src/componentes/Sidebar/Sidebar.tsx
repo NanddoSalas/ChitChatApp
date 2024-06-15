@@ -1,16 +1,24 @@
-import { useStore } from '../../store';
+import { useContext } from 'react';
+import { AuthContext } from '../../AuthContext';
+import { useAuthQuery } from '../../hooks/useAuthQuery';
+import { Room, User } from '../../types/api/resources';
 import { Skeleton } from '../Skeleton';
-import { RoomItem, SearchButton } from './components';
+import { RoomItem, SearchButton, UserItem } from './components';
 import { AdminOptions } from './components/AdminOptions';
 import { ProfileButton } from './components/ProfileButton';
-import { UserItem } from './components/UserItem';
 
 export const Sidebar = () => {
-  const role = useStore((state) => state.auth.user?.role);
-  const users = useStore((state) => state.users);
-  const rooms = useStore((state) => state.rooms);
+  const { user } = useContext(AuthContext);
 
-  const fetching = users.fetching && rooms.fetching;
+  const { data: usersData, isFetching: isFetchingUsers } = useAuthQuery<
+    User[],
+    Error
+  >({ queryKey: ['/users'] });
+
+  const { data: roomsData, isFetching: isFetchingRooms } = useAuthQuery<
+    Room[],
+    Error
+  >({ queryKey: ['/rooms'] });
 
   return (
     <nav className="flex flex-1 flex-col">
@@ -19,13 +27,15 @@ export const Sidebar = () => {
           <SearchButton />
         </li>
 
-        {role !== 'Member' ? <AdminOptions fetching={fetching} /> : null}
+        {user!.role !== 'Member' ? (
+          <AdminOptions fetching={isFetchingRooms || isFetchingUsers} />
+        ) : null}
 
         <li>
           <div className="font-semibold leading-6 text-gray-200">Rooms</div>
 
           <ul role="list" className="-mx-2 mt-2 space-y-1">
-            {fetching ? (
+            {isFetchingRooms ? (
               <>
                 <li>
                   <Skeleton square />
@@ -36,13 +46,13 @@ export const Sidebar = () => {
                 </li>
               </>
             ) : (
-              rooms.data?.map(({ id, name, isPrivate, haveAccess }) => (
-                <li key={id}>
+              roomsData?.map((room) => (
+                <li key={room.id}>
                   <RoomItem
-                    id={id}
-                    name={name}
-                    isPrivate={isPrivate}
-                    haveAccess={haveAccess}
+                    id={room.id}
+                    name={room.roomName}
+                    isPrivate={room.private}
+                    haveAccess={room.hasAccess}
                   />
                 </li>
               ))
@@ -56,7 +66,7 @@ export const Sidebar = () => {
           </div>
 
           <ul role="list" className="-mx-2 mt-2 space-y-1">
-            {fetching ? (
+            {isFetchingUsers ? (
               <>
                 <li>
                   <Skeleton />
@@ -71,7 +81,7 @@ export const Sidebar = () => {
                 </li>
               </>
             ) : (
-              users.data?.map((user) => (
+              usersData?.map((user) => (
                 <li key={user.id}>
                   <UserItem
                     id={user.id}
