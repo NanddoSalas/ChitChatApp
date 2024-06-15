@@ -9,6 +9,12 @@ import { TanStackRouterDevtools } from '@tanstack/router-devtools';
 import { IndexScreen } from './screens/IndexScreen';
 import { SignInScreen } from './screens/SignInScreen';
 import { SignUpScreen } from './screens/SignUpScreen';
+import {
+  AccountScreen,
+  InvitationsScreen,
+  RoomsScreen,
+  UsersScreen,
+} from './screens/SubScreens';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -37,7 +43,39 @@ const signUpRoute = createRoute({
   component: SignUpScreen,
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, signInRoute, signUpRoute]);
+const accountRoute = createRoute({
+  getParentRoute: () => indexRoute,
+  path: '/account',
+  component: AccountScreen,
+});
+
+const invitationsRoute = createRoute({
+  getParentRoute: () => indexRoute,
+  path: '/invitations',
+  component: InvitationsScreen,
+});
+
+const usersRoute = createRoute({
+  getParentRoute: () => indexRoute,
+  path: '/users',
+  component: UsersScreen,
+});
+
+const roomsRoute = createRoute({
+  getParentRoute: () => indexRoute,
+  path: '/rooms',
+  component: RoomsScreen,
+});
+
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  signInRoute,
+  signUpRoute,
+  accountRoute,
+  invitationsRoute,
+  usersRoute,
+  roomsRoute,
+]);
 
 const router = createRouter({
   routeTree,
