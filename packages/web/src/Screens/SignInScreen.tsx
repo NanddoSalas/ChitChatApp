@@ -1,10 +1,40 @@
-import { useState } from 'react';
+import { Link, useNavigate } from '@tanstack/react-router';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../AuthContext';
+import { useAuthMutation } from '../hooks/useAuthMutation';
+import {
+  SignInForm,
+  SingInData,
+  SingInErrors,
+} from '../types/api/authentication';
 
 export const SignInScreen = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('alice.johnson@example.com');
+  const [password, setPassword] = useState('password');
+  const { signIn, isAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const handlePasswordSignIn = () => {};
+  const { mutate, data, isPending } = useAuthMutation<
+    SingInData,
+    SingInErrors,
+    SignInForm
+  >({ mutationKey: ['/auth/signin'] });
+
+  const handlePasswordSignIn = () => {
+    mutate({ email, password });
+  };
+
+  useEffect(() => {
+    if (data?.accessToken && data.user) {
+      signIn(data.user, data.accessToken);
+    }
+  }, [data?.accessToken, data?.user, signIn]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate({ to: '/' });
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-50">
@@ -55,7 +85,11 @@ export const SignInScreen = () => {
               className="btn btn-block btn-outline"
               onClick={handlePasswordSignIn}
             >
-              Sign in
+              {isPending ? (
+                <span className="loading loading-dots loading-md"></span>
+              ) : (
+                'Sign In'
+              )}
             </button>
           </div>
 
@@ -121,6 +155,9 @@ export const SignInScreen = () => {
         <p className="mt-10 text-center text-sm ">
           Have an invitation code? <a className="link link-hover">Sign up</a>
         </p>
+
+        <Link to="/">Home</Link>
+        <Link to="/signup">SignUp</Link>
       </div>
     </div>
   );
