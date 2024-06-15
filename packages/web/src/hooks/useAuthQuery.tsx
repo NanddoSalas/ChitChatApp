@@ -37,6 +37,11 @@ export const useAuthQuery = <TQueryFnData, TError, TData = TQueryFnData>(
         return Promise.reject(null);
       }
     },
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchInterval: false,
+    refetchOnReconnect: false,
+    refetchIntervalInBackground: false,
     ...options,
   });
 };
