@@ -3,6 +3,7 @@ import {
   LockClosedIcon,
   LockOpenIcon,
 } from '@heroicons/react/24/outline';
+import { useLocation, useNavigate } from '@tanstack/react-router';
 import { useStore } from '../../../store';
 import { NavItemContainer } from './NavItemContainer';
 
@@ -19,18 +20,17 @@ export const RoomItem: React.FC<RoomItemProps> = ({
   isPrivate,
   ...props
 }) => {
-  const navigate = useStore((state) => state.navigate);
-  const navigationPath = useStore((state) => state.navigation);
-  const isSelected =
-    navigationPath.id === id && navigationPath.path === '/rooms/:id';
   const roomMessages = useStore((state) => state.roomMessages[id]);
+
+  const navigate = useNavigate();
+  const isSelected = useLocation().pathname === `/rooms/${id}`;
 
   const haveAccess =
     isPrivate === false ? true : props.haveAccess ? true : false;
 
   const handleClick = () => {
-    if (haveAccess) {
-      navigate('/rooms/:id', id);
+    if (haveAccess && !isSelected) {
+      navigate({ to: `/rooms/${id}` });
     }
   };
 

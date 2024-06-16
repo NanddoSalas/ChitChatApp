@@ -1,3 +1,4 @@
+import { useLocation, useNavigate } from '@tanstack/react-router';
 import { useStore } from '../../../store';
 import { Avatar } from '../../Avatar';
 import { NavItemContainer } from './NavItemContainer';
@@ -9,16 +10,17 @@ interface UserItemProps {
 }
 
 export const UserItem: React.FC<UserItemProps> = ({ id, avatar, fullName }) => {
-  const navigate = useStore((state) => state.navigate);
-  const navigationPath = useStore((state) => state.navigation);
-  const isSelected =
-    navigationPath.id === id && navigationPath.path === '/users/:id';
   const directMessages = useStore((state) => state.directMessages[id]);
+
+  const isSelected = useLocation().pathname === `/users/${id}`;
+  const navigate = useNavigate();
 
   const isOnline = isSelected;
 
   const handleClick = () => {
-    navigate('/users/:id', id);
+    if (!isSelected) {
+      navigate({ to: `/users/${id}` });
+    }
   };
 
   return (
