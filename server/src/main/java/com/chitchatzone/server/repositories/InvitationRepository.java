@@ -18,19 +18,21 @@ public class InvitationRepository {
     private final InvitationMapper mapper;
 
     public List<Invitation> findAllByCreatorId(int creatorId) {
-        String sql = "select * from invitations where creator_id = ?;";
+        String sql = "select * from invitations where creator_id = ? order by id asc;";
 
         return template.query(sql, mapper, creatorId);
     }
 
     public Invitation addInvitation(String inviteCode, int limit, int creatorId) {
-        String sql = "insert into invitations (invite_code, max_uses, creator_id) values (?, ?, ?) RETURNING *;";
+        String sql =
+                "insert into invitations (invite_code, max_uses, creator_id) values (?, ?, ?) RETURNING *;";
 
         return template.query(sql, mapper, inviteCode, limit, creatorId).get(0);
     }
 
     public void revokeInvitation(int invitationId, int creatorId) {
-        String sql = "update invitations set revoked = true where id = ? and creator_id = ? and revoked = false;";
+        String sql =
+                "update invitations set revoked = true where id = ? and creator_id = ? and revoked = false;";
 
         template.update(sql, invitationId, creatorId);
     }

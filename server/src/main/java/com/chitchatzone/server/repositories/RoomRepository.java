@@ -30,7 +30,8 @@ public class RoomRepository {
           END has_access
         FROM rooms r
           LEFT JOIN members m ON m.room_id = r.id
-          AND m.user_id = ?;
+          AND m.user_id = ?
+          order by r.id asc;
           """;
 
     return template.query(sql, mapper, userId);

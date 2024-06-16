@@ -21,10 +21,15 @@ public class RoomMessageRepository {
         if (cursor > 0) {
             String sql = """
                     SELECT *
-                    FROM room_messages
-                    WHERE room_id = ? AND id > ?
-                    ORDER BY id DESC
-                    LIMIT 20;
+                    FROM (
+                        SELECT *
+                        FROM room_messages
+                        WHERE room_id = ?
+                          AND id > ?
+                        ORDER BY id DESC
+                        LIMIT 20
+                      ) m
+                    ORDER BY m.id ASC;
                     """;
 
             return template.query(sql, mapper, roomId, cursor);
@@ -32,10 +37,14 @@ public class RoomMessageRepository {
 
         String sql = """
                 SELECT *
-                FROM room_messages
-                WHERE room_id = ?
-                ORDER BY id DESC
-                LIMIT 20;
+                FROM (
+                    SELECT *
+                    FROM room_messages
+                    WHERE room_id = ?
+                    ORDER BY id DESC
+                    LIMIT 20
+                  ) m
+                ORDER BY m.id ASC;
                 """;
 
         return template.query(sql, mapper, roomId);

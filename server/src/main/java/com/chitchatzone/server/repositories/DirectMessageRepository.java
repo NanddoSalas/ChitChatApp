@@ -22,20 +22,24 @@ public class DirectMessageRepository {
     if (cursor > 0) {
       String sql = """
           SELECT *
-          FROM direct_messages
-          WHERE (
-              (
-                sender_id = ?
-                AND receiver_id = ?
-              )
-              OR (
-                sender_id = ?
-                AND receiver_id = ?
-              )
-            )
-            AND id > ?
-          ORDER BY id DESC
-          LIMIT 20;
+          FROM (
+              SELECT *
+              FROM direct_messages
+              WHERE (
+                  (
+                    sender_id = ?
+                    AND receiver_id = ?
+                  )
+                  OR (
+                    sender_id = ?
+                    AND receiver_id = ?
+                  )
+                )
+                AND id > ?
+              ORDER BY id DESC
+              LIMIT 20
+            ) m
+          ORDER BY m.id ASC;
           """;
 
       return template.query(sql, mapper, senderId, receiverId, receiverId, senderId, cursor);
@@ -43,17 +47,21 @@ public class DirectMessageRepository {
 
     String sql = """
         SELECT *
-        FROM direct_messages
-        WHERE (
-            sender_id = ?
-            AND receiver_id = ?
-          )
-          OR (
-            sender_id = ?
-            AND receiver_id = ?
-          )
-        ORDER BY id DESC
-        LIMIT 20;
+        FROM (
+            SELECT *
+            FROM direct_messages
+            WHERE (
+                sender_id = ?
+                AND receiver_id = ?
+              )
+              OR (
+                sender_id = ?
+                AND receiver_id = ?
+              )
+            ORDER BY id DESC
+            LIMIT 20
+          ) m
+        ORDER BY m.id ASC;
         """;
 
     return template.query(sql, mapper, senderId, receiverId, receiverId, senderId);

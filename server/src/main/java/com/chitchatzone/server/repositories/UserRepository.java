@@ -22,7 +22,7 @@ public class UserRepository {
     private final InvitedUserMapper invitedUserMapper;
 
     public List<User> findAll() {
-        String sql = "select * from users;";
+        String sql = "select * from users order by id asc;";
 
         return template.query(sql, mapper);
     }
