@@ -1,29 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import Scrollbars from 'react-custom-scrollbars-2';
-import { useStore } from '../store';
+import { AuthContext } from '../AuthContext';
+import { Message } from '../types/api/resources';
 import { MessageItem } from './MessageItem';
 
 interface MessagesListProps {
-  target: 'user' | 'room';
-  targetId: number;
+  messages: Message[];
 }
 
-export const MessagesList: React.FC<MessagesListProps> = ({
-  target,
-  targetId,
-}) => {
-  const { user } = useStore((state) => state.auth);
-  const messages = useStore((state) =>
-    target === 'room'
-      ? state.roomMessages[targetId].data
-      : state.directMessages[targetId].data,
-  );
-
+export const MessagesList: React.FC<MessagesListProps> = ({ messages }) => {
+  const { user: me } = useContext(AuthContext);
   const ref = useRef<Scrollbars>(null);
 
   useEffect(() => {
     ref.current?.scrollToBottom();
-  }, [target, targetId]);
+  }, [messages]);
 
   return (
     <Scrollbars
@@ -36,7 +27,7 @@ export const MessagesList: React.FC<MessagesListProps> = ({
         <MessageItem
           message={message}
           key={message.id}
-          isMine={user?.id === message.sendById}
+          isMine={me!.id === message.senderId}
         />
       ))}
     </Scrollbars>
