@@ -1,4 +1,4 @@
-import { Outlet } from '@tanstack/react-router';
+import { Outlet, useNavigate } from '@tanstack/react-router';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { Drawer } from '../componentes/Drawer';
 import { SearchBar } from '../componentes/SearchBar';
@@ -11,6 +11,7 @@ import { useStore } from '../store';
 
 export const DashboardScreen = () => {
   const openSearchBar = useStore((state) => state.openSearchBar);
+  const navigate = useNavigate();
 
   const DraweContent = () => (
     <>
@@ -31,6 +32,7 @@ export const DashboardScreen = () => {
   );
 
   useHotkeys('ctrl+k', openSearchBar, { preventDefault: true });
+  useHotkeys('escape', () => navigate({ to: '/' }), { preventDefault: true });
 
   return <Drawer content={<DraweContent />} side={<DrawerSide />} />;
 };
