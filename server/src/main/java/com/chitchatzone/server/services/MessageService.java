@@ -8,7 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 
-import com.chitchatzone.server.forms.RetrieveMessagesForm;
 import com.chitchatzone.server.forms.SendMessageForm;
 import com.chitchatzone.server.models.Message;
 import com.chitchatzone.server.repositories.DirectMessageRepository;
@@ -27,13 +26,13 @@ public class MessageService {
     private final RoomRepository roomRepository;
     private final MemberRepository memberRepository;
 
-    public List<Message> retrieveDirectMessages(int userId, RetrieveMessagesForm form) {
+    public List<Message> retrieveDirectMessages(int userId, int cursor) {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();
         int sub = Integer.parseInt(jwt.getSubject());
 
-        return directMessageRepository.findAll(sub, userId, form.getCursor());
+        return directMessageRepository.findAll(sub, userId, cursor);
     }
 
     public Message sendDirectMessage(int userId, SendMessageForm form) {
@@ -45,8 +44,7 @@ public class MessageService {
         return directMessageRepository.createMessage(sub, userId, form.getBody());
     }
 
-    public List<Message> retrieveRoomMessages(int roomId, RetrieveMessagesForm form)
-            throws Exception {
+    public List<Message> retrieveRoomMessages(int roomId, int cursor) throws Exception {
         SecurityContext context = SecurityContextHolder.getContext();
         Authentication authentication = context.getAuthentication();
         Jwt jwt = (Jwt) authentication.getPrincipal();
@@ -63,7 +61,7 @@ public class MessageService {
             }
         }
 
-        return roomMessageRepository.findAll(roomId, form.getCursor());
+        return roomMessageRepository.findAll(roomId, cursor);
     }
 
     public Message sendRoomMessage(int roomId, SendMessageForm form) throws Exception {

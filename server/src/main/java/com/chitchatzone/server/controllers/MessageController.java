@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chitchatzone.server.dtos.ResponseDTO;
-import com.chitchatzone.server.forms.RetrieveMessagesForm;
 import com.chitchatzone.server.forms.SendMessageForm;
 import com.chitchatzone.server.models.Message;
 import com.chitchatzone.server.services.MessageService;
@@ -26,9 +26,9 @@ public class MessageController {
 
     @GetMapping("/users/{userId}/messages")
     public ResponseEntity<ResponseDTO> retrieveDirectMessages(@PathVariable String userId,
-            @Valid @RequestBody RetrieveMessagesForm form) {
+            @RequestParam(required = false, defaultValue = "0") int cursor) {
         List<Message> messages =
-                messageService.retrieveDirectMessages(Integer.parseInt(userId), form);
+                messageService.retrieveDirectMessages(Integer.parseInt(userId), cursor);
 
         return ResponseDTO.ok(messages);
     }
@@ -43,9 +43,10 @@ public class MessageController {
 
     @GetMapping("/rooms/{roomId}/messages")
     public ResponseEntity<ResponseDTO> retrieveRoomMessages(@PathVariable String roomId,
-            @Valid @RequestBody RetrieveMessagesForm form) throws NumberFormatException, Exception {
+            @RequestParam(required = false, defaultValue = "0") int cursor)
+            throws NumberFormatException, Exception {
         List<Message> messages =
-                messageService.retrieveRoomMessages(Integer.parseInt(roomId), form);
+                messageService.retrieveRoomMessages(Integer.parseInt(roomId), cursor);
 
         return ResponseDTO.ok(messages);
     }
