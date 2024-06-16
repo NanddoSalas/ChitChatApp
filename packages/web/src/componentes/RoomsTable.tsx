@@ -1,13 +1,13 @@
 import { useAuthQuery } from '../hooks/useAuthQuery';
+import { useGetUser } from '../hooks/useGetUser';
 import { Room } from '../types/api/resources';
 import { Avatar } from './Avatar';
 import { RoomOptionsDropdown } from './RoomOptionsDrawer';
 
 export default function RoomsTable() {
-  // const rooms = useStore((state) => state.rooms.data);
-  // const getUser = useStore((state) => state.getUser);
+  const getUser = useGetUser();
 
-  const { data: roomsData } = useAuthQuery<Room[], Error>({
+  const { data: rooms } = useAuthQuery<Room[], Error>({
     queryKey: ['/rooms'],
   });
 
@@ -52,7 +52,7 @@ export default function RoomsTable() {
           </thead>
 
           <tbody className="divide-y divide-gray-200 bg-white">
-            {roomsData?.map((room) => (
+            {rooms?.map((room) => (
               <tr key={room.id}>
                 <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
                   <div className="font-medium text-gray-900">
@@ -63,15 +63,13 @@ export default function RoomsTable() {
                 <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                   <div className="flex items-center">
                     <Avatar
-                      // avatar={getUser(room.creatorId)?.avatar || ''}
-                      avatar={''}
+                      avatar={getUser(room.creatorId)?.avatar || ''}
                       size="lg"
                     />
 
                     <div className="ml-4">
                       <div className="font-medium text-gray-900">
-                        {/* {getUser(room.creatorId)?.fullName} */}
-                        creator name
+                        {getUser(room.creatorId)?.fullName}
                       </div>
                     </div>
                   </div>

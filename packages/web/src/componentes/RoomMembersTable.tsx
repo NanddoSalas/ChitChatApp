@@ -1,10 +1,18 @@
-import { useStore } from '../store';
+import { getRouteApi } from '@tanstack/react-router';
+import { useAuthQuery } from '../hooks/useAuthQuery';
+import { useGetUser } from '../hooks/useGetUser';
+import { Member } from '../types/api/resources';
 import { Avatar } from './Avatar';
 
+const route = getRouteApi('/rooms/$roomId/members');
+
 export default function RoomMembersTable() {
-  const roomId = useStore((state) => state.navigation.id!);
-  const members = useStore((state) => state.roomMembers[roomId].data);
-  const getUser = useStore((state) => state.getUser);
+  const roomId = parseInt(route.useParams().roomId);
+  const getUser = useGetUser();
+
+  const { data: members } = useAuthQuery<Member[], Error>({
+    queryKey: [`/rooms/${roomId}/members`],
+  });
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleKickOut = (userId: number) => {};
@@ -54,10 +62,10 @@ export default function RoomMembersTable() {
               const user = getUser(member.userId)!;
 
               return (
-                <tr key={user.email}>
+                <tr key={user.id}>
                   <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
                     <div className="flex items-center">
-                      <Avatar avatar={user.avatar} size="lg" />
+                      <Avatar avatar={user.avatar || ''} size="lg" />
 
                       <div className="ml-4">
                         <div className="font-medium text-gray-900">
@@ -77,7 +85,7 @@ export default function RoomMembersTable() {
 
                   <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
                     <div className="mt-1 text-gray-500">
-                      {user.joinedServer.toDateString()}
+                      {user.creationDate}
                     </div>
                   </td>
 
