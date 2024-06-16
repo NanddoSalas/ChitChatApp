@@ -1,5 +1,5 @@
 import { PlusIcon } from '@heroicons/react/20/solid';
-import Breadcrumb from '../../componentes/Breadcrumbs';
+import Breadcrumb from '../../componentes/Breadcrumb';
 import { OpenDraweButton } from '../../componentes/Drawer';
 import { Header } from '../../componentes/Header';
 import { Heading } from '../../componentes/Heading';

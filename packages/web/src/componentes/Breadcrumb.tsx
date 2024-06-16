@@ -1,11 +1,10 @@
 import { HomeIcon } from '@heroicons/react/20/solid';
-import { useStore } from '../store';
-import { NavigationPath } from '../types/resources';
+import { useNavigate } from '@tanstack/react-router';
 import { classNames } from '../utils';
 
 type BreadcrumbItem = {
   name: string;
-  path: NavigationPath | null;
+  path: string;
 };
 
 interface BreadcrumpProps {
@@ -13,15 +12,15 @@ interface BreadcrumpProps {
 }
 
 const Breadcrumb: React.FC<BreadcrumpProps> = ({ items }) => {
-  const navigate = useStore((state) => state.navigate);
+  const navigate = useNavigate();
 
   const handleHomeClick = () => {
-    navigate('/', null);
+    navigate({ to: '/' });
   };
 
-  const handleItemClick = (path: NavigationPath | null) => {
+  const handleItemClick = (path: string) => {
     if (path) {
-      navigate(path, null);
+      navigate({ to: path });
     }
   };
 
