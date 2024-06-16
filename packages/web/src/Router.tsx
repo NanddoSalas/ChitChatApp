@@ -12,9 +12,12 @@ import { SignUpScreen } from './screens/SignUpScreen';
 import {
   AccountScreen,
   InvitationsScreen,
+  RoomMembersScreen,
   RoomsScreen,
   UsersScreen,
 } from './screens/SubScreens';
+import { RoomChatScreen } from './screens/SubScreens/RoomChatScreen';
+import { UserChatScreen } from './screens/SubScreens/UserChatScreen';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -67,6 +70,24 @@ const roomsRoute = createRoute({
   component: RoomsScreen,
 });
 
+const roomMemberRoute = createRoute({
+  getParentRoute: () => indexRoute,
+  path: '/rooms/$roomId/members',
+  component: RoomMembersScreen,
+});
+
+const roomChatRoute = createRoute({
+  getParentRoute: () => indexRoute,
+  path: '/rooms/$roomId',
+  component: RoomChatScreen,
+});
+
+const userChatRoute = createRoute({
+  getParentRoute: () => indexRoute,
+  path: '/users/$userId',
+  component: UserChatScreen,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   signInRoute,
@@ -75,6 +96,9 @@ const routeTree = rootRoute.addChildren([
   invitationsRoute,
   usersRoute,
   roomsRoute,
+  roomMemberRoute,
+  roomChatRoute,
+  userChatRoute,
 ]);
 
 const router = createRouter({
