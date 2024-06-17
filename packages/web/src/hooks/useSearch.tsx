@@ -1,7 +1,8 @@
 import Fuse from 'fuse.js';
-import { useState } from 'react';
-import { useStore } from '../store';
-import { Room, User } from '../types/resources';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../AuthContext';
+import { Room, User } from '../types/api/resources';
+import { useAuthQuery } from './useAuthQuery';
 
 type Option = {
   id: number;
@@ -22,12 +23,14 @@ const options: Option[] = [
 
 export const useSearch = () => {
   const [query, setQuery] = useState('');
-  const users = useStore((state) => state.users.data) || [];
-  const rooms = useStore((state) => state.rooms.data) || [];
-  const role = useStore((state) => state.auth.user?.role) || 'Member';
+  const role = useContext(AuthContext).user!.role;
 
-  const fuseUsers = new Fuse<User>(users, { keys: ['fullName'] });
-  const fuseRooms = new Fuse<Room>(rooms, { keys: ['name'] });
+  const { data: users } = useAuthQuery<User[], Error>({ queryKey: ['/users'] });
+
+  const { data: rooms } = useAuthQuery<Room[], Error>({ queryKey: ['/rooms'] });
+
+  const fuseUsers = new Fuse<User>(users || [], { keys: ['fullName'] });
+  const fuseRooms = new Fuse<Room>(rooms || [], { keys: ['roomName'] });
   const fuseOptions = new Fuse<Option>(
     options.concat(role !== 'Member' ? adminOptions : []),
     { keys: ['name'] },

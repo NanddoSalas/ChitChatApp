@@ -1,27 +1,22 @@
 import { Combobox, Dialog, Transition } from '@headlessui/react';
+import { useNavigate } from '@tanstack/react-router';
 import { Fragment } from 'react';
 import { useSearch } from '../../hooks/useSearch';
 import { useStore } from '../../store';
-import { NavigationPath } from '../../types/resources';
 import { classNames } from '../../utils';
 import { EmptyQuery } from './EmptyQuery';
 
-export type NavItem = {
-  id: number | null;
-  path: NavigationPath;
-};
-
 export const SearchBar = () => {
+  const navigate = useNavigate();
   const { query, setQuery, filteredUsers, filteredRooms, filteredOptions } =
     useSearch();
-  const navigate = useStore((state) => state.navigate);
   const {
     closeSearchBar,
     searchBar: { isOpen },
   } = useStore((state) => state);
 
-  const handleNavigation = (item: NavItem) => {
-    navigate(item.path, item.id);
+  const handleNavigation = (path: string) => {
+    navigate({ to: path });
     closeSearchBar();
   };
 
@@ -75,7 +70,7 @@ export const SearchBar = () => {
                     {filteredOptions.map(({ id, name, path }) => (
                       <Combobox.Option
                         key={id}
-                        value={{ id, path }}
+                        value={path}
                         className={({ active }) =>
                           classNames(
                             'cursor-default select-none rounded-md px-4 py-2',
@@ -98,10 +93,10 @@ export const SearchBar = () => {
                       Rooms
                     </h2>
 
-                    {filteredRooms.map(({ id, name }) => (
+                    {filteredRooms.map(({ id, roomName }) => (
                       <Combobox.Option
                         key={id}
-                        value={{ id, path: '/rooms/:id' }}
+                        value={`/rooms/${id}`}
                         className={({ active }) =>
                           classNames(
                             'cursor-default select-none rounded-md px-4 py-2',
@@ -109,7 +104,7 @@ export const SearchBar = () => {
                           )
                         }
                       >
-                        {name}
+                        {roomName}
                       </Combobox.Option>
                     ))}
                   </Combobox.Options>
@@ -127,7 +122,7 @@ export const SearchBar = () => {
                     {filteredUsers.map(({ id, fullName }) => (
                       <Combobox.Option
                         key={id}
-                        value={{ id, path: '/users/:id' }}
+                        value={`/users/${id}`}
                         className={({ active }) =>
                           classNames(
                             'cursor-default select-none rounded-md px-4 py-2',
