@@ -14,7 +14,7 @@ const RoomsScreen = () => {
 
       <SubScreenLayout>
         <Heading
-          start={<Breadcrumb items={[{ name: 'Rooms', path: null }]} />}
+          start={<Breadcrumb items={[{ name: 'Rooms', path: '' }]} />}
           end={
             <div className="flex">
               <button className="btn btn-neutral btn-sm lg:btn-md">

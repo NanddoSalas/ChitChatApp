@@ -12,9 +12,7 @@ const UsersScreen = () => {
       <Header start={<OpenDraweButton />} />
 
       <SubScreenLayout>
-        <Heading
-          start={<Breadcrumb items={[{ name: 'Users', path: null }]} />}
-        />
+        <Heading start={<Breadcrumb items={[{ name: 'Users', path: '' }]} />} />
 
         <UsersTable />
       </SubScreenLayout>

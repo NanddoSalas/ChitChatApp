@@ -32,7 +32,7 @@ const AccountScreen = () => {
 
       <SubScreenLayout>
         <Heading
-          start={<Breadcrumb items={[{ name: 'Account', path: null }]} />}
+          start={<Breadcrumb items={[{ name: 'Account', path: '' }]} />}
         />
 
         <div className="space-y-10 divide-y divide-gray-900/10 !mt-0">

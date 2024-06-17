@@ -14,7 +14,7 @@ const InvitationsScreen = () => {
 
       <SubScreenLayout>
         <Heading
-          start={<Breadcrumb items={[{ name: 'Invitations', path: null }]} />}
+          start={<Breadcrumb items={[{ name: 'Invitations', path: '' }]} />}
           end={
             <div className="flex">
               <button className="btn btn-neutral  btn-sm lg:btn-md">

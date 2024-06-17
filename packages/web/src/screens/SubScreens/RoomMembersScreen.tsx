@@ -18,7 +18,7 @@ const RoomMembersScreen = () => {
             <Breadcrumb
               items={[
                 { name: 'Rooms', path: '/rooms' },
-                { name: 'Some Room Name', path: null },
+                { name: 'Some Room Name', path: '' },
               ]}
             />
           }
