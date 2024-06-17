@@ -1,3 +1,4 @@
+import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/20/solid';
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthContext';
 import Breadcrumb from '../../componentes/Breadcrumb';
@@ -11,7 +12,7 @@ import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 import { SubScreenLayout } from '../../componentes/SubScreenLayout';
 
 const AccountScreen = () => {
-  const { user } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
 
   const hasPassword = true;
   const hasGitHub = false;
@@ -33,6 +34,20 @@ const AccountScreen = () => {
       <SubScreenLayout>
         <Heading
           start={<Breadcrumb items={[{ name: 'Account', path: '' }]} />}
+          end={
+            <div className="flex">
+              <button
+                className="btn btn-neutral  btn-sm lg:btn-md"
+                onClick={signOut}
+              >
+                <ArrowLeftStartOnRectangleIcon
+                  className="h-5 w-5"
+                  aria-hidden="true"
+                />
+                Sign Out
+              </button>
+            </div>
+          }
         />
 
         <div className="space-y-10 divide-y divide-gray-900/10 !mt-0">
