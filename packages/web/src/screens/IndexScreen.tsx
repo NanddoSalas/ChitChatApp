@@ -37,6 +37,13 @@ export const IndexScreen = () => {
     });
   }, [accessToken, queryClient]);
 
+  useEffect(() => {
+    if (!isAuthenticated) {
+      queryClient.clear();
+      queryClient.getQueryCache().clear();
+    }
+  }, [isAuthenticated, queryClient]);
+
   if (isAuthenticated) {
     return <DashboardScreen />;
   }
