@@ -1,5 +1,9 @@
+import { useForm } from '@tanstack/react-form';
 import { Link, useNavigate } from '@tanstack/react-router';
-import { useContext, useEffect, useState } from 'react';
+import { zodValidator } from '@tanstack/zod-form-adapter';
+
+import { useContext, useEffect } from 'react';
+import { z } from 'zod';
 import { AuthContext } from '../AuthContext';
 import { useAuthMutation } from '../hooks/useAuthMutation';
 import {
@@ -7,22 +11,28 @@ import {
   SingInData,
   SingInErrors,
 } from '../types/api/authentication';
+import { classNames } from '../utils';
 
 export const SignInScreen = () => {
-  const [email, setEmail] = useState('alice.johnson@example.com');
-  const [password, setPassword] = useState('password');
   const { signIn, isAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const { mutate, data, isPending } = useAuthMutation<
+  const { mutate, data, isPending, error } = useAuthMutation<
     SingInData,
     SingInErrors,
     SignInForm
   >({ mutationKey: ['/auth/signin'] });
 
-  const handlePasswordSignIn = () => {
-    mutate({ email, password });
-  };
+  const form = useForm({
+    defaultValues: {
+      email: 'alice.johnson@example.com',
+      password: 'password',
+    },
+    onSubmit: async ({ value }) => {
+      mutate(value);
+    },
+    validatorAdapter: zodValidator,
+  });
 
   useEffect(() => {
     if (data?.accessToken && data.user) {
@@ -58,12 +68,37 @@ export const SignInScreen = () => {
                 <span className="label-text">Email address</span>
               </div>
 
-              <input
-                type="email"
-                className="input input-bordered w-full"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+              <form.Field
+                name="email"
+                validators={{ onBlur: z.string().email() }}
+                children={(field) => {
+                  console.log(field.state);
+
+                  return (
+                    <>
+                      <input
+                        type="email"
+                        className={classNames(
+                          'input input-bordered w-full',
+                          field.state.meta.touchedErrors.length > 0
+                            ? 'input-error'
+                            : '',
+                          error?.message ? 'input-error' : '',
+                        )}
+                        required
+                        name={field.name}
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                      />
+                      <div className="pt-2">
+                        {field.state.meta.touchedErrors.map((m) => (
+                          <span className="text-red-500">{m}</span>
+                        ))}
+                      </div>
+                    </>
+                  );
+                }}
               />
             </label>
 
@@ -72,18 +107,48 @@ export const SignInScreen = () => {
                 <span className="label-text">Password</span>
               </div>
 
-              <input
-                type="password"
-                className="input input-bordered w-full"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+              <form.Field
+                name="password"
+                validators={{
+                  onBlur: z
+                    .string()
+                    .min(8, 'Invalid credentials')
+                    .max(32, 'Invalid credentials'),
+                }}
+                children={(field) => (
+                  <>
+                    <input
+                      type="password"
+                      className={classNames(
+                        'input input-bordered w-full',
+                        field.state.meta.touchedErrors.length > 0
+                          ? 'input-error'
+                          : '',
+                        error?.message ? 'input-error' : '',
+                      )}
+                      required
+                      name={field.name}
+                      value={field.state.value}
+                      onBlur={field.handleBlur}
+                      onChange={(e) => field.handleChange(e.target.value)}
+                    />
+                    <div className="pt-2">
+                      {error?.message ? (
+                        <span className="text-red-500">{error.message}</span>
+                      ) : (
+                        field.state.meta.touchedErrors.map((m) => (
+                          <span className="text-red-500">{m}</span>
+                        ))
+                      )}
+                    </div>
+                  </>
+                )}
               />
             </label>
 
             <button
               className="btn btn-block btn-outline"
-              onClick={handlePasswordSignIn}
+              onClick={form.handleSubmit}
             >
               {isPending ? (
                 <span className="loading loading-dots loading-md"></span>
@@ -109,7 +174,7 @@ export const SignInScreen = () => {
             </div>
 
             <div className="grid grid-cols-2 gap-4 mt-6">
-              <a className="btn btn-outline">
+              <a className="btn btn-outline btn-disabled">
                 <svg className="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24">
                   <path
                     d="M12.0003 4.75C13.7703 4.75 15.3553 5.36002 16.6053 6.54998L20.0303 3.125C17.9502 1.19 15.2353 0 12.0003 0C7.31028 0 3.25527 2.69 1.28027 6.60998L5.27028 9.70498C6.21525 6.86002 8.87028 4.75 12.0003 4.75Z"
@@ -132,7 +197,7 @@ export const SignInScreen = () => {
                 <span className="text-sm font-semibold leading-6">Google</span>
               </a>
 
-              <a className="btn btn-outline">
+              <a className="btn btn-outline btn-disabled">
                 <svg
                   className="h-5 w-5"
                   aria-hidden="true"
@@ -153,11 +218,11 @@ export const SignInScreen = () => {
         </div>
 
         <p className="mt-10 text-center text-sm ">
-          Have an invitation code? <a className="link link-hover">Sign up</a>
+          Have an invitation code?{' '}
+          <Link className="link link-hover" to="/signup">
+            Sign up
+          </Link>
         </p>
-
-        <Link to="/">Home</Link>
-        <Link to="/signup">SignUp</Link>
       </div>
     </div>
   );
