@@ -1,27 +1,13 @@
 import { useForm } from '@tanstack/react-form';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 import { zodValidator } from '@tanstack/zod-form-adapter';
 
-import { useContext, useEffect } from 'react';
 import { z } from 'zod';
-import { AuthContext } from '../AuthContext';
-import { useAuthMutation } from '../hooks/useAuthMutation';
-import {
-  SignInForm,
-  SingInData,
-  SingInErrors,
-} from '../types/api/authentication';
+import { useSignInService } from '../hooks/useSignInService';
 import { classNames } from '../utils';
 
 export const SignInScreen = () => {
-  const { signIn, isAuthenticated } = useContext(AuthContext);
-  const navigate = useNavigate();
-
-  const { mutate, data, isPending, error } = useAuthMutation<
-    SingInData,
-    SingInErrors,
-    SignInForm
-  >({ mutationKey: ['/auth/signin'] });
+  const { signInError, signInService, isSigningIn } = useSignInService();
 
   const form = useForm({
     defaultValues: {
@@ -29,22 +15,10 @@ export const SignInScreen = () => {
       password: 'password',
     },
     onSubmit: async ({ value }) => {
-      mutate(value);
+      signInService(value);
     },
     validatorAdapter: zodValidator,
   });
-
-  useEffect(() => {
-    if (data?.accessToken && data.user) {
-      signIn(data.user, data.accessToken);
-    }
-  }, [data?.accessToken, data?.user, signIn]);
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate({ to: '/' });
-    }
-  }, [isAuthenticated, navigate]);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-50">
@@ -83,7 +57,7 @@ export const SignInScreen = () => {
                           field.state.meta.touchedErrors.length > 0
                             ? 'input-error'
                             : '',
-                          error?.message ? 'input-error' : '',
+                          signInError ? 'input-error' : '',
                         )}
                         required
                         name={field.name}
@@ -124,7 +98,7 @@ export const SignInScreen = () => {
                         field.state.meta.touchedErrors.length > 0
                           ? 'input-error'
                           : '',
-                        error?.message ? 'input-error' : '',
+                        signInError ? 'input-error' : '',
                       )}
                       required
                       name={field.name}
@@ -133,8 +107,8 @@ export const SignInScreen = () => {
                       onChange={(e) => field.handleChange(e.target.value)}
                     />
                     <div className="pt-2">
-                      {error?.message ? (
-                        <span className="text-red-500">{error.message}</span>
+                      {signInError ? (
+                        <span className="text-red-500">{signInError}</span>
                       ) : (
                         field.state.meta.touchedErrors.map((m) => (
                           <span className="text-red-500">{m}</span>
@@ -150,7 +124,7 @@ export const SignInScreen = () => {
               className="btn btn-block btn-outline"
               onClick={form.handleSubmit}
             >
-              {isPending ? (
+              {isSigningIn ? (
                 <span className="loading loading-dots loading-md"></span>
               ) : (
                 'Sign In'
