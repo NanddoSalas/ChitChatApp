@@ -1,7 +1,6 @@
 import { useParams } from '@tanstack/react-router';
 import { OpenDraweButton } from '../../componentes/Drawer';
 import { Header } from '../../componentes/Header';
-import { Heading } from '../../componentes/Heading';
 import { MessageBox } from '../../componentes/MessageBox';
 import { MessagesList } from '../../componentes/MessagesList';
 import { SubScreenContainer } from '../../componentes/SubScreenContainer';
@@ -30,7 +29,6 @@ export const RoomChatScreen = () => {
   return (
     <SubScreenContainer disableOverflow>
       <Header start={<OpenDraweButton />} />
-      <Heading center={room.roomName} />
       <MessagesList messages={messages || []} />
       <MessageBox onSendMessage={handleSendMessage} />
     </SubScreenContainer>
