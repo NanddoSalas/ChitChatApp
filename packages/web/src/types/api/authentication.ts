@@ -13,8 +13,7 @@ export interface SingInData {
 }
 
 export interface SingInErrors {
-  email?: string;
-  password?: string;
+  message?: string;
 }
 
 // post /auth/signup

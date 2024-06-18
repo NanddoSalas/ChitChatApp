@@ -10,12 +10,12 @@ import { ProfileButton } from './components/ProfileButton';
 export const Sidebar = () => {
   const { user } = useContext(AuthContext);
 
-  const { data: usersData, isFetching: isFetchingUsers } = useAuthQuery<
+  const { data: users, isFetching: isFetchingUsers } = useAuthQuery<
     User[],
     Error
   >({ queryKey: ['/users'] });
 
-  const { data: roomsData, isFetching: isFetchingRooms } = useAuthQuery<
+  const { data: rooms, isFetching: isFetchingRooms } = useAuthQuery<
     Room[],
     Error
   >({ queryKey: ['/rooms'] });
@@ -46,7 +46,7 @@ export const Sidebar = () => {
                 </li>
               </>
             ) : (
-              roomsData?.map((room) => (
+              rooms?.map((room) => (
                 <li key={room.id}>
                   <RoomItem
                     id={room.id}
@@ -81,7 +81,7 @@ export const Sidebar = () => {
                 </li>
               </>
             ) : (
-              usersData?.map((user) => (
+              users?.map((user) => (
                 <li key={user.id}>
                   <UserItem
                     id={user.id}
