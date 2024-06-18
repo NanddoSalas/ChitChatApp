@@ -8,6 +8,7 @@ import {
   SidebarContainer,
 } from '../componentes/Sidebar';
 import { useStore } from '../store';
+import { HomeScreen } from './SubScreens';
 
 export const DashboardScreen = () => {
   const openSearchBar = useStore((state) => state.openSearchBar);
@@ -26,7 +27,7 @@ export const DashboardScreen = () => {
         <Sidebar />
       </SidebarContainer>
 
-      <Outlet />
+      {location.pathname === '/' ? <HomeScreen /> : <Outlet />}
 
       <SearchBar />
     </>
