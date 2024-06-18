@@ -33,7 +33,7 @@ const AccountScreen = () => {
         start={<OpenDraweButton />}
         center={<span className="text-white font-semibold">Account</span>}
         end={
-          <button className="btn btn-square btn-neutral">
+          <button className="btn btn-square btn-neutral" onClick={signOut}>
             <ArrowLeftStartOnRectangleIcon
               className="h-6 w-6"
               aria-hidden="true"
