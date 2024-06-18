@@ -1,4 +1,5 @@
 import PlusIcon from '@heroicons/react/20/solid/PlusIcon';
+import { getRouteApi } from '@tanstack/react-router';
 import Breadcrumb from '../../componentes/Breadcrumb';
 import { OpenDraweButton } from '../../componentes/Drawer';
 import { Header } from '../../componentes/Header';
@@ -6,11 +7,29 @@ import { Heading } from '../../componentes/Heading';
 import RoomMembersTable from '../../componentes/RoomMembersTable';
 import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 import { SubScreenLayout } from '../../componentes/SubScreenLayout';
+import { useGetRoom } from '../../hooks/useGetRoom';
+
+const route = getRouteApi('/rooms/$roomId/members');
 
 const RoomMembersScreen = () => {
+  const roomId = parseInt(route.useParams().roomId);
+  const room = useGetRoom()(roomId);
+
   return (
     <SubScreenContainer>
-      <Header start={<OpenDraweButton />} />
+      <Header
+        start={<OpenDraweButton />}
+        center={
+          <span className="text-white font-semibold">
+            {room.roomName}'s Members
+          </span>
+        }
+        end={
+          <button className="btn btn-square btn-neutral">
+            <PlusIcon className="h-6 w-6" aria-hidden="true" />
+          </button>
+        }
+      />
 
       <SubScreenLayout>
         <Heading

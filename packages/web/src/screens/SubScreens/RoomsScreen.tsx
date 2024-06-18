@@ -10,7 +10,15 @@ import { SubScreenLayout } from '../../componentes/SubScreenLayout';
 const RoomsScreen = () => {
   return (
     <SubScreenContainer>
-      <Header start={<OpenDraweButton />} />
+      <Header
+        start={<OpenDraweButton />}
+        center={<span className="text-white font-semibold">Rooms</span>}
+        end={
+          <button className="btn btn-square btn-neutral">
+            <PlusIcon className="h-6 w-6" aria-hidden="true" />
+          </button>
+        }
+      />
 
       <SubScreenLayout>
         <Heading

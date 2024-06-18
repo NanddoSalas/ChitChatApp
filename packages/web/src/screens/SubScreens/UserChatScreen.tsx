@@ -28,7 +28,13 @@ export const UserChatScreen = () => {
 
   return (
     <SubScreenContainer disableOverflow>
-      <Header start={<OpenDraweButton />} />
+      <Header
+        start={<OpenDraweButton />}
+        center={
+          <span className="text-white font-semibold">{user.fullName}</span>
+        }
+        end={<></>}
+      />
       <MessagesList messages={messages || []} />
       <MessageBox onSendMessage={handleSendMessage} />
     </SubScreenContainer>

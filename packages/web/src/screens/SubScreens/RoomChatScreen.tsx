@@ -28,7 +28,13 @@ export const RoomChatScreen = () => {
 
   return (
     <SubScreenContainer disableOverflow>
-      <Header start={<OpenDraweButton />} />
+      <Header
+        start={<OpenDraweButton />}
+        center={
+          <span className="text-white font-semibold">{room.roomName}</span>
+        }
+        end={<></>}
+      />
       <MessagesList messages={messages || []} />
       <MessageBox onSendMessage={handleSendMessage} />
     </SubScreenContainer>

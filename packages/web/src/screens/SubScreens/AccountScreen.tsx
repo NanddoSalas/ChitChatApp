@@ -29,7 +29,18 @@ const AccountScreen = () => {
 
   return (
     <SubScreenContainer>
-      <Header start={<OpenDraweButton />} />
+      <Header
+        start={<OpenDraweButton />}
+        center={<span className="text-white font-semibold">Account</span>}
+        end={
+          <button className="btn btn-square btn-neutral">
+            <ArrowLeftStartOnRectangleIcon
+              className="h-6 w-6"
+              aria-hidden="true"
+            />
+          </button>
+        }
+      />
 
       <SubScreenLayout>
         <Heading

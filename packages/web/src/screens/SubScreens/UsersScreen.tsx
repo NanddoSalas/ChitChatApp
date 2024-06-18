@@ -9,7 +9,11 @@ import { UsersTable } from '../../componentes/UsersTable';
 const UsersScreen = () => {
   return (
     <SubScreenContainer>
-      <Header start={<OpenDraweButton />} />
+      <Header
+        start={<OpenDraweButton />}
+        center={<span className="text-white font-semibold">Users</span>}
+        end={<></>}
+      />
 
       <SubScreenLayout>
         <Heading start={<Breadcrumb items={[{ name: 'Users', path: '' }]} />} />
