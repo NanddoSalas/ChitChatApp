@@ -1298,6 +1298,13 @@
   dependencies:
     "@typescript-eslint/utils" "8.0.0-alpha.28"
 
+"@tanstack/form-core@0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/form-core/-/form-core-0.21.0.tgz#ef5a9d465273174867de1080674145c0a1c3218a"
+  integrity sha512-ZhiG74PSZ5ECZXcidD7iEabQTMr8YtEdshGB3ai3ZXsjIHUF185sWyHc1N6VyccUaLJ6/IiNbUdjTMhZWjdRyg==
+  dependencies:
+    "@tanstack/store" "^0.3.1"
+
 "@tanstack/history@1.31.16":
   version "1.31.16"
   resolved "https://registry.yarnpkg.com/@tanstack/history/-/history-1.31.16.tgz#6b4947e967af3173ce4929d54d9cb97234646e32"
@@ -1312,6 +1319,16 @@
   version "5.37.1"
   resolved "https://registry.yarnpkg.com/@tanstack/query-devtools/-/query-devtools-5.37.1.tgz#8dcfa1488b4f2e353be7eede6691b0ad9197183b"
   integrity sha512-XcG4IIHIv0YQKrexTqo2zogQWR1Sz672tX2KsfE9kzB+9zhx44vRKH5si4WDILE1PIWQpStFs/NnrDQrBAUQpg==
+
+"@tanstack/react-form@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-form/-/react-form-0.21.0.tgz#f8a9730133f4f1aa7fcb3c6dbd10e20a813b44e8"
+  integrity sha512-+HEMLYav98SBawDK7XfczmODUxDLii7Bo9DGgjCCYO+IUaPMRfto/VLcwFJB/0H1us8sShdbV/IdVJa3VU+LaQ==
+  dependencies:
+    "@tanstack/form-core" "0.21.0"
+    "@tanstack/react-store" "^0.3.1"
+    decode-formdata "^0.4.0"
+    rehackt "^0.0.3"
 
 "@tanstack/react-query-devtools@^5.45.0":
   version "5.45.0"
@@ -1343,6 +1360,14 @@
   integrity sha512-tEbMCQjbeVw9KOP/202LfqZMSNAVi6zYkkp1kBom8nFuMx/965Hzes3+6G6b/comCwVxoJU8Gg9IrcF8yRPthw==
   dependencies:
     "@tanstack/store" "0.1.3"
+    use-sync-external-store "^1.2.0"
+
+"@tanstack/react-store@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-store/-/react-store-0.3.1.tgz#f93896da40f91b4385aca9448d3ccf914b314b50"
+  integrity sha512-PfV271d345It6FdcX4c9gd+llKGddtvau8iJnybTAWmYVyDeFWfIIkiAJ5iNITJmI02AzqgtcV3QLNBBlpBUjA==
+  dependencies:
+    "@tanstack/store" "0.3.1"
     use-sync-external-store "^1.2.0"
 
 "@tanstack/react-table@^8.16.0":
@@ -1403,6 +1428,11 @@
   resolved "https://registry.yarnpkg.com/@tanstack/store/-/store-0.1.3.tgz#b8410435dac0a0f6d3fe77d49509f296905d4c73"
   integrity sha512-GnolmC8Fr4mvsHE1fGQmR3Nm0eBO3KnZjDU0a+P3TeQNM/dDscFGxtA7p31NplQNW3KwBw4t1RVFmz0VeKLxcw==
 
+"@tanstack/store@0.3.1", "@tanstack/store@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/@tanstack/store/-/store-0.3.1.tgz#317bfb7eedd8cc4ee32c4e52740abbf1bd311d36"
+  integrity sha512-A49KN8SpLMWaNmZGPa9K982RQ81W+m7W6iStcQVeKeVS70JZRqkF0fDwKByREPq6qz9/kS0aQFOPQ0W6wIeU5g==
+
 "@tanstack/table-core@8.16.0":
   version "8.16.0"
   resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.16.0.tgz#7b58018dd3cec8e0015fe22d6bb24d18d33c891f"
@@ -1412,6 +1442,13 @@
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/@tanstack/virtual-core/-/virtual-core-3.2.1.tgz#b3e4214b8f462054501d80e8777068faa139bd06"
   integrity sha512-nO0d4vRzsmpBQCJYyClNHPPoUMI4nXNfrm6IcCRL33ncWMoNVpURh9YebEHPw8KrtsP2VSJIHE4gf4XFGk1OGg==
+
+"@tanstack/zod-form-adapter@^0.21.0":
+  version "0.21.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/zod-form-adapter/-/zod-form-adapter-0.21.0.tgz#9d2980617c25c606aa5d2bf0733bb05e1129a464"
+  integrity sha512-VHVQDBFmrEmmCOBgJ1TmSgDD0weXHesVjv3kcuGZ/2BFawOUb2eb+jn8BYHsZSM/Ea2QP577R3mtCHNOohojZA==
+  dependencies:
+    "@tanstack/form-core" "0.21.0"
 
 "@tootallnate/once@2":
   version "2.0.0"
@@ -2460,6 +2497,11 @@ decamelize@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
   integrity sha512-z2S+W9X73hAUUki+N+9Za2lBlun89zigOyGrsax+KUQ6wKW4ZoWpEYBkGhQjwAjjDCkWxhY0VKEhk8wzY7F5cA==
+
+decode-formdata@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/decode-formdata/-/decode-formdata-0.4.0.tgz#485715a37417868435a92d2144b39646fe654aae"
+  integrity sha512-/OMUlsRLrSgHPOWCwembsFFTT4DY7Ts9GGlwK8v9yeLOyYZSPKIfn/1oOuV9UmpQ9CZi5JeyT8edunRoBOOl5g==
 
 dedent@0.7.0:
   version "0.7.0"
@@ -5246,6 +5288,11 @@ regenerator-runtime@^0.14.0:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.14.1.tgz#356ade10263f685dda125100cd862c1db895327f"
   integrity sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==
 
+rehackt@^0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/rehackt/-/rehackt-0.0.3.tgz#1ea454620d4641db8342e2db44595cf0e7ac6aa0"
+  integrity sha512-aBRHudKhOWwsTvCbSoinzq+Lej/7R8e8UoPvLZo5HirZIIBLGAgdG7SL9QpdcBoQ7+3QYPi3lRLknAzXBlhZ7g==
+
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
@@ -6220,7 +6267,7 @@ yocto-queue@^0.1.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-zod@^3.22.4:
+zod@^3.22.4, zod@^3.23.8:
   version "3.23.8"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.23.8.tgz#e37b957b5d52079769fb8097099b592f0ef4067d"
   integrity sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==
