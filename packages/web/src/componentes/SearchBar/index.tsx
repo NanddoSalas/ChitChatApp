@@ -94,20 +94,28 @@ export const SearchBar = () => {
                       Rooms
                     </h2>
 
-                    {filteredRooms.map(({ id, roomName }) => (
-                      <Combobox.Option
-                        key={id}
-                        value={`/room/${id}/${slugify(roomName)}`}
-                        className={({ active }) =>
-                          classNames(
-                            'cursor-default select-none rounded-md px-4 py-2',
-                            active ? 'bg-indigo-600 text-white' : '',
-                          )
+                    {filteredRooms.map(
+                      ({ id, roomName, hasAccess, ...room }) => {
+                        if (room.private && !hasAccess) {
+                          return null;
                         }
-                      >
-                        {roomName}
-                      </Combobox.Option>
-                    ))}
+
+                        return (
+                          <Combobox.Option
+                            key={id}
+                            value={`/room/${id}/${slugify(roomName)}`}
+                            className={({ active }) =>
+                              classNames(
+                                'cursor-default select-none rounded-md px-4 py-2',
+                                active ? 'bg-indigo-600 text-white' : '',
+                              )
+                            }
+                          >
+                            {roomName}
+                          </Combobox.Option>
+                        );
+                      },
+                    )}
                   </Combobox.Options>
                 )}
 
