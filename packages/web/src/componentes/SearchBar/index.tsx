@@ -1,6 +1,7 @@
 import { Combobox, Dialog, Transition } from '@headlessui/react';
 import { useNavigate } from '@tanstack/react-router';
 import { Fragment } from 'react';
+import slugify from 'slugify';
 import { useSearch } from '../../hooks/useSearch';
 import { useStore } from '../../store';
 import { classNames } from '../../utils';
@@ -96,7 +97,7 @@ export const SearchBar = () => {
                     {filteredRooms.map(({ id, roomName }) => (
                       <Combobox.Option
                         key={id}
-                        value={`/rooms/${id}`}
+                        value={`/room/${id}/${slugify(roomName)}`}
                         className={({ active }) =>
                           classNames(
                             'cursor-default select-none rounded-md px-4 py-2',
@@ -122,7 +123,7 @@ export const SearchBar = () => {
                     {filteredUsers.map(({ id, fullName }) => (
                       <Combobox.Option
                         key={id}
-                        value={`/users/${id}`}
+                        value={`/user/${id}/${slugify(fullName)}`}
                         className={({ active }) =>
                           classNames(
                             'cursor-default select-none rounded-md px-4 py-2',

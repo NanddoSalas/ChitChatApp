@@ -5,21 +5,15 @@ import { MessageBox } from '../../componentes/MessageBox';
 import { MessagesList } from '../../componentes/MessagesList';
 import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 import { useAuthQuery } from '../../hooks/useAuthQuery';
-import { useGetUser } from '../../hooks/useGetUser';
 import { Message } from '../../types/api/resources';
 
 export const UserChatScreen = () => {
-  const userId = parseInt(
-    useParams({
-      from: '/users/$userId',
-      select: (params) => params.userId,
-    }),
-  );
-
-  const user = useGetUser()(userId);
+  const { userId, userName } = useParams({
+    from: '/user/$userId/$userName',
+  });
 
   const { data: messages } = useAuthQuery<Message[], Error>({
-    queryKey: [`/users/${user.id}/messages`],
+    queryKey: [`/users/${userId}/messages`],
   });
 
   const handleSendMessage = (body: string) => {
@@ -30,9 +24,7 @@ export const UserChatScreen = () => {
     <SubScreenContainer disableOverflow>
       <Header
         start={<OpenDraweButton />}
-        center={
-          <span className="text-white font-semibold">{user.fullName}</span>
-        }
+        center={<span className="text-white font-semibold">{userName}</span>}
         end={<></>}
       />
       <MessagesList messages={messages || []} />

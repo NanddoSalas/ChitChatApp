@@ -4,6 +4,7 @@ import {
   LockOpenIcon,
 } from '@heroicons/react/24/outline';
 import { useLocation, useNavigate } from '@tanstack/react-router';
+import slugify from 'slugify';
 import { useStore } from '../../../store';
 import { NavItemContainer } from './NavItemContainer';
 
@@ -23,14 +24,20 @@ export const RoomItem: React.FC<RoomItemProps> = ({
   const roomMessages = useStore((state) => state.roomMessages[id]);
 
   const navigate = useNavigate();
-  const isSelected = useLocation().pathname === `/rooms/${id}`;
+  const isSelected = useLocation().pathname === `/room/${id}/${slugify(name)}`;
 
   const haveAccess =
     isPrivate === false ? true : props.haveAccess ? true : false;
 
   const handleClick = () => {
     if (haveAccess && !isSelected) {
-      navigate({ to: `/rooms/${id}` });
+      navigate({
+        to: '/room/$roomId/$roomName',
+        params: {
+          roomId: id.toString(),
+          roomName: slugify(name),
+        },
+      });
     }
   };
 

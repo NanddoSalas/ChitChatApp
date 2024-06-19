@@ -46,8 +46,6 @@ export const SignInScreen = () => {
                 name="email"
                 validators={{ onBlur: z.string().email() }}
                 children={(field) => {
-                  console.log(field.state);
-
                   return (
                     <>
                       <input
