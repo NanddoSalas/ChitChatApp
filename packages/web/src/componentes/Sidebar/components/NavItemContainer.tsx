@@ -15,7 +15,7 @@ export const NavItemContainer: React.FC<NavItemContainerProps> = ({
     <label htmlFor="sidebar-drawer">
       <a
         className={classNames(
-          'btn btn-block btn-outline flex justify-start',
+          'btn btn-block btn-outline flex justify-start flex-nowrap',
           selected ? 'btn-active no-animation' : 'text-gray-400 border-0',
         )}
         onClick={onClick}
