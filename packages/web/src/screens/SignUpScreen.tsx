@@ -239,15 +239,15 @@ export const SignUpScreen = () => {
             </label>
 
             <button
-              className="btn btn-block btn-outline"
+              className={classNames(
+                'btn btn-block btn-outline',
+                isSuccess ? 'btn-disabled' : '',
+              )}
               onClick={form.handleSubmit}
             >
               {isPending ? (
                 <span
-                  className={classNames(
-                    'loading loading-dots loading-md',
-                    isSuccess ? 'btn-disabled' : '',
-                  )}
+                  className={classNames('loading loading-dots loading-md')}
                 ></span>
               ) : (
                 'Sign In'
