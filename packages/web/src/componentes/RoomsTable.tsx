@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext';
 import { useAuthQuery } from '../hooks/useAuthQuery';
 import { useGetUser } from '../hooks/useGetUser';
 import { Room } from '../types/api/resources';
@@ -5,6 +7,7 @@ import { Avatar } from './Avatar';
 import { RoomOptionsDropdown } from './RoomOptionsDrawer';
 
 export default function RoomsTable() {
+  const { user } = useContext(AuthContext);
   const getUser = useGetUser();
 
   const { data: rooms } = useAuthQuery<Room[], Error>({
@@ -86,10 +89,12 @@ export default function RoomsTable() {
                 </td>
 
                 <td className="whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium">
-                  <RoomOptionsDropdown
-                    roomId={room.id}
-                    isPrivate={room.private}
-                  />
+                  {user!.id === room.creatorId ? (
+                    <RoomOptionsDropdown
+                      roomId={room.id}
+                      isPrivate={room.private}
+                    />
+                  ) : null}
                 </td>
               </tr>
             ))}

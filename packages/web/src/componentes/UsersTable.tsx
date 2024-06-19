@@ -1,11 +1,16 @@
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext';
 import { useAuthQuery } from '../hooks/useAuthQuery';
 import { User } from '../types/api/resources';
 import { Avatar } from './Avatar';
 
 export const UsersTable = () => {
+  const { user } = useContext(AuthContext);
   const { data: usersData } = useAuthQuery<User[], Error>({
     queryKey: ['/users'],
   });
+
+  const isServerAdmin = user?.role === 'ServerAdmin';
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleMakeAdmin = (userId: number) => {};
@@ -53,9 +58,11 @@ export const UsersTable = () => {
                 Role
               </th>
 
-              <th scope="col" className="relative py-3.5 pl-3 pr-4">
-                <span className="sr-only">Update Role</span>
-              </th>
+              {isServerAdmin && (
+                <th scope="col" className="relative py-3.5 pl-3 pr-4">
+                  <span className="sr-only">Update Role</span>
+                </th>
+              )}
             </tr>
           </thead>
 
@@ -97,25 +104,27 @@ export const UsersTable = () => {
                   {user.role}
                 </td>
 
-                <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right">
-                  {user.role === 'Admin' && (
-                    <button
-                      className="btn btn-neutral btn-outline btn-sm lg:btn-md"
-                      onClick={() => handleRevokeAdmin(user.id)}
-                    >
-                      Revoke Admin
-                    </button>
-                  )}
+                {isServerAdmin && (
+                  <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right">
+                    {user.role === 'Admin' && (
+                      <button
+                        className="btn btn-neutral btn-outline btn-sm lg:btn-md"
+                        onClick={() => handleRevokeAdmin(user.id)}
+                      >
+                        Revoke Admin
+                      </button>
+                    )}
 
-                  {user.role === 'Member' && (
-                    <button
-                      className="btn btn-neutral btn-outline btn-sm lg:btn-md"
-                      onClick={() => handleMakeAdmin(user.id)}
-                    >
-                      Make Admin
-                    </button>
-                  )}
-                </td>
+                    {user.role === 'Member' && (
+                      <button
+                        className="btn btn-neutral btn-outline btn-sm lg:btn-md"
+                        onClick={() => handleMakeAdmin(user.id)}
+                      >
+                        Make Admin
+                      </button>
+                    )}
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
