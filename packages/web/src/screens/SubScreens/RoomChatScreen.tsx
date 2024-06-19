@@ -24,7 +24,11 @@ export const RoomChatScreen = () => {
     <SubScreenContainer disableOverflow>
       <Header
         start={<OpenDraweButton />}
-        center={<span className="text-white font-semibold">{roomName}</span>}
+        center={
+          <span className="text-white font-semibold">
+            {roomName.split('-').join(' ')}
+          </span>
+        }
         end={<></>}
       />
       <MessagesList messages={messages || []} />
