@@ -15,7 +15,6 @@ export const useAuth = () => {
   const signOut = () => {
     setIsAuthenticated(false);
     setAccessToken(null);
-    setUser(null);
   };
 
   return { isAuthenticated, user, accessToken, signIn, signOut };
