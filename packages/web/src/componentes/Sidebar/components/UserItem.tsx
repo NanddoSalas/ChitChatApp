@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from '@tanstack/react-router';
 import slugify from 'slugify';
-import { useStore } from '../../../store';
 import { Avatar } from '../../Avatar';
 import { NavItemContainer } from './NavItemContainer';
 
@@ -11,8 +10,6 @@ interface UserItemProps {
 }
 
 export const UserItem: React.FC<UserItemProps> = ({ id, avatar, fullName }) => {
-  const directMessages = useStore((state) => state.directMessages[id]);
-
   const isSelected =
     useLocation().pathname === `/user/${id}/${slugify(fullName)}`;
   const navigate = useNavigate();
@@ -34,14 +31,14 @@ export const UserItem: React.FC<UserItemProps> = ({ id, avatar, fullName }) => {
 
       <span className="truncate">{fullName}</span>
 
-      {directMessages?.unreadMessagesCount ? (
+      {/* {directMessages?.unreadMessagesCount ? (
         <span
           className="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700"
           aria-hidden="true"
         >
           {directMessages?.unreadMessagesCount}+
         </span>
-      ) : null}
+      ) : null} */}
     </NavItemContainer>
   );
 };

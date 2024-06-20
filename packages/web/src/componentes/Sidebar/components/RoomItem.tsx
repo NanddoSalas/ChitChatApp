@@ -5,7 +5,6 @@ import {
 } from '@heroicons/react/24/outline';
 import { useLocation, useNavigate } from '@tanstack/react-router';
 import slugify from 'slugify';
-import { useStore } from '../../../store';
 import { NavItemContainer } from './NavItemContainer';
 
 interface RoomItemProps {
@@ -21,8 +20,6 @@ export const RoomItem: React.FC<RoomItemProps> = ({
   isPrivate,
   ...props
 }) => {
-  const roomMessages = useStore((state) => state.roomMessages[id]);
-
   const navigate = useNavigate();
   const isSelected = useLocation().pathname === `/room/${id}/${slugify(name)}`;
 
@@ -55,7 +52,7 @@ export const RoomItem: React.FC<RoomItemProps> = ({
 
       {name}
 
-      {haveAccess ? (
+      {/* {haveAccess ? (
         roomMessages?.unreadMessagesCount ? (
           <span
             className="ml-auto w-9 min-w-max whitespace-nowrap rounded-full bg-gray-900 px-2.5 py-0.5 text-center text-xs font-medium leading-5 text-white ring-1 ring-inset ring-gray-700"
@@ -64,7 +61,7 @@ export const RoomItem: React.FC<RoomItemProps> = ({
             {roomMessages?.unreadMessagesCount}+
           </span>
         ) : null
-      ) : null}
+      ) : null} */}
     </NavItemContainer>
   );
 };
