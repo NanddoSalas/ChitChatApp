@@ -1,13 +1,11 @@
 import { useAuthQuery } from '../hooks/useAuthQuery';
 import { Invitation } from '../types/api/resources';
+import { RevokeInvitationButton } from './RevokeInvitationButton';
 
 export default function InvitationsTable() {
   const { data: invitationsData } = useAuthQuery<Invitation[], Error>({
     queryKey: ['/invitations'],
   });
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleRevokeInvitation = (invitationId: number) => {};
 
   return (
     <div className="inline-block min-w-full align-middle">
@@ -92,12 +90,7 @@ export default function InvitationsTable() {
 
                   <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right">
                     {!invitation.revoked && (
-                      <button
-                        className="btn btn-neutral btn-outline btn-sm lg:btn-md"
-                        onClick={() => handleRevokeInvitation(invitation.id)}
-                      >
-                        Revoke
-                      </button>
+                      <RevokeInvitationButton invitationId={invitation.id} />
                     )}
                   </td>
                 </tr>

@@ -13,3 +13,10 @@ export const RevokeAdminDialog: Dialog = {
   status: 'warning',
   actionPlaceholder: 'Revoke Privileges',
 };
+
+export const RevokeInvitationDialog: Dialog = {
+  title: 'Revoke Invitation',
+  text: '',
+  status: 'warning',
+  actionPlaceholder: 'Revoke',
+};
