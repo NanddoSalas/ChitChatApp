@@ -1,4 +1,5 @@
 import React from 'react';
+import { ConfirmationDialog } from './ConfirmationDialog';
 
 interface DrawerProps {
   content: React.ReactNode;
@@ -17,6 +18,8 @@ export const Drawer: React.FC<DrawerProps> = ({ content, side }) => {
 
         {side}
       </div>
+
+      <ConfirmationDialog />
     </div>
   );
 };

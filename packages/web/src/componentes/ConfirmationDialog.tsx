@@ -1,32 +1,22 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useRef } from 'react';
+import { useStore } from '../store';
 import { classNames } from '../utils';
 
-export interface ConfirmationDialogProps {
-  title: string;
-  text: string;
-  actionPlaceholder: string;
-  status: 'danger' | 'warning';
-}
-
-export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
-  title,
-  text,
-  actionPlaceholder,
-  status,
-}) => {
-  const [open, setOpen] = useState(true);
+export const ConfirmationDialog: React.FC = () => {
+  const closeDialog = useStore((state) => state.closeConfirmationDialog);
+  const { dialog, isOpen } = useStore((state) => state.confirmationDialog);
 
   const cancelButtonRef = useRef(null);
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="relative z-10"
         initialFocus={cancelButtonRef}
-        onClose={setOpen}
+        onClose={() => closeDialog(false)}
       >
         <Transition.Child
           as={Fragment}
@@ -72,10 +62,10 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
                       as="h3"
                       className="text-base font-semibold leading-6 text-gray-900"
                     >
-                      {title}
+                      {dialog?.title}
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">{text}</p>
+                      <p className="text-sm text-gray-500">{dialog?.text}</p>
                     </div>
                   </div>
                 </div>
@@ -89,15 +79,15 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
                         ? 'bg-red-600 hover:bg-red-500'
                         : 'bg-blue-600 hover:bg-blue-500',
                     )}
-                    onClick={() => setOpen(false)}
+                    onClick={() => closeDialog(true)}
                   >
-                    {actionPlaceholder}
+                    {dialog?.actionPlaceholder}
                   </button>
 
                   <button
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    onClick={() => setOpen(false)}
+                    onClick={() => closeDialog(false)}
                     ref={cancelButtonRef}
                   >
                     Cancel
