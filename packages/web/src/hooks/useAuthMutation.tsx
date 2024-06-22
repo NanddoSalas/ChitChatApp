@@ -3,9 +3,11 @@ import {
   UseMutationOptions,
   useMutation,
 } from '@tanstack/react-query';
-import axios from 'axios';
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useContext } from 'react';
 import { AuthContext } from '../AuthContext';
+
+type Method = 'post' | 'put' | 'patch ' | 'delete';
 
 export const useAuthMutation = <
   TData = unknown,
@@ -14,24 +16,33 @@ export const useAuthMutation = <
   TContext = unknown,
 >(
   options: UseMutationOptions<TData, TError, TVariables, TContext>,
+  method: Method = 'post',
 ) => {
   const { accessToken } = useContext(AuthContext);
 
   return useMutation<TData, TError, TVariables, TContext>({
     mutationFn: async (form) => {
       try {
-        const res = await axios.post(
-          'http://localhost:8080' + options?.mutationKey,
-          form,
-          {
-            validateStatus: (status) => {
-              return status < 500;
-            },
-            headers: {
-              Authorization: accessToken ? `Bearer ${accessToken}` : undefined,
-            },
+        let res: AxiosResponse;
+        const url = 'http://localhost:8080' + options?.mutationKey;
+        const config: AxiosRequestConfig = {
+          validateStatus: (status) => {
+            return status < 500;
           },
-        );
+          headers: {
+            Authorization: accessToken ? `Bearer ${accessToken}` : undefined,
+          },
+        };
+
+        if (method === 'delete') {
+          res = await axios.delete(url, config);
+        } else if (method === 'put') {
+          res = await axios.put(url, form, config);
+        } else if (method === 'patch ') {
+          res = await axios.patch(url, form, config);
+        } else {
+          res = await axios.post(url, form, config);
+        }
 
         if (res.status === 200) {
           return res.data.data;
