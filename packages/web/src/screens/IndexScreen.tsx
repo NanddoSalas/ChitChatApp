@@ -11,7 +11,7 @@ export const IndexScreen = () => {
 
   useEffect(() => {
     if (!isAuthenticated) {
-      navigate({ to: '/welcome' });
+      navigate({ to: '/' });
       queryClient.clear();
       queryClient.getQueryCache().clear();
     }

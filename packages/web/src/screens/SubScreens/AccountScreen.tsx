@@ -1,4 +1,5 @@
 import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/20/solid';
+import { useNavigate } from '@tanstack/react-router';
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthContext';
 import Breadcrumb from '../../componentes/Breadcrumb';
@@ -13,6 +14,7 @@ import { SubScreenLayout } from '../../componentes/SubScreenLayout';
 
 const AccountScreen = () => {
   const { user, signOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const hasPassword = true;
   const hasGitHub = false;
@@ -26,6 +28,8 @@ const AccountScreen = () => {
   const handleUpdatePassword = (password: string) => {
     console.log(password);
   };
+
+  if (!user) navigate({ to: '/' });
 
   return (
     <SubScreenContainer>

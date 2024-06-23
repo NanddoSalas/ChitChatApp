@@ -11,7 +11,6 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as WelcomeImport } from './routes/welcome'
 import { Route as UsersImport } from './routes/users'
 import { Route as SignupImport } from './routes/signup'
 import { Route as SigninImport } from './routes/signin'
@@ -24,11 +23,6 @@ import { Route as RoomRoomIdRoomNameImport } from './routes/room/$roomId.$roomNa
 import { Route as RoomRoomIdRoomNameMembersImport } from './routes/room/$roomId.$roomName.members'
 
 // Create/Update Routes
-
-const WelcomeRoute = WelcomeImport.update({
-  path: '/welcome',
-  getParentRoute: () => rootRoute,
-} as any)
 
 const UsersRoute = UsersImport.update({
   path: '/users',
@@ -133,13 +127,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsersImport
       parentRoute: typeof rootRoute
     }
-    '/welcome': {
-      id: '/welcome'
-      path: '/welcome'
-      fullPath: '/welcome'
-      preLoaderRoute: typeof WelcomeImport
-      parentRoute: typeof rootRoute
-    }
     '/room/$roomId/$roomName': {
       id: '/room/$roomId/$roomName'
       path: '/room/$roomId/$roomName'
@@ -174,7 +161,6 @@ export const routeTree = rootRoute.addChildren({
   SigninRoute,
   SignupRoute,
   UsersRoute,
-  WelcomeRoute,
   RoomRoomIdRoomNameRoute: RoomRoomIdRoomNameRoute.addChildren({
     RoomRoomIdRoomNameMembersRoute,
   }),
@@ -196,7 +182,6 @@ export const routeTree = rootRoute.addChildren({
         "/signin",
         "/signup",
         "/users",
-        "/welcome",
         "/room/$roomId/$roomName",
         "/user/$userId/$userName"
       ]
@@ -221,9 +206,6 @@ export const routeTree = rootRoute.addChildren({
     },
     "/users": {
       "filePath": "users.tsx"
-    },
-    "/welcome": {
-      "filePath": "welcome.tsx"
     },
     "/room/$roomId/$roomName": {
       "filePath": "room/$roomId.$roomName.tsx",
