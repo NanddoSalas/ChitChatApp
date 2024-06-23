@@ -4,8 +4,14 @@ import {
   TrashIcon,
   UsersIcon,
 } from '@heroicons/react/20/solid';
+import { useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from '@tanstack/react-router';
 import slugify from 'slugify';
+import { DeleteRoomDialog, MakeRoomPrivate, MakeRoomPublic } from '../dialogs';
+import { useAuthMutation } from '../hooks/useAuthMutation';
+import { useStore } from '../store';
+import { Room } from '../types/api/resources';
+import { UpdateRoomForm } from '../types/api/rooms';
 import { Dropdown } from './Dropdown';
 
 interface RoomOptionsDropdownProps {
@@ -19,8 +25,9 @@ export const RoomOptionsDropdown: React.FC<RoomOptionsDropdownProps> = ({
   roomName,
   isPrivate,
 }) => {
+  const queryClient = useQueryClient();
+  const openDialog = useStore((state) => state.openConfirmationDialog);
   const navigate = useNavigate();
-
   const handleManageMembers = () => {
     navigate({
       to: `/room/$roomId/$roomName/members`,
@@ -28,13 +35,60 @@ export const RoomOptionsDropdown: React.FC<RoomOptionsDropdownProps> = ({
     });
   };
 
-  const handleMakePrivate = () => {};
-  const handleMakePublic = () => {};
-  const handleDelete = () => {};
+  const updateRoomMutation = useAuthMutation<null, null, UpdateRoomForm>(
+    {
+      mutationKey: [`/rooms/${roomId}`],
+      onSuccess: (_data, variables) => {
+        queryClient.setQueryData<Room[]>(['/rooms'], (oldData) => {
+          if (oldData) {
+            return oldData.map((room) =>
+              room.id === roomId
+                ? { ...room, private: variables.private }
+                : room,
+            );
+          }
+        });
+      },
+    },
+    'put',
+  );
+
+  const delteRoomMutation = useAuthMutation<null, null, null>(
+    {
+      mutationKey: [`/rooms/${roomId}`],
+      onSuccess: () => {
+        queryClient.setQueryData<Room[]>(['/rooms'], (oldData) => {
+          if (oldData) {
+            return oldData.filter((room) => room.id !== roomId);
+          }
+        });
+      },
+    },
+    'delete',
+  );
+
+  const handleMakePrivate = () => {
+    openDialog(MakeRoomPrivate, () => {
+      updateRoomMutation.mutate({ private: true, name: roomName });
+    });
+  };
+
+  const handleMakePublic = () => {
+    openDialog(MakeRoomPublic, () => {
+      updateRoomMutation.mutate({ private: false, name: roomName });
+    });
+  };
+
+  const handleDelete = () => {
+    openDialog(DeleteRoomDialog, () => {
+      delteRoomMutation.mutate(null);
+    });
+  };
 
   if (isPrivate) {
     return (
       <Dropdown
+        loading={updateRoomMutation.isPending}
         options={[
           {
             name: 'Manage Members',
@@ -75,6 +129,7 @@ export const RoomOptionsDropdown: React.FC<RoomOptionsDropdownProps> = ({
 
   return (
     <Dropdown
+      loading={updateRoomMutation.isPending}
       options={[
         {
           name: 'Make Private',

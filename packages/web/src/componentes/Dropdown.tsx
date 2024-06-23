@@ -1,5 +1,6 @@
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import React from 'react';
+import { classNames } from '../utils';
 
 type Option = {
   name: string;
@@ -9,20 +10,30 @@ type Option = {
 
 interface DropdownProps {
   options: Option[];
+  loading: boolean;
 }
 
-export const Dropdown: React.FC<DropdownProps> = ({ options }) => (
+export const Dropdown: React.FC<DropdownProps> = ({ options, loading }) => (
   <div className="dropdown dropdown-end static">
     <div
       tabIndex={0}
       role="button"
-      className="btn btn-neutral btn-outline btn-sm lg:btn-md m-1"
+      className={classNames(
+        'btn btn-neutral btn-outline btn-sm lg:btn-md m-1',
+        loading ? 'btn-disabled' : '',
+      )}
     >
-      Options
-      <ChevronDownIcon
-        className="-mr-1 h-5 w-5 text-gray-400"
-        aria-hidden="true"
-      />
+      {loading ? (
+        <span className="loading loading-spinner"></span>
+      ) : (
+        <>
+          Options
+          <ChevronDownIcon
+            className="-mr-1 h-5 w-5 text-gray-400"
+            aria-hidden="true"
+          />
+        </>
+      )}
     </div>
 
     <ul
