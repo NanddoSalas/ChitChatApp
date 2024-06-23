@@ -1,10 +1,14 @@
 import { useParams } from '@tanstack/react-router';
+import { useContext } from 'react';
+import { AuthContext } from '../AuthContext';
 import { useAuthQuery } from '../hooks/useAuthQuery';
 import { useGetUser } from '../hooks/useGetUser';
 import { Member } from '../types/api/resources';
 import { Avatar } from './Avatar';
+import { KickOutUserButton } from './KickOutUserButton';
 
 export default function RoomMembersTable() {
+  const { user: me } = useContext(AuthContext);
   const { roomId } = useParams({
     from: '/room/$roomId/$roomName/members',
   });
@@ -13,9 +17,6 @@ export default function RoomMembersTable() {
   const { data: members } = useAuthQuery<Member[], Error>({
     queryKey: [`/rooms/${roomId}/members`],
   });
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleKickOut = (userId: number) => {};
 
   return (
     <div className="inline-block min-w-full align-middle">
@@ -96,12 +97,12 @@ export default function RoomMembersTable() {
                   </td>
 
                   <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right">
-                    <button
-                      className="btn btn-neutral btn-outline btn-sm lg:btn-md"
-                      onClick={() => handleKickOut(user.id)}
-                    >
-                      Kick out
-                    </button>
+                    {user.id !== me?.id ? (
+                      <KickOutUserButton
+                        roomId={parseInt(roomId)}
+                        userId={user.id}
+                      />
+                    ) : null}
                   </td>
                 </tr>
               );

@@ -43,3 +43,12 @@ export const DeleteRoomDialog: Dialog = {
   status: 'danger',
   actionPlaceholder: 'Delete',
 };
+
+export const KickOutUserdialog: Dialog = {
+  title: 'Kick out User',
+  text: "Are you sure you want to Kick the User out of the Room? \
+    The User won't be able to see, send and receive messages from the Room. \
+    All kicked out User's messages will remain.",
+  status: 'warning',
+  actionPlaceholder: 'Kick out',
+};
