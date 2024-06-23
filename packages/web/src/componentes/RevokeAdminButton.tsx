@@ -16,20 +16,23 @@ export const RevokeAdminButton: React.FC<RevokeAdminButtonProps> = ({
   const openDialog = useStore((state) => state.openConfirmationDialog);
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useAuthMutation<null, null, UpdateRoleForm>({
-    mutationKey: [`/users/${userId}/role`],
-    onSuccess: () => {
-      queryClient.setQueryData<User[]>(['/users'], (oldData) => {
-        if (oldData) {
-          return [
-            ...oldData.map((user) =>
-              user.id === userId ? { ...user, role: 'Member' } : user,
-            ),
-          ];
-        }
-      });
+  const { mutate, isPending } = useAuthMutation<null, null, UpdateRoleForm>(
+    {
+      mutationKey: [`/users/${userId}/role`],
+      onSuccess: () => {
+        queryClient.setQueryData<User[]>(['/users'], (oldData) => {
+          if (oldData) {
+            return [
+              ...oldData.map((user) =>
+                user.id === userId ? { ...user, role: 'Member' } : user,
+              ),
+            ];
+          }
+        });
+      },
     },
-  });
+    'put',
+  );
 
   const handleRevokeAdmin = () => {
     openDialog(RevokeAdminDialog, () => {

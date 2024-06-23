@@ -14,20 +14,23 @@ export const MakeAdminButton: React.FC<MakeAdminButtonProps> = ({ userId }) => {
   const openDialog = useStore((state) => state.openConfirmationDialog);
   const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useAuthMutation<null, null, UpdateRoleForm>({
-    mutationKey: [`/users/${userId}/role`],
-    onSuccess: () => {
-      queryClient.setQueryData<User[]>(['/users'], (oldData) => {
-        if (oldData) {
-          return [
-            ...oldData.map((user) =>
-              user.id === userId ? { ...user, role: 'Admin' } : user,
-            ),
-          ];
-        }
-      });
+  const { mutate, isPending } = useAuthMutation<null, null, UpdateRoleForm>(
+    {
+      mutationKey: [`/users/${userId}/role`],
+      onSuccess: () => {
+        queryClient.setQueryData<User[]>(['/users'], (oldData) => {
+          if (oldData) {
+            return [
+              ...oldData.map((user) =>
+                user.id === userId ? { ...user, role: 'Admin' } : user,
+              ),
+            ];
+          }
+        });
+      },
     },
-  });
+    'put',
+  );
 
   const handleMakeAdmin = () => {
     openDialog(MakeAdminDialog, () => {
