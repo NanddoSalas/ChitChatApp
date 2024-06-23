@@ -16,10 +16,6 @@ export const RoomChatScreen = () => {
     queryKey: [`/rooms/${roomId}/messages`],
   });
 
-  const handleSendMessage = (body: string) => {
-    return body;
-  };
-
   return (
     <SubScreenContainer disableOverflow>
       <Header
@@ -32,7 +28,7 @@ export const RoomChatScreen = () => {
         end={<></>}
       />
       <MessagesList messages={messages || []} />
-      <MessageBox onSendMessage={handleSendMessage} />
+      <MessageBox target="room" targetId={parseInt(roomId)} />
     </SubScreenContainer>
   );
 };

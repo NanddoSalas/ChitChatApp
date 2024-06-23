@@ -32,7 +32,7 @@ export const UserChatScreen = () => {
         end={<></>}
       />
       <MessagesList messages={messages || []} />
-      <MessageBox onSendMessage={handleSendMessage} />
+      <MessageBox target="user" targetId={parseInt(userId)} />
     </SubScreenContainer>
   );
 };
