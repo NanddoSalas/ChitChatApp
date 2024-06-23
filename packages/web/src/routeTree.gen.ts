@@ -21,6 +21,7 @@ import { Route as AccountImport } from './routes/account'
 import { Route as IndexImport } from './routes/index'
 import { Route as UserUserIdUserNameImport } from './routes/user/$userId.$userName'
 import { Route as RoomRoomIdRoomNameImport } from './routes/room/$roomId.$roomName'
+import { Route as RoomRoomIdRoomNameMembersImport } from './routes/room/$roomId.$roomName.members'
 
 // Create/Update Routes
 
@@ -72,6 +73,11 @@ const UserUserIdUserNameRoute = UserUserIdUserNameImport.update({
 const RoomRoomIdRoomNameRoute = RoomRoomIdRoomNameImport.update({
   path: '/room/$roomId/$roomName',
   getParentRoute: () => rootRoute,
+} as any)
+
+const RoomRoomIdRoomNameMembersRoute = RoomRoomIdRoomNameMembersImport.update({
+  path: '/members',
+  getParentRoute: () => RoomRoomIdRoomNameRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -148,6 +154,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UserUserIdUserNameImport
       parentRoute: typeof rootRoute
     }
+    '/room/$roomId/$roomName/members': {
+      id: '/room/$roomId/$roomName/members'
+      path: '/members'
+      fullPath: '/room/$roomId/$roomName/members'
+      preLoaderRoute: typeof RoomRoomIdRoomNameMembersImport
+      parentRoute: typeof RoomRoomIdRoomNameImport
+    }
   }
 }
 
@@ -162,7 +175,9 @@ export const routeTree = rootRoute.addChildren({
   SignupRoute,
   UsersRoute,
   WelcomeRoute,
-  RoomRoomIdRoomNameRoute,
+  RoomRoomIdRoomNameRoute: RoomRoomIdRoomNameRoute.addChildren({
+    RoomRoomIdRoomNameMembersRoute,
+  }),
   UserUserIdUserNameRoute,
 })
 
@@ -211,10 +226,17 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "welcome.tsx"
     },
     "/room/$roomId/$roomName": {
-      "filePath": "room/$roomId.$roomName.tsx"
+      "filePath": "room/$roomId.$roomName.tsx",
+      "children": [
+        "/room/$roomId/$roomName/members"
+      ]
     },
     "/user/$userId/$userName": {
       "filePath": "user/$userId.$userName.tsx"
+    },
+    "/room/$roomId/$roomName/members": {
+      "filePath": "room/$roomId.$roomName.members.tsx",
+      "parent": "/room/$roomId/$roomName"
     }
   }
 }

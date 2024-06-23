@@ -92,6 +92,7 @@ export default function RoomsTable() {
                   {user!.id === room.creatorId ? (
                     <RoomOptionsDropdown
                       roomId={room.id}
+                      roomName={room.roomName}
                       isPrivate={room.private}
                     />
                   ) : null}

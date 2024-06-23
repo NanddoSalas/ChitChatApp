@@ -5,21 +5,27 @@ import {
   UsersIcon,
 } from '@heroicons/react/20/solid';
 import { useNavigate } from '@tanstack/react-router';
+import slugify from 'slugify';
 import { Dropdown } from './Dropdown';
 
 interface RoomOptionsDropdownProps {
   roomId: number;
+  roomName: string;
   isPrivate: boolean;
 }
 
 export const RoomOptionsDropdown: React.FC<RoomOptionsDropdownProps> = ({
   roomId,
+  roomName,
   isPrivate,
 }) => {
   const navigate = useNavigate();
 
   const handleManageMembers = () => {
-    navigate({ to: `/rooms/${roomId}/members` });
+    navigate({
+      to: `/room/$roomId/$roomName/members`,
+      params: { roomId: roomId.toString(), roomName: slugify(roomName) },
+    });
   };
 
   const handleMakePrivate = () => {};

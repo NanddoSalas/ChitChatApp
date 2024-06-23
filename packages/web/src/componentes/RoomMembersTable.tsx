@@ -1,13 +1,13 @@
-import { getRouteApi } from '@tanstack/react-router';
+import { useParams } from '@tanstack/react-router';
 import { useAuthQuery } from '../hooks/useAuthQuery';
 import { useGetUser } from '../hooks/useGetUser';
 import { Member } from '../types/api/resources';
 import { Avatar } from './Avatar';
 
-const route = getRouteApi('/rooms/$roomId/members');
-
 export default function RoomMembersTable() {
-  const roomId = parseInt(route.useParams().roomId);
+  const { roomId } = useParams({
+    from: '/room/$roomId/$roomName/members',
+  });
   const getUser = useGetUser();
 
   const { data: members } = useAuthQuery<Member[], Error>({
