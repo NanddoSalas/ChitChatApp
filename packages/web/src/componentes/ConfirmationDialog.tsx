@@ -31,7 +31,7 @@ export const ConfirmationDialog: React.FC = () => {
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 w-screen overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className="flex min-h-full justify-center p-4 text-center items-center sm:p-0">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -46,13 +46,17 @@ export const ConfirmationDialog: React.FC = () => {
                   <div
                     className={classNames(
                       'mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full sm:mx-0 sm:h-10 sm:w-10',
-                      status === 'danger' ? 'bg-red-100' : 'bg-blue-100',
+                      dialog?.status === 'danger'
+                        ? 'bg-red-100'
+                        : 'bg-blue-100',
                     )}
                   >
                     <ExclamationTriangleIcon
                       className={classNames(
                         'h-6 w-6',
-                        status === 'danger' ? 'text-red-600' : 'text-blue-600',
+                        dialog?.status === 'danger'
+                          ? 'text-red-600'
+                          : 'text-blue-600',
                       )}
                       aria-hidden="true"
                     />
@@ -70,27 +74,27 @@ export const ConfirmationDialog: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                <div className="mt-5 sm:mt-4 flex justify-end space-x-4">
                   <button
                     type="button"
                     className={classNames(
-                      'inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm sm:ml-3 sm:w-auto',
-                      status === 'danger'
-                        ? 'bg-red-600 hover:bg-red-500'
-                        : 'bg-blue-600 hover:bg-blue-500',
+                      'btn btn-neutral btn-outline btn-sm lg:btn-md',
                     )}
-                    onClick={() => closeDialog(true)}
-                  >
-                    {dialog?.actionPlaceholder}
-                  </button>
-
-                  <button
-                    type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                     onClick={() => closeDialog(false)}
                     ref={cancelButtonRef}
                   >
                     Cancel
+                  </button>
+
+                  <button
+                    type="button"
+                    className={classNames(
+                      'btn btn-neutral btn-sm lg:btn-md',
+                      dialog?.status === 'danger' ? 'btn-error' : 'btn-info',
+                    )}
+                    onClick={() => closeDialog(true)}
+                  >
+                    {dialog?.actionPlaceholder}
                   </button>
                 </div>
               </Dialog.Panel>
