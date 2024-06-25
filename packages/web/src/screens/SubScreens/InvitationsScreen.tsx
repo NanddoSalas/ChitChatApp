@@ -1,6 +1,8 @@
 import { PlusIcon } from '@heroicons/react/20/solid';
+import { useState } from 'react';
 import Breadcrumb from '../../componentes/Breadcrumb';
 import { OpenDraweButton } from '../../componentes/Drawer';
+import { GenerateInvitationModal } from '../../componentes/GenerateInvitationModal';
 import { Header } from '../../componentes/Header';
 import { Heading } from '../../componentes/Heading';
 import InvitationsTable from '../../componentes/InvitationsTable';
@@ -8,13 +10,23 @@ import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 import { SubScreenLayout } from '../../componentes/SubScreenLayout';
 
 const InvitationsScreen = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <SubScreenContainer>
+      <GenerateInvitationModal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+      />
+
       <Header
         start={<OpenDraweButton />}
         center={<span className="text-white font-semibold">Invitations</span>}
         end={
-          <button className="btn btn-square btn-neutral">
+          <button
+            className="btn btn-square btn-neutral"
+            onClick={() => setIsOpen(true)}
+          >
             <PlusIcon className="h-6 w-6" aria-hidden="true" />
           </button>
         }
@@ -25,7 +37,10 @@ const InvitationsScreen = () => {
           start={<Breadcrumb items={[{ name: 'Invitations', path: '' }]} />}
           end={
             <div className="flex">
-              <button className="btn btn-neutral  btn-sm lg:btn-md">
+              <button
+                className="btn btn-neutral  btn-sm lg:btn-md"
+                onClick={() => setIsOpen(true)}
+              >
                 <PlusIcon className="h-5 w-5" aria-hidden="true" />
                 Generate Invite Code
               </button>
