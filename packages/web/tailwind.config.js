@@ -8,8 +8,8 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [forms, daisyui, typography],
+  plugins: [forms, typography, daisyui],
   daisyui: {
-    themes: ["light"],
+    themes: ['light'],
   },
 };
