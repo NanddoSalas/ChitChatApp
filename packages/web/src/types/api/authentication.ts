@@ -31,3 +31,20 @@ export interface SingUpErrors {
   fullName?: string;
   email?: string;
 }
+
+// post /auth/signin/google
+
+export interface GoogleSignInForm {
+  code: string;
+}
+
+// post /auth/signup/google
+
+export interface GoogleSignUpForm {
+  code: string;
+  inviteCode: string;
+}
+
+export interface GoogleSignUpErrors {
+  message?: string;
+}
