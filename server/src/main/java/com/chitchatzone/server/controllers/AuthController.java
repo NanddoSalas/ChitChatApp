@@ -10,7 +10,10 @@ import com.chitchatzone.server.dtos.ResponseDTO;
 import com.chitchatzone.server.dtos.SignInForm;
 import com.chitchatzone.server.dtos.SignUpForm;
 import com.chitchatzone.server.exceptions.EmailAlreadyInUseException;
+import com.chitchatzone.server.exceptions.GenericMessageException;
 import com.chitchatzone.server.exceptions.InvalidInvitationCodeException;
+import com.chitchatzone.server.forms.GoogleSignInForm;
+import com.chitchatzone.server.forms.GoogleSignUpForm;
 import com.chitchatzone.server.services.AuthService;
 
 import jakarta.validation.Valid;
@@ -34,6 +37,21 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<ResponseDTO> signIn(@Valid @RequestBody SignInForm form) {
         return ResponseDTO.ok(authService.signIn(form));
+    }
+
+    @PostMapping("/signup/google")
+    public ResponseEntity<ResponseDTO> googleSignUp(@Valid @RequestBody GoogleSignUpForm form)
+            throws InvalidInvitationCodeException, EmailAlreadyInUseException,
+            GenericMessageException {
+        authService.googleSignUp(form);
+
+        return ResponseDTO.ok(null);
+    }
+
+    @PostMapping("/signin/google")
+    public ResponseEntity<ResponseDTO> googleSignIn(@Valid @RequestBody GoogleSignInForm form)
+            throws GenericMessageException {
+        return ResponseDTO.ok(authService.googleSignIn(form));
     }
 
 }

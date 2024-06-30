@@ -4,6 +4,21 @@
       "name": "secret.key",
       "type": "java.lang.String",
       "description": "A description for 'secret.key'"
+    },
+    {
+      "name": "google.clientId",
+      "type": "java.lang.String",
+      "description": "A description for 'google.clientId'"
+    },
+    {
+      "name": "google.clientSecret",
+      "type": "java.lang.String",
+      "description": "A description for 'google.clientSecret'"
+    },
+    {
+      "name": "google.redirectUri",
+      "type": "java.lang.String",
+      "description": "A description for 'google.redirectUri'"
     }
   ]
 }
