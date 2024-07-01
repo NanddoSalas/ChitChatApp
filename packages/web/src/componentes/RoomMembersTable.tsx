@@ -10,7 +10,7 @@ import { KickOutUserButton } from './KickOutUserButton';
 export default function RoomMembersTable() {
   const { user: me } = useContext(AuthContext);
   const { roomId } = useParams({
-    from: '/room/$roomId/$roomName/members',
+    from: '/_dashboard/room/$roomId/$roomName/members',
   });
   const getUser = useGetUser();
 

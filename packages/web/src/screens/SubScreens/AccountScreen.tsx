@@ -29,7 +29,10 @@ const AccountScreen = () => {
     console.log(password);
   };
 
-  if (!user) navigate({ to: '/' });
+  const handleSignOut = () => {
+    signOut();
+    navigate({ to: '/welcome' });
+  };
 
   return (
     <SubScreenContainer>
@@ -37,7 +40,10 @@ const AccountScreen = () => {
         start={<OpenDraweButton />}
         center={<span className="text-white font-semibold">Account</span>}
         end={
-          <button className="btn btn-square btn-neutral" onClick={signOut}>
+          <button
+            className="btn btn-square btn-neutral"
+            onClick={handleSignOut}
+          >
             <ArrowLeftStartOnRectangleIcon
               className="h-6 w-6"
               aria-hidden="true"
@@ -53,7 +59,7 @@ const AccountScreen = () => {
             <div className="flex">
               <button
                 className="btn btn-neutral  btn-sm lg:btn-md"
-                onClick={signOut}
+                onClick={handleSignOut}
               >
                 <ArrowLeftStartOnRectangleIcon
                   className="h-5 w-5"

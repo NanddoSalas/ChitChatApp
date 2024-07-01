@@ -9,16 +9,12 @@ import { Message } from '../../types/api/resources';
 
 export const UserChatScreen = () => {
   const { userId, userName } = useParams({
-    from: '/user/$userId/$userName',
+    from: '/_dashboard/user/$userId/$userName',
   });
 
   const { data: messages } = useAuthQuery<Message[], Error>({
     queryKey: [`/users/${userId}/messages`],
   });
-
-  const handleSendMessage = (body: string) => {
-    return body;
-  };
 
   return (
     <SubScreenContainer disableOverflow>

@@ -5,8 +5,8 @@ export const WelcomeScreen = () => {
     <div>
       <div>Welcome</div>
 
-      <Link to="/signin">SignIn</Link>
-      <Link to="/signup">SignUp</Link>
+      <Link to="/auth/signin">SignIn</Link>
+      <Link to="/auth/signup">SignUp</Link>
     </div>
   );
 };

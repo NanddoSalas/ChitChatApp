@@ -9,7 +9,7 @@ import { Message } from '../../types/api/resources';
 
 export const RoomChatScreen = () => {
   const { roomId, roomName } = useParams({
-    from: '/room/$roomId/$roomName',
+    from: '/_dashboard/room/$roomId/$roomName',
   });
 
   const { data: messages } = useAuthQuery<Message[], Error>({

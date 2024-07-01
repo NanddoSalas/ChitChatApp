@@ -3,15 +3,15 @@ import { useForm } from '@tanstack/react-form';
 import { Link } from '@tanstack/react-router';
 import { zodValidator } from '@tanstack/zod-form-adapter';
 import { z } from 'zod';
-import { GoogleButton } from '../componentes/GoogleButton';
-import { useAuthMutation } from '../hooks/useAuthMutation';
+import { GoogleButton } from '../../componentes/GoogleButton';
+import { useAuthMutation } from '../../hooks/useAuthMutation';
 import {
   GoogleSignUpErrors,
   GoogleSignUpForm,
   SignUpForm,
   SingUpErrors,
-} from '../types/api/authentication';
-import { classNames } from '../utils';
+} from '../../types/api/authentication';
+import { classNames } from '../../utils';
 
 export const SignUpScreen = () => {
   const passwordSignUp = useAuthMutation<null, SingUpErrors, SignUpForm>({
@@ -88,7 +88,7 @@ export const SignUpScreen = () => {
                 </svg>
                 <span>Account has been created!</span>
                 <div>
-                  <Link className="btn btn-sm btn-success" to="/signin">
+                  <Link className="btn btn-sm btn-success" to="/auth/signin">
                     Sign in
                   </Link>
                 </div>
@@ -333,7 +333,7 @@ export const SignUpScreen = () => {
 
         <p className="mt-10 text-center text-sm ">
           Already have an account?{' '}
-          <Link className="link link-hover" to="/signin">
+          <Link className="link link-hover" to="/auth/signin">
             Sign in
           </Link>
         </p>

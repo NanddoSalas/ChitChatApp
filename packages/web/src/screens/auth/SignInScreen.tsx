@@ -1,22 +1,25 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import { useForm } from '@tanstack/react-form';
-import { Link } from '@tanstack/react-router';
+import { useQueryClient } from '@tanstack/react-query';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { zodValidator } from '@tanstack/zod-form-adapter';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { z } from 'zod';
-import { AuthContext } from '../AuthContext';
-import { GoogleButton } from '../componentes/GoogleButton';
-import { useAuthMutation } from '../hooks/useAuthMutation';
+import { AuthContext } from '../../AuthContext';
+import { GoogleButton } from '../../componentes/GoogleButton';
+import { useAuthMutation } from '../../hooks/useAuthMutation';
 import {
   GoogleSignInForm,
   SignInForm,
   SingInData,
   SingInErrors,
-} from '../types/api/authentication';
-import { classNames } from '../utils';
+} from '../../types/api/authentication';
+import { classNames } from '../../utils';
 
 export const SignInScreen = () => {
-  const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { signIn, isAuthenticated } = useContext(AuthContext);
+  const queryClient = useQueryClient();
 
   const googleSignIn = useAuthMutation<
     SingInData,
@@ -56,6 +59,14 @@ export const SignInScreen = () => {
 
   const isSigningIn = passwordSignIn.isPending || googleSignIn.isPending;
   const errorMessage = passwordSignIn.error?.message;
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate({ to: '/' });
+      queryClient.clear();
+      queryClient.getQueryCache().clear();
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-50">
@@ -219,7 +230,7 @@ export const SignInScreen = () => {
 
         <p className="mt-10 text-center text-sm ">
           Have an invitation code?{' '}
-          <Link className="link link-hover" to="/signup">
+          <Link className="link link-hover" to="/auth/signup">
             Sign up
           </Link>
         </p>

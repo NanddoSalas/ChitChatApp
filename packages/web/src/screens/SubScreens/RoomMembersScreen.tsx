@@ -10,7 +10,7 @@ import { SubScreenLayout } from '../../componentes/SubScreenLayout';
 
 const RoomMembersScreen = () => {
   const { roomName } = useParams({
-    from: '/room/$roomId/$roomName/members',
+    from: '/_dashboard/room/$roomId/$roomName/members',
   });
 
   return (

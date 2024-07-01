@@ -11,142 +11,171 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as UsersImport } from './routes/users'
-import { Route as SignupImport } from './routes/signup'
-import { Route as SigninImport } from './routes/signin'
-import { Route as RoomsImport } from './routes/rooms'
-import { Route as InvitationsImport } from './routes/invitations'
-import { Route as AccountImport } from './routes/account'
-import { Route as IndexImport } from './routes/index'
-import { Route as UserUserIdUserNameImport } from './routes/user/$userId.$userName'
-import { Route as RoomRoomIdRoomNameImport } from './routes/room/$roomId.$roomName'
-import { Route as RoomRoomIdRoomNameMembersImport } from './routes/room/$roomId.$roomName.members'
+import { Route as WelcomeImport } from './routes/welcome'
+import { Route as DashboardImport } from './routes/_dashboard'
+import { Route as DashboardIndexImport } from './routes/_dashboard.index'
+import { Route as AuthSignupImport } from './routes/auth/signup'
+import { Route as AuthSigninImport } from './routes/auth/signin'
+import { Route as DashboardUsersImport } from './routes/_dashboard.users'
+import { Route as DashboardRoomsImport } from './routes/_dashboard.rooms'
+import { Route as DashboardInvitationsImport } from './routes/_dashboard.invitations'
+import { Route as DashboardAccountImport } from './routes/_dashboard.account'
+import { Route as DashboardUserUserIdUserNameImport } from './routes/_dashboard.user/$userId.$userName'
+import { Route as DashboardRoomRoomIdRoomNameImport } from './routes/_dashboard.room/$roomId.$roomName'
+import { Route as DashboardRoomRoomIdRoomNameMembersImport } from './routes/_dashboard.room/$roomId.$roomName.members'
 
 // Create/Update Routes
 
-const UsersRoute = UsersImport.update({
-  path: '/users',
+const WelcomeRoute = WelcomeImport.update({
+  path: '/welcome',
   getParentRoute: () => rootRoute,
 } as any)
 
-const SignupRoute = SignupImport.update({
-  path: '/signup',
+const DashboardRoute = DashboardImport.update({
+  id: '/_dashboard',
   getParentRoute: () => rootRoute,
 } as any)
 
-const SigninRoute = SigninImport.update({
-  path: '/signin',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const RoomsRoute = RoomsImport.update({
-  path: '/rooms',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const InvitationsRoute = InvitationsImport.update({
-  path: '/invitations',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const AccountRoute = AccountImport.update({
-  path: '/account',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const IndexRoute = IndexImport.update({
+const DashboardIndexRoute = DashboardIndexImport.update({
   path: '/',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const AuthSignupRoute = AuthSignupImport.update({
+  path: '/auth/signup',
   getParentRoute: () => rootRoute,
 } as any)
 
-const UserUserIdUserNameRoute = UserUserIdUserNameImport.update({
-  path: '/user/$userId/$userName',
+const AuthSigninRoute = AuthSigninImport.update({
+  path: '/auth/signin',
   getParentRoute: () => rootRoute,
 } as any)
 
-const RoomRoomIdRoomNameRoute = RoomRoomIdRoomNameImport.update({
-  path: '/room/$roomId/$roomName',
-  getParentRoute: () => rootRoute,
+const DashboardUsersRoute = DashboardUsersImport.update({
+  path: '/users',
+  getParentRoute: () => DashboardRoute,
 } as any)
 
-const RoomRoomIdRoomNameMembersRoute = RoomRoomIdRoomNameMembersImport.update({
-  path: '/members',
-  getParentRoute: () => RoomRoomIdRoomNameRoute,
+const DashboardRoomsRoute = DashboardRoomsImport.update({
+  path: '/rooms',
+  getParentRoute: () => DashboardRoute,
 } as any)
+
+const DashboardInvitationsRoute = DashboardInvitationsImport.update({
+  path: '/invitations',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardAccountRoute = DashboardAccountImport.update({
+  path: '/account',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
+const DashboardUserUserIdUserNameRoute =
+  DashboardUserUserIdUserNameImport.update({
+    path: '/user/$userId/$userName',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+
+const DashboardRoomRoomIdRoomNameRoute =
+  DashboardRoomRoomIdRoomNameImport.update({
+    path: '/room/$roomId/$roomName',
+    getParentRoute: () => DashboardRoute,
+  } as any)
+
+const DashboardRoomRoomIdRoomNameMembersRoute =
+  DashboardRoomRoomIdRoomNameMembersImport.update({
+    path: '/members',
+    getParentRoute: () => DashboardRoomRoomIdRoomNameRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
+    '/_dashboard': {
+      id: '/_dashboard'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof DashboardImport
       parentRoute: typeof rootRoute
     }
-    '/account': {
-      id: '/account'
+    '/welcome': {
+      id: '/welcome'
+      path: '/welcome'
+      fullPath: '/welcome'
+      preLoaderRoute: typeof WelcomeImport
+      parentRoute: typeof rootRoute
+    }
+    '/_dashboard/account': {
+      id: '/_dashboard/account'
       path: '/account'
       fullPath: '/account'
-      preLoaderRoute: typeof AccountImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DashboardAccountImport
+      parentRoute: typeof DashboardImport
     }
-    '/invitations': {
-      id: '/invitations'
+    '/_dashboard/invitations': {
+      id: '/_dashboard/invitations'
       path: '/invitations'
       fullPath: '/invitations'
-      preLoaderRoute: typeof InvitationsImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DashboardInvitationsImport
+      parentRoute: typeof DashboardImport
     }
-    '/rooms': {
-      id: '/rooms'
+    '/_dashboard/rooms': {
+      id: '/_dashboard/rooms'
       path: '/rooms'
       fullPath: '/rooms'
-      preLoaderRoute: typeof RoomsImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DashboardRoomsImport
+      parentRoute: typeof DashboardImport
     }
-    '/signin': {
-      id: '/signin'
-      path: '/signin'
-      fullPath: '/signin'
-      preLoaderRoute: typeof SigninImport
-      parentRoute: typeof rootRoute
-    }
-    '/signup': {
-      id: '/signup'
-      path: '/signup'
-      fullPath: '/signup'
-      preLoaderRoute: typeof SignupImport
-      parentRoute: typeof rootRoute
-    }
-    '/users': {
-      id: '/users'
+    '/_dashboard/users': {
+      id: '/_dashboard/users'
       path: '/users'
       fullPath: '/users'
-      preLoaderRoute: typeof UsersImport
+      preLoaderRoute: typeof DashboardUsersImport
+      parentRoute: typeof DashboardImport
+    }
+    '/auth/signin': {
+      id: '/auth/signin'
+      path: '/auth/signin'
+      fullPath: '/auth/signin'
+      preLoaderRoute: typeof AuthSigninImport
       parentRoute: typeof rootRoute
     }
-    '/room/$roomId/$roomName': {
-      id: '/room/$roomId/$roomName'
+    '/auth/signup': {
+      id: '/auth/signup'
+      path: '/auth/signup'
+      fullPath: '/auth/signup'
+      preLoaderRoute: typeof AuthSignupImport
+      parentRoute: typeof rootRoute
+    }
+    '/_dashboard/': {
+      id: '/_dashboard/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof DashboardIndexImport
+      parentRoute: typeof DashboardImport
+    }
+    '/_dashboard/room/$roomId/$roomName': {
+      id: '/_dashboard/room/$roomId/$roomName'
       path: '/room/$roomId/$roomName'
       fullPath: '/room/$roomId/$roomName'
-      preLoaderRoute: typeof RoomRoomIdRoomNameImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DashboardRoomRoomIdRoomNameImport
+      parentRoute: typeof DashboardImport
     }
-    '/user/$userId/$userName': {
-      id: '/user/$userId/$userName'
+    '/_dashboard/user/$userId/$userName': {
+      id: '/_dashboard/user/$userId/$userName'
       path: '/user/$userId/$userName'
       fullPath: '/user/$userId/$userName'
-      preLoaderRoute: typeof UserUserIdUserNameImport
-      parentRoute: typeof rootRoute
+      preLoaderRoute: typeof DashboardUserUserIdUserNameImport
+      parentRoute: typeof DashboardImport
     }
-    '/room/$roomId/$roomName/members': {
-      id: '/room/$roomId/$roomName/members'
+    '/_dashboard/room/$roomId/$roomName/members': {
+      id: '/_dashboard/room/$roomId/$roomName/members'
       path: '/members'
       fullPath: '/room/$roomId/$roomName/members'
-      preLoaderRoute: typeof RoomRoomIdRoomNameMembersImport
-      parentRoute: typeof RoomRoomIdRoomNameImport
+      preLoaderRoute: typeof DashboardRoomRoomIdRoomNameMembersImport
+      parentRoute: typeof DashboardRoomRoomIdRoomNameImport
     }
   }
 }
@@ -154,17 +183,21 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  IndexRoute,
-  AccountRoute,
-  InvitationsRoute,
-  RoomsRoute,
-  SigninRoute,
-  SignupRoute,
-  UsersRoute,
-  RoomRoomIdRoomNameRoute: RoomRoomIdRoomNameRoute.addChildren({
-    RoomRoomIdRoomNameMembersRoute,
+  DashboardRoute: DashboardRoute.addChildren({
+    DashboardAccountRoute,
+    DashboardInvitationsRoute,
+    DashboardRoomsRoute,
+    DashboardUsersRoute,
+    DashboardIndexRoute,
+    DashboardRoomRoomIdRoomNameRoute:
+      DashboardRoomRoomIdRoomNameRoute.addChildren({
+        DashboardRoomRoomIdRoomNameMembersRoute,
+      }),
+    DashboardUserUserIdUserNameRoute,
   }),
-  UserUserIdUserNameRoute,
+  WelcomeRoute,
+  AuthSigninRoute,
+  AuthSignupRoute,
 })
 
 /* prettier-ignore-end */
@@ -175,50 +208,67 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/",
-        "/account",
-        "/invitations",
-        "/rooms",
-        "/signin",
-        "/signup",
-        "/users",
-        "/room/$roomId/$roomName",
-        "/user/$userId/$userName"
+        "/_dashboard",
+        "/welcome",
+        "/auth/signin",
+        "/auth/signup"
       ]
     },
-    "/": {
-      "filePath": "index.tsx"
-    },
-    "/account": {
-      "filePath": "account.tsx"
-    },
-    "/invitations": {
-      "filePath": "invitations.tsx"
-    },
-    "/rooms": {
-      "filePath": "rooms.tsx"
-    },
-    "/signin": {
-      "filePath": "signin.tsx"
-    },
-    "/signup": {
-      "filePath": "signup.tsx"
-    },
-    "/users": {
-      "filePath": "users.tsx"
-    },
-    "/room/$roomId/$roomName": {
-      "filePath": "room/$roomId.$roomName.tsx",
+    "/_dashboard": {
+      "filePath": "_dashboard.tsx",
       "children": [
-        "/room/$roomId/$roomName/members"
+        "/_dashboard/account",
+        "/_dashboard/invitations",
+        "/_dashboard/rooms",
+        "/_dashboard/users",
+        "/_dashboard/",
+        "/_dashboard/room/$roomId/$roomName",
+        "/_dashboard/user/$userId/$userName"
       ]
     },
-    "/user/$userId/$userName": {
-      "filePath": "user/$userId.$userName.tsx"
+    "/welcome": {
+      "filePath": "welcome.tsx"
     },
-    "/room/$roomId/$roomName/members": {
-      "filePath": "room/$roomId.$roomName.members.tsx",
-      "parent": "/room/$roomId/$roomName"
+    "/_dashboard/account": {
+      "filePath": "_dashboard.account.tsx",
+      "parent": "/_dashboard"
+    },
+    "/_dashboard/invitations": {
+      "filePath": "_dashboard.invitations.tsx",
+      "parent": "/_dashboard"
+    },
+    "/_dashboard/rooms": {
+      "filePath": "_dashboard.rooms.tsx",
+      "parent": "/_dashboard"
+    },
+    "/_dashboard/users": {
+      "filePath": "_dashboard.users.tsx",
+      "parent": "/_dashboard"
+    },
+    "/auth/signin": {
+      "filePath": "auth/signin.tsx"
+    },
+    "/auth/signup": {
+      "filePath": "auth/signup.tsx"
+    },
+    "/_dashboard/": {
+      "filePath": "_dashboard.index.tsx",
+      "parent": "/_dashboard"
+    },
+    "/_dashboard/room/$roomId/$roomName": {
+      "filePath": "_dashboard.room/$roomId.$roomName.tsx",
+      "parent": "/_dashboard",
+      "children": [
+        "/_dashboard/room/$roomId/$roomName/members"
+      ]
+    },
+    "/_dashboard/user/$userId/$userName": {
+      "filePath": "_dashboard.user/$userId.$userName.tsx",
+      "parent": "/_dashboard"
+    },
+    "/_dashboard/room/$roomId/$roomName/members": {
+      "filePath": "_dashboard.room/$roomId.$roomName.members.tsx",
+      "parent": "/_dashboard/room/$roomId/$roomName"
     }
   }
 }
