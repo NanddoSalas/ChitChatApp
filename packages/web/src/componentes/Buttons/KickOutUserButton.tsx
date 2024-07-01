@@ -1,9 +1,9 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { KickOutUserdialog } from '../dialogs';
-import { useAuthMutation } from '../hooks/useAuthMutation';
-import { useStore } from '../store';
-import { Member } from '../types/api/resources';
-import { classNames } from '../utils';
+import { KickOutUserdialog } from '../../dialogs';
+import { useAuthMutation } from '../../hooks/useAuthMutation';
+import { useStore } from '../../store';
+import { Member } from '../../types/api/resources';
+import { classNames } from '../../utils';
 
 interface KickOutUserButtonProps {
   userId: number;

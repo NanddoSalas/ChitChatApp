@@ -1,9 +1,9 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { useAuthMutation } from '../hooks/useAuthMutation';
-import { Room } from '../types/api/resources';
-import { CreateRoomForm } from '../types/api/rooms';
-import { classNames } from '../utils';
+import { useAuthMutation } from '../../hooks/useAuthMutation';
+import { Room } from '../../types/api/resources';
+import { CreateRoomForm } from '../../types/api/rooms';
+import { classNames } from '../../utils';
 import { Modal } from './Modal';
 
 interface CreateRoomModalProps {

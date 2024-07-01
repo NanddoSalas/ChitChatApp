@@ -1,10 +1,10 @@
 import { DocumentDuplicateIcon } from '@heroicons/react/24/outline';
 import { useQueryClient } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
-import { useAuthMutation } from '../hooks/useAuthMutation';
-import { GenerateInvitationForm } from '../types/api/invitations';
-import { Invitation } from '../types/api/resources';
-import { classNames } from '../utils';
+import { useAuthMutation } from '../../hooks/useAuthMutation';
+import { GenerateInvitationForm } from '../../types/api/invitations';
+import { Invitation } from '../../types/api/resources';
+import { classNames } from '../../utils';
 import { Modal } from './Modal';
 
 interface GenerateInvitationModalProps {

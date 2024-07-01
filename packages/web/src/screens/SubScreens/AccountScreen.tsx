@@ -2,13 +2,15 @@ import { ArrowLeftStartOnRectangleIcon } from '@heroicons/react/20/solid';
 import { useNavigate } from '@tanstack/react-router';
 import { useContext } from 'react';
 import { AuthContext } from '../../AuthContext';
+import {
+  ProfileSection,
+  SocialLoginSection,
+  UpdatePasswordSection,
+} from '../../componentes/AccountScreenSections';
 import Breadcrumb from '../../componentes/Breadcrumb';
 import { OpenDraweButton } from '../../componentes/Drawer';
 import { Header } from '../../componentes/Header';
 import { Heading } from '../../componentes/Heading';
-import { ProfileSection } from '../../componentes/Sections/ProfileSection';
-import { SocialLoginSection } from '../../componentes/Sections/SocialLoginSection';
-import { UpdatePasswordSection } from '../../componentes/Sections/UpdatePasswordSection';
 import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 import { SubScreenLayout } from '../../componentes/SubScreenLayout';
 

@@ -2,12 +2,12 @@ import { PlusIcon } from '@heroicons/react/20/solid';
 import { useState } from 'react';
 import Breadcrumb from '../../componentes/Breadcrumb';
 import { OpenDraweButton } from '../../componentes/Drawer';
-import { GenerateInvitationModal } from '../../componentes/GenerateInvitationModal';
 import { Header } from '../../componentes/Header';
 import { Heading } from '../../componentes/Heading';
-import InvitationsTable from '../../componentes/InvitationsTable';
+import { GenerateInvitationModal } from '../../componentes/Modals/GenerateInvitationModal';
 import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 import { SubScreenLayout } from '../../componentes/SubScreenLayout';
+import InvitationsTable from '../../componentes/Tables/InvitationsTable';
 
 const InvitationsScreen = () => {
   const [isOpen, setIsOpen] = useState(false);

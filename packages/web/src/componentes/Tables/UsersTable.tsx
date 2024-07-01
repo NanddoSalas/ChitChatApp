@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import { AuthContext } from '../AuthContext';
-import { useAuthQuery } from '../hooks/useAuthQuery';
-import { User } from '../types/api/resources';
-import { Avatar } from './Avatar';
-import { MakeAdminButton } from './MakeAdminButton';
-import { RevokeAdminButton } from './RevokeAdminButton';
+import { AuthContext } from '../../AuthContext';
+import { useAuthQuery } from '../../hooks/useAuthQuery';
+import { User } from '../../types/api/resources';
+import { Avatar } from '../Avatar';
+import { MakeAdminButton } from '../Buttons/MakeAdminButton';
+import { RevokeAdminButton } from '../Buttons/RevokeAdminButton';
 
 export const UsersTable = () => {
   const { user } = useContext(AuthContext);

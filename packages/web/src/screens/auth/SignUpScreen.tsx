@@ -3,7 +3,7 @@ import { useForm } from '@tanstack/react-form';
 import { Link } from '@tanstack/react-router';
 import { zodValidator } from '@tanstack/zod-form-adapter';
 import { z } from 'zod';
-import { GoogleButton } from '../../componentes/GoogleButton';
+import { GoogleButton } from '../../componentes/Buttons/GoogleButton';
 import { useAuthMutation } from '../../hooks/useAuthMutation';
 import {
   GoogleSignUpErrors,

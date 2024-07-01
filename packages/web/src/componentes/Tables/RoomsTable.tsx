@@ -1,10 +1,10 @@
 import { useContext } from 'react';
-import { AuthContext } from '../AuthContext';
-import { useAuthQuery } from '../hooks/useAuthQuery';
-import { useGetUser } from '../hooks/useGetUser';
-import { Room } from '../types/api/resources';
-import { Avatar } from './Avatar';
-import { RoomOptionsDropdown } from './RoomOptionsDrawer';
+import { AuthContext } from '../../AuthContext';
+import { useAuthQuery } from '../../hooks/useAuthQuery';
+import { useGetUser } from '../../hooks/useGetUser';
+import { Room } from '../../types/api/resources';
+import { Avatar } from '../Avatar';
+import { RoomOptionsDropdown } from '../RoomOptionsDrawer';
 
 export default function RoomsTable() {
   const { user } = useContext(AuthContext);

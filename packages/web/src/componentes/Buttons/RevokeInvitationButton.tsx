@@ -1,9 +1,9 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { RevokeInvitationDialog } from '../dialogs';
-import { useAuthMutation } from '../hooks/useAuthMutation';
-import { useStore } from '../store';
-import { Invitation } from '../types/api/resources';
-import { classNames } from '../utils';
+import { RevokeInvitationDialog } from '../../dialogs';
+import { useAuthMutation } from '../../hooks/useAuthMutation';
+import { useStore } from '../../store';
+import { Invitation } from '../../types/api/resources';
+import { classNames } from '../../utils';
 
 interface RevokeINvitationButtonProps {
   invitationId: number;

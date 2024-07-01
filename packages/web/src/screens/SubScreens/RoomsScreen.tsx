@@ -1,13 +1,13 @@
 import { PlusIcon } from '@heroicons/react/20/solid';
 import { useState } from 'react';
 import Breadcrumb from '../../componentes/Breadcrumb';
-import { CreateRoomModal } from '../../componentes/CreateRoomModal';
 import { OpenDraweButton } from '../../componentes/Drawer';
 import { Header } from '../../componentes/Header';
 import { Heading } from '../../componentes/Heading';
-import RoomsTable from '../../componentes/RoomsTable';
+import { CreateRoomModal } from '../../componentes/Modals/CreateRoomModal';
 import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 import { SubScreenLayout } from '../../componentes/SubScreenLayout';
+import RoomsTable from '../../componentes/Tables/RoomsTable';
 
 const RoomsScreen = () => {
   const [isOpen, setIsOpen] = useState(false);

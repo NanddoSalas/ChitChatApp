@@ -4,9 +4,9 @@ import Breadcrumb from '../../componentes/Breadcrumb';
 import { OpenDraweButton } from '../../componentes/Drawer';
 import { Header } from '../../componentes/Header';
 import { Heading } from '../../componentes/Heading';
-import RoomMembersTable from '../../componentes/RoomMembersTable';
 import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 import { SubScreenLayout } from '../../componentes/SubScreenLayout';
+import RoomMembersTable from '../../componentes/Tables/RoomMembersTable';
 
 const RoomMembersScreen = () => {
   const { roomName } = useParams({

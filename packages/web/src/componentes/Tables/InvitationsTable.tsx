@@ -1,6 +1,6 @@
-import { useAuthQuery } from '../hooks/useAuthQuery';
-import { Invitation } from '../types/api/resources';
-import { RevokeInvitationButton } from './RevokeInvitationButton';
+import { useAuthQuery } from '../../hooks/useAuthQuery';
+import { Invitation } from '../../types/api/resources';
+import { RevokeInvitationButton } from '../Buttons/RevokeInvitationButton';
 
 export default function InvitationsTable() {
   const { data: invitationsData } = useAuthQuery<Invitation[], Error>({

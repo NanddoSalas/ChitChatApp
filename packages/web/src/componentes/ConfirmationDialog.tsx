@@ -2,7 +2,7 @@ import { Dialog } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 import { useStore } from '../store';
 import { classNames } from '../utils';
-import { Modal } from './Modal';
+import { Modal } from './Modals/Modal';
 
 export const ConfirmationDialog: React.FC = () => {
   const closeDialog = useStore((state) => state.closeConfirmationDialog);

@@ -4,7 +4,7 @@ import { Header } from '../../componentes/Header';
 import { Heading } from '../../componentes/Heading';
 import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 import { SubScreenLayout } from '../../componentes/SubScreenLayout';
-import { UsersTable } from '../../componentes/UsersTable';
+import { UsersTable } from '../../componentes/Tables/UsersTable';
 
 const UsersScreen = () => {
   return (

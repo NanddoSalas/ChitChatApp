@@ -1,11 +1,11 @@
 import { useParams } from '@tanstack/react-router';
 import { useContext } from 'react';
-import { AuthContext } from '../AuthContext';
-import { useAuthQuery } from '../hooks/useAuthQuery';
-import { useGetUser } from '../hooks/useGetUser';
-import { Member } from '../types/api/resources';
-import { Avatar } from './Avatar';
-import { KickOutUserButton } from './KickOutUserButton';
+import { AuthContext } from '../../AuthContext';
+import { useAuthQuery } from '../../hooks/useAuthQuery';
+import { useGetUser } from '../../hooks/useGetUser';
+import { Member } from '../../types/api/resources';
+import { Avatar } from '../Avatar';
+import { KickOutUserButton } from '../Buttons/KickOutUserButton';
 
 export default function RoomMembersTable() {
   const { user: me } = useContext(AuthContext);

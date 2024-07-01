@@ -6,7 +6,7 @@ import { zodValidator } from '@tanstack/zod-form-adapter';
 import { useContext, useEffect } from 'react';
 import { z } from 'zod';
 import { AuthContext } from '../../AuthContext';
-import { GoogleButton } from '../../componentes/GoogleButton';
+import { GoogleButton } from '../../componentes/Buttons/GoogleButton';
 import { useAuthMutation } from '../../hooks/useAuthMutation';
 import {
   GoogleSignInForm,
@@ -66,7 +66,7 @@ export const SignInScreen = () => {
       queryClient.clear();
       queryClient.getQueryCache().clear();
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, navigate, queryClient]);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 bg-gray-50">

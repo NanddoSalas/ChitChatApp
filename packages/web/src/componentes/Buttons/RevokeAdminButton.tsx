@@ -1,10 +1,10 @@
 import { useQueryClient } from '@tanstack/react-query';
-import { RevokeAdminDialog } from '../dialogs';
-import { useAuthMutation } from '../hooks/useAuthMutation';
-import { useStore } from '../store';
-import { User } from '../types/api/resources';
-import { UpdateRoleForm } from '../types/api/users';
-import { classNames } from '../utils';
+import { RevokeAdminDialog } from '../../dialogs';
+import { useAuthMutation } from '../../hooks/useAuthMutation';
+import { useStore } from '../../store';
+import { User } from '../../types/api/resources';
+import { UpdateRoleForm } from '../../types/api/users';
+import { classNames } from '../../utils';
 
 interface RevokeAdminButtonProps {
   userId: number;
