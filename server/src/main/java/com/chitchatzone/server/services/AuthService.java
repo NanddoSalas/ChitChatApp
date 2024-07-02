@@ -51,7 +51,7 @@ public class AuthService {
         SignInDTO signInDTO = new SignInDTO();
 
         signInDTO.setAccessToken(token);
-        signInDTO.setUser(user.toDTO());
+        signInDTO.setUser(user.toFullDTO());
 
         return signInDTO;
     }
@@ -97,7 +97,7 @@ public class AuthService {
         SignInDTO signInDTO = new SignInDTO();
 
         signInDTO.setAccessToken(accessToken);
-        signInDTO.setUser(user.get().toDTO());
+        signInDTO.setUser(user.get().toFullDTO());
 
         return signInDTO;
     }

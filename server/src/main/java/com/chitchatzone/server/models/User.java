@@ -1,5 +1,6 @@
 package com.chitchatzone.server.models;
 
+import com.chitchatzone.server.dtos.FullUserDTO;
 import com.chitchatzone.server.dtos.UserDTO;
 
 import lombok.Data;
@@ -30,6 +31,24 @@ public class User {
         userDTO.setCreationDate(creationDate);
 
         return userDTO;
+    }
+
+    public FullUserDTO toFullDTO() {
+        FullUserDTO fullDTO = new FullUserDTO();
+
+        fullDTO.setId(id);
+        fullDTO.setFullName(fullName);
+        fullDTO.setEmail(email);
+        fullDTO.setAvatar(avatar);
+        fullDTO.setAbout(about);
+        fullDTO.setRole(role);
+        fullDTO.setCreationDate(creationDate);
+
+        fullDTO.setHasPassword((password != null));
+        fullDTO.setHasGoogle((googleId != null));
+        fullDTO.setHasGigHub((githubId != null));
+
+        return fullDTO;
     }
 
 }

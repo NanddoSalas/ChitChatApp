@@ -6,6 +6,6 @@ import lombok.Data;
 public class SignInDTO {
 
     private String accessToken;
-    private UserDTO user;
+    private FullUserDTO user;
 
 }
