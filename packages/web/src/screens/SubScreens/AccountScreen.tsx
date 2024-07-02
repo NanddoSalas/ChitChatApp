@@ -23,10 +23,6 @@ const AccountScreen = () => {
     console.log(about);
   };
 
-  const handleUpdatePassword = (password: string) => {
-    console.log(password);
-  };
-
   const handleSignOut = () => {
     signOut();
     navigate({ to: '/welcome' });
@@ -80,10 +76,7 @@ const AccountScreen = () => {
             onSave={handleProfileSave}
           />
 
-          <UpdatePasswordSection
-            onSave={handleUpdatePassword}
-            hasPassword={hasPassword}
-          />
+          <UpdatePasswordSection />
 
           <SocialLoginSection
             hasGitHub={hasGitHub}
