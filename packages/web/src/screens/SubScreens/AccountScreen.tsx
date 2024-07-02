@@ -28,8 +28,6 @@ const AccountScreen = () => {
     navigate({ to: '/welcome' });
   };
 
-  const { hasPassword, hasGoogle, hasGitHub } = user!;
-
   return (
     <SubScreenContainer>
       <Header
@@ -78,11 +76,7 @@ const AccountScreen = () => {
 
           <UpdatePasswordSection />
 
-          <SocialLoginSection
-            hasGitHub={hasGitHub}
-            hasGoogle={hasGoogle}
-            hasPassword={hasPassword}
-          />
+          <SocialLoginSection />
         </div>
       </SubScreenLayout>
     </SubScreenContainer>
