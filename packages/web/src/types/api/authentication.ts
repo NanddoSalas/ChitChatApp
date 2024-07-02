@@ -1,4 +1,4 @@
-import { User } from './resources';
+import { AuthenticatedUser, User } from './resources';
 
 // post /auth/signin
 
@@ -9,7 +9,7 @@ export interface SignInForm {
 
 export interface SingInData {
   accessToken: string;
-  user: User;
+  user: AuthenticatedUser;
 }
 
 export interface SingInErrors {

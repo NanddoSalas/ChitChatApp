@@ -12,6 +12,12 @@ export interface User {
   role: string;
   creationDate: string;
 }
+export interface AuthenticatedUser extends User {
+  hasPassword: boolean;
+  hasGoogle: boolean;
+  hasGitHub: boolean;
+}
+
 export interface Invitation {
   id: number;
   inviteCode: string;

@@ -2,7 +2,7 @@ import { classNames } from '../../utils';
 
 interface GoogleButtonProps {
   placeholder?: string;
-  onClick: () => void;
+  onClick?: () => void;
   loading?: boolean;
   disabled?: boolean;
 }

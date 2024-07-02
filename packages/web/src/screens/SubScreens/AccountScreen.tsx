@@ -18,10 +18,6 @@ const AccountScreen = () => {
   const { user, signOut } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const hasPassword = true;
-  const hasGitHub = false;
-  const hasGoogle = false;
-
   const handleProfileSave = (fullName: string, about: string) => {
     console.log(fullName);
     console.log(about);
@@ -35,6 +31,8 @@ const AccountScreen = () => {
     signOut();
     navigate({ to: '/welcome' });
   };
+
+  const { hasPassword, hasGoogle, hasGitHub } = user!;
 
   return (
     <SubScreenContainer>

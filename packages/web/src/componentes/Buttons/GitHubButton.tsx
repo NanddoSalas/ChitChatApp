@@ -1,8 +1,8 @@
 import { classNames } from '../../utils';
 
 interface GitHubButtonProps {
-  placeholder: string;
-  onClick: () => void;
+  placeholder?: string;
+  onClick?: () => void;
   loading?: boolean;
   disabled: boolean;
 }

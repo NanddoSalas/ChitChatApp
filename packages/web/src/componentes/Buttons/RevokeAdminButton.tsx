@@ -36,7 +36,6 @@ export const RevokeAdminButton: React.FC<RevokeAdminButtonProps> = ({
 
   const handleRevokeAdmin = () => {
     openDialog(RevokeAdminDialog, () => {
-      console.log('revoke admin ' + userId);
       mutate({ role: 'Member' });
     });
   };
