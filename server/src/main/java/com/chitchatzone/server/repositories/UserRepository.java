@@ -186,4 +186,31 @@ public class UserRepository {
     return affectedRows == 1;
   }
 
+  public boolean connectGoogleAccount(int userId, String googleId) {
+    String sql = """
+        UPDATE users
+        SET google_id = ?
+        WHERE id = ?""";
+
+    int affectedRows = template.update(sql, googleId, userId);
+
+    return affectedRows == 1;
+  }
+
+  public boolean disconnectGoogleAccount(int userId) {
+    String sql = """
+        UPDATE users
+        SET google_id = NULL
+        WHERE id = ?
+          AND google_id IS NOT NULL
+          AND (
+            encrypted_password IS NOT NULL
+            OR github_id IS NOT NULL
+          );""";
+
+    int affectedRows = template.update(sql, userId);
+
+    return affectedRows == 1;
+  }
+
 }
