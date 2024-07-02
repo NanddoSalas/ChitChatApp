@@ -1,25 +1,59 @@
-import { useState } from 'react';
+import { useForm } from '@tanstack/react-form';
+import { useQueryClient } from '@tanstack/react-query';
+import { zodValidator } from '@tanstack/zod-form-adapter';
+import { useContext } from 'react';
+import { z } from 'zod';
+import { AuthContext } from '../../AuthContext';
+import { useAuthMutation } from '../../hooks/useAuthMutation';
+import { User } from '../../types/api/resources';
+import { UpdateProfileErrors, UpdateProfileForm } from '../../types/api/users';
 import { classNames } from '../../utils';
 
-interface ProfileSectionProps {
-  avatar: string;
-  fullName: string;
-  email: string;
-  about: string;
-  onSave: (fullName: string, about: string) => void;
-}
+export const ProfileSection: React.FC = () => {
+  const { user, setUser } = useContext(AuthContext);
+  const queryClient = useQueryClient();
 
-export const ProfileSection: React.FC<ProfileSectionProps> = (props) => {
-  const [fullName, setFullName] = useState(props.fullName);
-  const [about, setAbout] = useState(props.about);
-  const isModified = fullName !== props.fullName || about !== props.about;
+  const { isPending, mutate, isSuccess, error, reset } = useAuthMutation<
+    null,
+    UpdateProfileErrors,
+    UpdateProfileForm
+  >(
+    {
+      mutationKey: [`/users/${user?.id}/profile`],
+      onSuccess: (_data, variables) => {
+        setUser((current) => ({ ...current!, ...variables }));
 
-  const handleCancel = () => {
-    setFullName(props.fullName);
-    setAbout(props.about);
+        queryClient.setQueryData<User[]>(['/users'], (oldData) => {
+          if (oldData) {
+            return oldData.map((u) =>
+              u.id === user!.id ? { ...u, ...variables } : u,
+            );
+          }
+        });
+      },
+    },
+    'put',
+  );
+
+  const form = useForm({
+    defaultValues: {
+      fullName: user!.fullName,
+      about: user!.about,
+    },
+    onSubmit: async ({ value }) => {
+      if (value.about !== user?.about || value.fullName !== user.fullName) {
+        mutate(value);
+      }
+    },
+    validatorAdapter: zodValidator,
+  });
+
+  const handleReset = () => {
+    reset();
+    form.reset();
   };
 
-  const handleSave = () => props.onSave(fullName, about);
+  const disabled = isPending || isSuccess;
 
   return (
     <div className="grid grid-cols-1 gap-x-8 gap-y-8 pt-10 md:grid-cols-3 px-0 2xl:px-24 3xl:px-32">
@@ -40,8 +74,8 @@ export const ProfileSection: React.FC<ProfileSectionProps> = (props) => {
             <div className="col-span-full flex items-center gap-x-8">
               <div className="avatar">
                 <div className="w-24 rounded-xl">
-                  {props.avatar ? (
-                    <img src={props.avatar} />
+                  {user!.avatar ? (
+                    <img src={user!.avatar} />
                   ) : (
                     <span
                       className={classNames(
@@ -77,11 +111,43 @@ export const ProfileSection: React.FC<ProfileSectionProps> = (props) => {
                   <span className="label-text">Full Name</span>
                 </div>
 
-                <input
-                  type="text"
-                  className="input input-bordered w-full max-w-xs"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
+                <form.Field
+                  name="fullName"
+                  validators={{ onBlur: z.string().min(1).max(64) }}
+                  children={(field) => {
+                    return (
+                      <>
+                        <input
+                          type="text"
+                          className={classNames(
+                            'input input-bordered w-full',
+                            field.state.meta.touchedErrors.length > 0
+                              ? 'input-error'
+                              : '',
+                            error?.fullName ? 'input-error' : '',
+                            isSuccess ? 'input-disabled' : '',
+                          )}
+                          required
+                          name={field.name}
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={(e) => field.handleChange(e.target.value)}
+                          disabled={disabled}
+                        />
+                        <div className="pt-2">
+                          {error?.fullName ? (
+                            <span className="text-red-500">
+                              {error.fullName}
+                            </span>
+                          ) : (
+                            field.state.meta.touchedErrors.map((m) => (
+                              <span className="text-red-500">{m}</span>
+                            ))
+                          )}
+                        </div>
+                      </>
+                    );
+                  }}
                 />
               </label>
             </div>
@@ -95,7 +161,7 @@ export const ProfileSection: React.FC<ProfileSectionProps> = (props) => {
                 <input
                   type="text"
                   className="input input-bordered w-full max-w-xs"
-                  value={props.email}
+                  value={user!.email}
                   disabled
                 />
               </label>
@@ -107,12 +173,43 @@ export const ProfileSection: React.FC<ProfileSectionProps> = (props) => {
                   <span className="label-text">About</span>
                 </div>
 
-                <textarea
-                  className="textarea textarea-bordered h-24"
-                  value={about}
-                  onChange={(e) => setAbout(e.target.value)}
-                  rows={3}
-                ></textarea>
+                <form.Field
+                  name="about"
+                  validators={{ onBlur: z.string().min(0).max(256) }}
+                  children={(field) => {
+                    return (
+                      <>
+                        <textarea
+                          rows={3}
+                          className={classNames(
+                            'input input-bordered w-full',
+                            field.state.meta.touchedErrors.length > 0
+                              ? 'input-error'
+                              : '',
+                            error?.fullName ? 'input-error' : '',
+                            isSuccess ? 'input-disabled' : '',
+                          )}
+                          required
+                          name={field.name}
+                          value={field.state.value}
+                          onBlur={field.handleBlur}
+                          onChange={(e) => field.handleChange(e.target.value)}
+                          disabled={disabled}
+                        ></textarea>
+
+                        <div className="pt-2">
+                          {error?.fullName ? (
+                            <span className="text-red-500">{error.about}</span>
+                          ) : (
+                            field.state.meta.touchedErrors.map((m) => (
+                              <span className="text-red-500">{m}</span>
+                            ))
+                          )}
+                        </div>
+                      </>
+                    );
+                  }}
+                />
               </label>
 
               <p className="mt-3">Write a few sentences about yourself.</p>
@@ -121,18 +218,37 @@ export const ProfileSection: React.FC<ProfileSectionProps> = (props) => {
         </div>
 
         <div className="flex items-center justify-end gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:px-8">
+          {isSuccess && (
+            <div role="alert" className="alert alert-success">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 shrink-0 stroke-current"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              <span>Profile's been updated Successfully!</span>
+            </div>
+          )}
+
           <button
             className="btn btn-neutral btn-outline btn-sm lg:btn-md"
-            disabled={!isModified}
-            onClick={handleCancel}
+            onClick={handleReset}
+            disabled={isPending}
           >
-            Cancel
+            Reset
           </button>
 
           <button
             className="btn btn-neutral btn-sm lg:btn-md"
-            disabled={!isModified}
-            onClick={handleSave}
+            onClick={form.handleSubmit}
+            disabled={disabled}
           >
             Save
           </button>

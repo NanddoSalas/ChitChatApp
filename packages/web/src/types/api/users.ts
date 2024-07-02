@@ -14,3 +14,15 @@ export interface UpdatePasswordForm {
 export interface UpdatePasswordErrors {
   oldPassword: string;
 }
+
+// put /users/${userId}/profile
+
+export interface UpdateProfileForm {
+  fullName: string;
+  about: string;
+}
+
+export interface UpdateProfileErrors {
+  fullName: string;
+  about: string;
+}

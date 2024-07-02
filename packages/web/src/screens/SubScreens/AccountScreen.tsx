@@ -15,13 +15,8 @@ import { SubScreenContainer } from '../../componentes/SubScreenContainer';
 import { SubScreenLayout } from '../../componentes/SubScreenLayout';
 
 const AccountScreen = () => {
-  const { user, signOut } = useContext(AuthContext);
+  const { signOut } = useContext(AuthContext);
   const navigate = useNavigate();
-
-  const handleProfileSave = (fullName: string, about: string) => {
-    console.log(fullName);
-    console.log(about);
-  };
 
   const handleSignOut = () => {
     signOut();
@@ -66,13 +61,7 @@ const AccountScreen = () => {
         />
 
         <div className="space-y-10 divide-y divide-gray-900/10 !mt-0">
-          <ProfileSection
-            about={user!.about}
-            avatar={user!.avatar}
-            email={user!.email}
-            fullName={user!.fullName}
-            onSave={handleProfileSave}
-          />
+          <ProfileSection />
 
           <UpdatePasswordSection />
 
