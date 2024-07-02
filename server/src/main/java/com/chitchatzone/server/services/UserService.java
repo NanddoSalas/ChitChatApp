@@ -55,10 +55,16 @@ public class UserService {
         if (userId == sub) {
             Optional<User> user = userRepository.findById(userId);
 
-            String oldPassword = form.getOldPassword();
             String newPassword = form.getNewPassword();
-            String oldEncryptedPassword = user.get().getPassword();
             String newEncryptedPassword = encoder.encode(newPassword);
+
+            if (user.get().getPassword() == null) {
+                userRepository.updatePassword(userId, newEncryptedPassword);
+                return;
+            }
+
+            String oldPassword = form.getOldPassword();
+            String oldEncryptedPassword = user.get().getPassword();
 
             if (encoder.matches(oldPassword, oldEncryptedPassword)) {
                 userRepository.updatePassword(userId, newEncryptedPassword);
