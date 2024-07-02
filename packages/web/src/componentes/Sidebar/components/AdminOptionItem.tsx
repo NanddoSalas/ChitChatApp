@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from '@tanstack/react-router';
-import { NavigationPath } from '../../../types/resources';
 import { NavItemContainer } from './NavItemContainer';
 
 interface AdminOptionItemProps {
@@ -10,7 +9,7 @@ interface AdminOptionItemProps {
       titleId?: string | undefined;
     } & React.RefAttributes<SVGSVGElement>
   >;
-  href: NavigationPath;
+  href: string;
 }
 
 export const AdminOptionItem: React.FC<AdminOptionItemProps> = ({

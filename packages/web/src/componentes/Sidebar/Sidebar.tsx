@@ -85,7 +85,7 @@ export const Sidebar = () => {
                 <li key={user.id}>
                   <UserItem
                     id={user.id}
-                    avatar={user.avatar}
+                    email={user.email}
                     fullName={user.fullName}
                   />
                 </li>

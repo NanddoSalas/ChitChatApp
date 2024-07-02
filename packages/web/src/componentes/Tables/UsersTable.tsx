@@ -1,8 +1,8 @@
 import { useContext } from 'react';
+import Avatar, { genConfig } from 'react-nice-avatar';
 import { AuthContext } from '../../AuthContext';
 import { useAuthQuery } from '../../hooks/useAuthQuery';
 import { User } from '../../types/api/resources';
-import { Avatar } from '../Avatar';
 import { MakeAdminButton } from '../Buttons/MakeAdminButton';
 import { RevokeAdminButton } from '../Buttons/RevokeAdminButton';
 
@@ -69,7 +69,10 @@ export const UsersTable = () => {
                 <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
                   <div className="flex items-center">
                     <div className="h-11 w-11 flex-shrink-0">
-                      <Avatar avatar={user.avatar} size="lg" />
+                      <Avatar
+                        {...genConfig(user?.email)}
+                        className="w-12 h-12"
+                      />
                     </div>
 
                     <div className="ml-4">

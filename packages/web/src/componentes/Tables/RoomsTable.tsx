@@ -1,9 +1,9 @@
 import { useContext } from 'react';
+import Avatar, { genConfig } from 'react-nice-avatar';
 import { AuthContext } from '../../AuthContext';
 import { useAuthQuery } from '../../hooks/useAuthQuery';
 import { useGetUser } from '../../hooks/useGetUser';
 import { Room } from '../../types/api/resources';
-import { Avatar } from '../Avatar';
 import { RoomOptionsDropdown } from '../RoomOptionsDrawer';
 
 export default function RoomsTable() {
@@ -66,8 +66,8 @@ export default function RoomsTable() {
                 <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                   <div className="flex items-center">
                     <Avatar
-                      avatar={getUser(room.creatorId)?.avatar || ''}
-                      size="lg"
+                      {...genConfig(getUser(room.creatorId).email)}
+                      className="w-12 h-12"
                     />
 
                     <div className="ml-4">

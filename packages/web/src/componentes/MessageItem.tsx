@@ -1,7 +1,7 @@
+import Avatar, { genConfig } from 'react-nice-avatar';
 import { useGetUser } from '../hooks/useGetUser';
 import { Message } from '../types/api/resources';
 import { classNames } from '../utils';
-import { Avatar } from './Avatar';
 
 interface MessageProps {
   message: Message;
@@ -14,12 +14,12 @@ export const MessageItem: React.FC<MessageProps> = ({ message, isMine }) => {
   return (
     <div
       className={classNames(
-        'py-5 flex space-x-3 px-4 sm:px-6 lg:px-8',
+        'py-5 flex space-x-6 px-4 sm:px-6 lg:px-8',
         isMine ? 'bg-gray-200' : '',
       )}
     >
       <div className="w-12">
-        <Avatar avatar={user.avatar || ''} size="lg" />
+        <Avatar {...genConfig(user.email)} className="w-14 h-14" />
       </div>
 
       <div className="min-w-0 flex-1">

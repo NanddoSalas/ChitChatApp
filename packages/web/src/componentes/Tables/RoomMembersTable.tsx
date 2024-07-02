@@ -1,10 +1,10 @@
 import { useParams } from '@tanstack/react-router';
 import { useContext } from 'react';
+import Avatar, { genConfig } from 'react-nice-avatar';
 import { AuthContext } from '../../AuthContext';
 import { useAuthQuery } from '../../hooks/useAuthQuery';
 import { useGetUser } from '../../hooks/useGetUser';
 import { Member } from '../../types/api/resources';
-import { Avatar } from '../Avatar';
 import { KickOutUserButton } from '../Buttons/KickOutUserButton';
 
 export default function RoomMembersTable() {
@@ -66,7 +66,10 @@ export default function RoomMembersTable() {
                 <tr key={user.id}>
                   <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
                     <div className="flex items-center">
-                      <Avatar avatar={user.avatar || ''} size="lg" />
+                      <Avatar
+                        {...genConfig(user?.email)}
+                        className="w-12 h-12"
+                      />
 
                       <div className="ml-4">
                         <div className="font-medium text-gray-900">

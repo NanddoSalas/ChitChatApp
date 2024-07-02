@@ -2,6 +2,7 @@ import { useForm } from '@tanstack/react-form';
 import { useQueryClient } from '@tanstack/react-query';
 import { zodValidator } from '@tanstack/zod-form-adapter';
 import { useContext } from 'react';
+import Avatar, { genConfig } from 'react-nice-avatar';
 import { z } from 'zod';
 import { AuthContext } from '../../AuthContext';
 import { useAuthMutation } from '../../hooks/useAuthMutation';
@@ -71,38 +72,8 @@ export const ProfileSection: React.FC = () => {
       <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2 max-w-3xl">
         <div className="px-4 py-6 sm:p-8">
           <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="col-span-full flex items-center gap-x-8">
-              <div className="avatar">
-                <div className="w-24 rounded-xl">
-                  {user!.avatar ? (
-                    <img src={user!.avatar} />
-                  ) : (
-                    <span
-                      className={classNames(
-                        'inline-block overflow-hidden rounded-full bg-gray-100 w-24 h-24',
-                      )}
-                    >
-                      <svg
-                        className="h-full w-full text-gray-300"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
-                      </svg>
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div>
-                <button className="btn btn-outline btn-sm lg:btn-md" disabled>
-                  Change avatar
-                </button>
-
-                <p className="mt-2 text-xs leading-5 text-gray-900">
-                  JPG, GIF or PNG. 1MB max.
-                </p>
-              </div>
+            <div className="col-span-full flex">
+              <Avatar {...genConfig(user?.email)} className="w-32 h-32" />
             </div>
 
             <div className="sm:col-span-3">

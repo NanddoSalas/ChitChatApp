@@ -1,4 +1,4 @@
-import { AuthenticatedUser, User } from './resources';
+import { AuthenticatedUser } from './resources';
 
 // post /auth/signin
 

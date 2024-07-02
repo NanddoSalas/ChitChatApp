@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from '@tanstack/react-router';
 import { useContext } from 'react';
+import Avatar, { genConfig } from 'react-nice-avatar';
 import { AuthContext } from '../../../AuthContext';
 import { classNames } from '../../../utils';
-import { Avatar } from '../../Avatar';
 
 export const ProfileButton = () => {
   const { user } = useContext(AuthContext);
@@ -23,7 +23,7 @@ export const ProfileButton = () => {
       )}
       onClick={handleClick}
     >
-      <Avatar avatar={user!.avatar} />
+      <Avatar {...genConfig(user?.email)} className="w-12 h-12" />
 
       <span className="sr-only">Your profile</span>
       <span aria-hidden="true">{user!.fullName}</span>
