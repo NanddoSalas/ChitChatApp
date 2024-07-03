@@ -45,12 +45,12 @@ export default function RoomMembersTable() {
                 Member Since
               </th>
 
-              <th
+              {/* <th
                 scope="col"
                 className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hidden md:table-cell"
               >
                 Status
-              </th>
+              </th> */}
 
               <th scope="col" className="relative py-3.5 pl-3 pr-4">
                 <span className="sr-only">Edit</span>
@@ -93,11 +93,11 @@ export default function RoomMembersTable() {
                     </div>
                   </td>
 
-                  <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell ">
+                  {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell ">
                     <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                       Online
                     </span>
-                  </td>
+                  </td> */}
 
                   <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right">
                     {user.id !== me?.id ? (
