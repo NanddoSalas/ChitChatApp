@@ -11,6 +11,8 @@ interface MessageProps {
 export const MessageItem: React.FC<MessageProps> = ({ message, isMine }) => {
   const user = useGetUser()(message.senderId);
 
+  const date = new Date(message.creationDate);
+
   return (
     <div
       className={classNames(
@@ -26,7 +28,9 @@ export const MessageItem: React.FC<MessageProps> = ({ message, isMine }) => {
         <p className="font-semibold space-x-2">
           <span className="text-gray-900 text-sm">{user.fullName}</span>
 
-          <span className="text-gray-500 text-xs">{message.creationDate}</span>
+          <span className="text-gray-500 text-xs">
+            {date.toDateString()} {date.toLocaleTimeString()}
+          </span>
         </p>
 
         <p className="text-sm">{message.body}</p>

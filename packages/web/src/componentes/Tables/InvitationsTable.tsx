@@ -56,6 +56,8 @@ export default function InvitationsTable() {
 
           <tbody className="divide-y divide-gray-200 bg-white">
             {invitationsData?.map((invitation) => {
+              const date = new Date(invitation.creatioDate);
+
               return (
                 <tr key={invitation.id}>
                   <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
@@ -78,7 +80,7 @@ export default function InvitationsTable() {
 
                   <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell ">
                     <div className="mt-1 text-gray-500">
-                      {invitation.creatioDate}
+                      {date.toDateString()} {date.toLocaleTimeString()}
                     </div>
                   </td>
 

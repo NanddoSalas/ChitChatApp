@@ -55,50 +55,56 @@ export default function RoomsTable() {
           </thead>
 
           <tbody className="divide-y divide-gray-200 bg-white">
-            {rooms?.map((room) => (
-              <tr key={room.id}>
-                <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
-                  <div className="font-medium text-gray-900">
-                    {room.roomName}
-                  </div>
-                </td>
+            {rooms?.map((room) => {
+              const date = new Date(room.creationDate);
 
-                <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                  <div className="flex items-center">
-                    <Avatar
-                      {...genConfig(getUser(room.creatorId).email)}
-                      className="w-12 h-12"
-                    />
+              return (
+                <tr key={room.id}>
+                  <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
+                    <div className="font-medium text-gray-900">
+                      {room.roomName}
+                    </div>
+                  </td>
 
-                    <div className="ml-4">
-                      <div className="font-medium text-gray-900">
-                        {getUser(room.creatorId)?.fullName}
+                  <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                    <div className="flex items-center">
+                      <Avatar
+                        {...genConfig(getUser(room.creatorId).email)}
+                        className="w-12 h-12"
+                      />
+
+                      <div className="ml-4">
+                        <div className="font-medium text-gray-900">
+                          {getUser(room.creatorId)?.fullName}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
+                  </td>
 
-                <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
-                  <div className="mt-1 text-gray-500">{room.creationDate}</div>
-                </td>
+                  <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
+                    <div className="mt-1 text-gray-500">
+                      {date.toDateString()} {date.toLocaleTimeString()}
+                    </div>
+                  </td>
 
-                <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
-                  <div className="mt-1 text-gray-500">
-                    {room.private ? 'Private' : 'Public'}
-                  </div>
-                </td>
+                  <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
+                    <div className="mt-1 text-gray-500">
+                      {room.private ? 'Private' : 'Public'}
+                    </div>
+                  </td>
 
-                <td className="whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium">
-                  {user!.id === room.creatorId ? (
-                    <RoomOptionsDropdown
-                      roomId={room.id}
-                      roomName={room.roomName}
-                      isPrivate={room.private}
-                    />
-                  ) : null}
-                </td>
-              </tr>
-            ))}
+                  <td className="whitespace-nowrap py-5 pl-3 pr-4 text-right text-sm font-medium">
+                    {user!.id === room.creatorId ? (
+                      <RoomOptionsDropdown
+                        roomId={room.id}
+                        roomName={room.roomName}
+                        isPrivate={room.private}
+                      />
+                    ) : null}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

@@ -61,6 +61,7 @@ export default function RoomMembersTable() {
           <tbody className="divide-y divide-gray-200 bg-white">
             {members?.map((member) => {
               const user = getUser(member.userId)!;
+              const date = new Date(member.memberSince);
 
               return (
                 <tr key={user.id}>
@@ -89,7 +90,7 @@ export default function RoomMembersTable() {
 
                   <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
                     <div className="mt-1 text-gray-500">
-                      {user.creationDate}
+                      {date.toDateString()} {date.toLocaleTimeString()}
                     </div>
                   </td>
 

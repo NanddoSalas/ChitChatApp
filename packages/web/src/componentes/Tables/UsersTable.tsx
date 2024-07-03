@@ -64,59 +64,65 @@ export const UsersTable = () => {
           </thead>
 
           <tbody className="divide-y divide-gray-200 bg-white">
-            {usersData?.map((user) => (
-              <tr key={user.email}>
-                <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
-                  <div className="flex items-center">
-                    <div className="h-11 w-11 flex-shrink-0">
-                      <Avatar
-                        {...genConfig(user?.email)}
-                        className="w-12 h-12"
-                      />
-                    </div>
+            {usersData?.map((user) => {
+              const date = new Date(user.creationDate);
 
-                    <div className="ml-4">
-                      <div className="font-medium text-gray-900">
-                        {user.fullName}
+              return (
+                <tr key={user.email}>
+                  <td className="whitespace-nowrap py-5 pl-4 pr-3 text-sm">
+                    <div className="flex items-center">
+                      <div className="h-11 w-11 flex-shrink-0">
+                        <Avatar
+                          {...genConfig(user?.email)}
+                          className="w-12 h-12"
+                        />
                       </div>
-                      <div className="mt-1 text-gray-500 md:hidden">
-                        {user.email}
+
+                      <div className="ml-4">
+                        <div className="font-medium text-gray-900">
+                          {user.fullName}
+                        </div>
+                        <div className="mt-1 text-gray-500 md:hidden">
+                          {user.email}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
+                  </td>
 
-                <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
-                  <div className="mt-1 text-gray-500">{user.email}</div>
-                </td>
+                  <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
+                    <div className="mt-1 text-gray-500">{user.email}</div>
+                  </td>
 
-                <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
-                  <div className="mt-1 text-gray-500">{user.creationDate}</div>
-                </td>
+                  <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden md:table-cell">
+                    <div className="mt-1 text-gray-500">
+                      {date.toDateString()} {date.toLocaleTimeString()}
+                    </div>
+                  </td>
 
-                {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden xl:table-cell ">
+                  {/* <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500 hidden xl:table-cell ">
                   <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                     Online
                   </span>
                 </td> */}
 
-                <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                  {user.role}
-                </td>
-
-                {isServerAdmin && (
-                  <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right">
-                    {user.role === 'Admin' && (
-                      <RevokeAdminButton userId={user.id} />
-                    )}
-
-                    {user.role === 'Member' && (
-                      <MakeAdminButton userId={user.id} />
-                    )}
+                  <td className="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
+                    {user.role}
                   </td>
-                )}
-              </tr>
-            ))}
+
+                  {isServerAdmin && (
+                    <td className="relative whitespace-nowrap py-5 pl-3 pr-4 text-right">
+                      {user.role === 'Admin' && (
+                        <RevokeAdminButton userId={user.id} />
+                      )}
+
+                      {user.role === 'Member' && (
+                        <MakeAdminButton userId={user.id} />
+                      )}
+                    </td>
+                  )}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
