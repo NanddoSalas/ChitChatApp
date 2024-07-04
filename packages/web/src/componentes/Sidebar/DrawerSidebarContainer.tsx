@@ -17,7 +17,9 @@ export const DrawerSidebarContainer: React.FC<{
   return (
     <div className="flex grow flex-col bg-gray-900 ring-1 ring-white/10 h-full">
       <Scrollbars
-        onScrollFrame={(x) => setScrollOffset(x.scrollTop)}
+        onScrollStop={() => {
+          setScrollOffset(ref.current?.getScrollTop() || 0);
+        }}
         ref={ref}
         style={{ width: 250 }}
       >
