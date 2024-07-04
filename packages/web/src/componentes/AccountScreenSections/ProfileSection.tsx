@@ -72,8 +72,18 @@ export const ProfileSection: React.FC = () => {
       <div className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2 max-w-3xl">
         <div className="px-4 py-6 sm:p-8">
           <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="col-span-full flex">
-              <Avatar {...genConfig(user?.email)} className="w-32 h-32" />
+            <div className="col-span-full ">
+              <div className="chat chat-start flex items-center">
+                <div className="chat-image avatar">
+                  <Avatar className="w-32 h-32" {...genConfig(user?.email)} />
+                </div>
+
+                <div className="chat-bubble prose">
+                  <h3 className="text-gray-100 truncate">
+                    {user?.about ? user.about : 'Hi there!'}
+                  </h3>
+                </div>
+              </div>
             </div>
 
             <div className="sm:col-span-3">
