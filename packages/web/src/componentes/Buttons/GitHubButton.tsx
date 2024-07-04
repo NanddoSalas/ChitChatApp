@@ -4,7 +4,7 @@ interface GitHubButtonProps {
   placeholder?: string;
   onClick?: () => void;
   loading?: boolean;
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export const GitHubButton: React.FC<GitHubButtonProps> = ({
