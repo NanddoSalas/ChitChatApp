@@ -1,13 +1,36 @@
-export const Logo = () => (
-  <div className="sm:mx-auto sm:w-full sm:max-w-md">
-    <img
-      className="mx-auto h-10 w-auto"
-      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-      alt="ChitChatZone"
-    />
+import Avatar, { AvatarFullConfig, genConfig } from 'react-nice-avatar';
 
-    <h2 className="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-      ChitChatZone
-    </h2>
-  </div>
-);
+export const Logo = () => {
+  const config: AvatarFullConfig = {
+    sex: 'man',
+    faceColor: '#F9C9B6',
+    earSize: 'small',
+    eyeStyle: 'circle',
+    noseStyle: 'long',
+    mouthStyle: 'laugh',
+    shirtStyle: 'polo',
+    glassesStyle: 'round',
+    hairStyle: 'thick',
+    hairColor: '#F9C9B6',
+    hatStyle: 'none',
+    eyeBrowStyle: 'up',
+    shirtColor: '#2b3440',
+    bgColor: '#e5e7eb',
+  };
+
+  const myConfig = genConfig(config);
+
+  return (
+    <div className="flex justify-center">
+      <div className="chat chat-start flex items-center bg-gray-100 p-4 rounded-2xl">
+        <div className="chat-image avatar">
+          <Avatar className="w-24 h-24" {...myConfig} />
+        </div>
+
+        <div className="chat-bubble prose">
+          <h3 className="text-gray-100">{'ChitChatZone'}</h3>
+        </div>
+      </div>
+    </div>
+  );
+};
