@@ -33,13 +33,13 @@ export const UserChatScreen = () => {
 
       {messages?.length === 0 ? (
         <div className="h-full flex justify-center items-center flex-col">
-          <div className="chat chat-start flex items-center opacity-50">
+          <div className="chat chat-start flex items-center opacity-50 m-6">
             <div className="chat-image avatar">
               <Avatar className="w-32 h-32" {...genConfig(user?.email)} />
             </div>
 
             <div className="chat-bubble prose">
-              <h3 className="text-gray-100 truncate">
+              <h3 className="text-gray-100 text-wrap">
                 {user?.about ? user.about : 'Hi there!'}
               </h3>
             </div>

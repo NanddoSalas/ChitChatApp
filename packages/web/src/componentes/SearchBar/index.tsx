@@ -28,7 +28,7 @@ export const SearchBar = () => {
       afterLeave={() => setQuery('')}
       appear
     >
-      <Dialog as="div" className="relative z-10" onClose={closeSearchBar}>
+      <Dialog as="div" className="relative z-50" onClose={closeSearchBar}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"

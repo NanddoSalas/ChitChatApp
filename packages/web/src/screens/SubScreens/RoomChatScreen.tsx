@@ -31,13 +31,13 @@ export const RoomChatScreen = () => {
 
       {messages?.length === 0 ? (
         <div className="h-full flex justify-center items-center flex-col">
-          <div className="chat chat-start flex items-center opacity-50">
+          <div className="chat chat-start flex items-center opacity-50 m-6">
             <div className="chat-image avatar">
               <Avatar className="w-32 h-32" {...genConfig(roomName)} />
             </div>
 
             <div className="chat-bubble prose">
-              <h3 className="text-gray-100 truncate">
+              <h3 className="text-gray-100 text-wrap">
                 Be the first one to send a message in {roomName}!
               </h3>
             </div>
