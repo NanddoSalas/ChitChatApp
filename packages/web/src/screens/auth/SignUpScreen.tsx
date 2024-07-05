@@ -33,6 +33,7 @@ export const SignUpScreen = () => {
       email: 'nanddosalas@gmail.com',
       password: 'password',
       inviteCode: 'INVITE1234',
+      inviteCode2: '',
     },
     onSubmit: async ({ value }) => {
       passwordSignUp.mutate(value);
@@ -45,10 +46,18 @@ export const SignUpScreen = () => {
     onSuccess: async (codeResponse) => {
       googleSignUp.mutate({
         code: codeResponse.code,
-        inviteCode: 'INVITE1234',
+        inviteCode: form.getFieldValue('inviteCode2'),
       });
     },
   });
+
+  const handleGoogleLogin = async () => {
+    const err = await form.validateField('inviteCode2', 'blur');
+
+    if (err.length === 0) {
+      googleLogin();
+    }
+  };
 
   const isSigningUp = passwordSignUp.isPending || googleSignUp.isPending;
   const isSuccess = passwordSignUp.isSuccess || googleSignUp.isSuccess;
@@ -293,13 +302,58 @@ export const SignUpScreen = () => {
             </div>
 
             <div className="mt-6 space-y-6">
+              <label className="form-control w-full">
+                <div className="label">
+                  <span className="label-text">Invitation Code</span>
+                </div>
+
+                <form.Field
+                  name="inviteCode2"
+                  validators={{
+                    onBlur: z.string().nonempty(),
+                  }}
+                  children={(field) => (
+                    <>
+                      <input
+                        type="text"
+                        className={classNames(
+                          'input input-bordered w-full',
+                          field.state.meta.touchedErrors.length > 0
+                            ? 'input-error'
+                            : '',
+                          googleSignUp.error?.inviteCode ? 'input-error' : '',
+                          isSuccess ? 'input-disabled' : '',
+                        )}
+                        required
+                        name={field.name}
+                        value={field.state.value}
+                        onBlur={field.handleBlur}
+                        onChange={(e) => field.handleChange(e.target.value)}
+                        disabled={isDisabled}
+                      />
+                      <div className="pt-2">
+                        {googleSignUp.error?.inviteCode ? (
+                          <span className="text-red-500">
+                            {googleSignUp.error?.inviteCode}
+                          </span>
+                        ) : (
+                          field.state.meta.touchedErrors.map((m) => (
+                            <span className="text-red-500">{m}</span>
+                          ))
+                        )}
+                      </div>
+                    </>
+                  )}
+                />
+              </label>
+
               <GoogleButton
-                onClick={googleLogin}
+                onClick={handleGoogleLogin}
                 disabled={isDisabled}
                 loading={googleSignUp.isPending}
               />
 
-              {googleSignUp.error && (
+              {googleSignUp.error?.message && (
                 <div role="alert" className="alert alert-error">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

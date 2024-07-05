@@ -47,4 +47,5 @@ export interface GoogleSignUpForm {
 
 export interface GoogleSignUpErrors {
   message?: string;
+  inviteCode?: string;
 }
