@@ -8,9 +8,14 @@ import { classNames } from '../utils';
 interface MessageBoxProps {
   target: 'room' | 'user';
   targetId: number;
+  disabled: boolean;
 }
 
-export const MessageBox: React.FC<MessageBoxProps> = ({ target, targetId }) => {
+export const MessageBox: React.FC<MessageBoxProps> = ({
+  target,
+  targetId,
+  disabled,
+}) => {
   const queryClient = useQueryClient();
   const [value, setValue] = useState('');
 
@@ -65,7 +70,10 @@ export const MessageBox: React.FC<MessageBoxProps> = ({ target, targetId }) => {
     >
       <div className="flex justify-end items-center">
         <textarea
-          className="textarea textarea-bordered w-full resize-none pr-[72px] overflow-hidden"
+          className={classNames(
+            'textarea textarea-bordered w-full resize-none pr-[72px] overflow-hidden',
+            disabled ? 'input-disabled' : '',
+          )}
           placeholder="Type your message..."
           rows={2}
           value={value}
@@ -77,6 +85,7 @@ export const MessageBox: React.FC<MessageBoxProps> = ({ target, targetId }) => {
             className={classNames(
               'btn btn-ghost btn-square',
               isPending ? 'btn-disabled' : '',
+              disabled ? 'btn-disabled' : '',
             )}
             disabled={!value}
             onClick={handleSendMessage}
