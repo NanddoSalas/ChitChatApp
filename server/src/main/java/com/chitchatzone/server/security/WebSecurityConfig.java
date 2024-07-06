@@ -61,6 +61,8 @@ public class WebSecurityConfig {
 
                         .requestMatchers("/auth/**").permitAll()
 
+                        .requestMatchers("/socket").permitAll()
+
                         .requestMatchers(HttpMethod.PUT, "/users/{userId}/role")
                         .hasAuthority("ServerAdmin")
 
