@@ -7,9 +7,11 @@ import {
   Sidebar,
   SidebarContainer,
 } from '../componentes/Sidebar';
+import { useStomp } from '../hooks/useStomp';
 import { useStore } from '../store';
 
 export const DashboardScreen = () => {
+  useStomp();
   const openSearchBar = useStore((state) => state.openSearchBar);
   const navigate = useNavigate();
   const location = useLocation();
