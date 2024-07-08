@@ -14,6 +14,7 @@ export const AuthContext = createContext<AuthContextType>({
   signIn: () => {},
   signOut: () => {},
   setUser: () => {},
+  setAccessToken: () => {},
 });
 
 export const AuthContextProvider: React.FC<AuthContextProviderProps> = ({

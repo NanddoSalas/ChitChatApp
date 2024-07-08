@@ -17,5 +17,13 @@ export const useAuth = () => {
     setAccessToken(null);
   };
 
-  return { isAuthenticated, user, accessToken, signIn, signOut, setUser };
+  return {
+    isAuthenticated,
+    user,
+    accessToken,
+    signIn,
+    signOut,
+    setUser,
+    setAccessToken,
+  };
 };
