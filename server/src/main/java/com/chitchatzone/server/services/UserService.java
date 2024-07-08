@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +22,8 @@ import com.chitchatzone.server.forms.UpdateProfileForm;
 import com.chitchatzone.server.forms.UpdateRoleForm;
 import com.chitchatzone.server.models.User;
 import com.chitchatzone.server.repositories.UserRepository;
+import com.chitchatzone.server.stomp.UpdateRolePayload;
+import com.chitchatzone.server.stomp.UpdateUserPayload;
 import com.nimbusds.jwt.JWT;
 import com.nimbusds.jwt.JWTClaimsSet;
 
@@ -33,6 +36,8 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder encoder;
     private final GoogleAuthClient googleAuthClient;
+    private final SimpMessagingTemplate template;
+    private final JwtService jwtService;
 
     public List<UserDTO> retrieveUsers() {
         List<User> users = userRepository.findAll();
@@ -47,7 +52,15 @@ public class UserService {
         int sub = Integer.parseInt(jwt.getSubject());
 
         if (userId == sub) {
-            userRepository.updateProfile(userId, form.getFullName(), form.getAbout());
+            Boolean isSuccess =
+                    userRepository.updateProfile(userId, form.getFullName(), form.getAbout());
+
+            if (isSuccess) {
+                String payload =
+                        new UpdateUserPayload(userId, form.getFullName(), form.getAbout()).build();
+
+                template.convertAndSend("/topic/update-user", payload);
+            }
         } else {
             throw new Exception("update someone else's profile not allowed");
         }
@@ -94,7 +107,19 @@ public class UserService {
             return;
         }
 
-        userRepository.updateRole(userId, form.getRole());
+        Boolean isSuccess = userRepository.updateRole(userId, form.getRole());
+
+        if (isSuccess) {
+            Optional<User> user = userRepository.findById(userId);
+
+            if (user.isPresent()) {
+                String accessToken = jwtService.generateAccessToken(user.get()).getTokenValue();
+                String payload = new UpdateRolePayload(form.getRole(), accessToken).build();
+
+                template.convertAndSendToUser(Integer.toString(userId), "/queue/update-role",
+                        payload);
+            }
+        }
     }
 
     public void connectGoogleAccount(int userId, GoogleSignInForm form) throws Exception {

@@ -2,6 +2,7 @@ package com.chitchatzone.server.services;
 
 import java.util.List;
 
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +13,9 @@ import com.chitchatzone.server.forms.CreateRoomForm;
 import com.chitchatzone.server.forms.UpdateRoomForm;
 import com.chitchatzone.server.models.Room;
 import com.chitchatzone.server.repositories.RoomRepository;
+import com.chitchatzone.server.stomp.DeleteRoomPayload;
+import com.chitchatzone.server.stomp.NewRoomPayload;
+import com.chitchatzone.server.stomp.UpdateRoomPayload;
 
 import lombok.AllArgsConstructor;
 
@@ -20,6 +24,7 @@ import lombok.AllArgsConstructor;
 public class RoomService {
 
     private final RoomRepository roomRepository;
+    private final SimpMessagingTemplate template;
 
     public List<Room> retrieveRooms() {
         SecurityContext context = SecurityContextHolder.getContext();
@@ -36,7 +41,15 @@ public class RoomService {
         Jwt jwt = (Jwt) authentication.getPrincipal();
         int sub = Integer.parseInt(jwt.getSubject());
 
-        return roomRepository.createRoom(sub, form.getName(), form.isPrivate());
+        Room room = roomRepository.createRoom(sub, form.getName(), form.isPrivate());
+
+        room.setHasAccess(false);
+        String payload = new NewRoomPayload(room).build();
+        room.setHasAccess(true);
+
+        template.convertAndSend("/topic/new-room", payload);
+
+        return room;
 
     }
 
@@ -46,7 +59,15 @@ public class RoomService {
         Jwt jwt = (Jwt) authentication.getPrincipal();
         int sub = Integer.parseInt(jwt.getSubject());
 
-        roomRepository.updateRoom(roomId, sub, form.getName(), form.isPrivate());
+        Boolean isSuccess =
+                roomRepository.updateRoom(roomId, sub, form.getName(), form.isPrivate());
+
+        if (isSuccess) {
+            String payload =
+                    new UpdateRoomPayload(roomId, form.getName(), form.isPrivate()).build();
+
+            template.convertAndSend("/topic/update-room", payload);
+        }
     }
 
     public void deleteRoom(int roomId) {
@@ -55,7 +76,13 @@ public class RoomService {
         Jwt jwt = (Jwt) authentication.getPrincipal();
         int sub = Integer.parseInt(jwt.getSubject());
 
-        roomRepository.deleteRoom(roomId, sub);
+        Boolean isSuccess = roomRepository.deleteRoom(roomId, sub);
+
+        if (isSuccess) {
+            String payload = new DeleteRoomPayload(roomId).build();
+
+            template.convertAndSend("/topic/delete-room", payload);
+        }
     }
 
 }

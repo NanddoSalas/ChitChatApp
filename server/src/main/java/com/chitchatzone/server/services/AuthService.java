@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,9 +22,11 @@ import com.chitchatzone.server.exceptions.GenericMessageException;
 import com.chitchatzone.server.exceptions.InvalidInvitationCodeException;
 import com.chitchatzone.server.forms.GoogleSignInForm;
 import com.chitchatzone.server.forms.GoogleSignUpForm;
+import com.chitchatzone.server.models.InvitedUser;
 import com.chitchatzone.server.models.MyUserPrincipal;
 import com.chitchatzone.server.models.User;
 import com.chitchatzone.server.repositories.UserRepository;
+import com.chitchatzone.server.stomp.NewUserPayload;
 import com.nimbusds.jwt.JWT;
 import com.nimbusds.jwt.JWTClaimsSet;
 
@@ -38,6 +41,7 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final GoogleAuthClient googleAuthClient;
+    private final SimpMessagingTemplate template;
 
     public SignInDTO signIn(SignInForm form) {
         Authentication authReq = UsernamePasswordAuthenticationToken
@@ -59,8 +63,18 @@ public class AuthService {
     public void signUp(SignUpForm form)
             throws EmailAlreadyInUseException, InvalidInvitationCodeException {
         try {
-            userRepository.addUser(form.getFullName(), form.getEmail(),
+            InvitedUser invitedUser = userRepository.addUser(form.getFullName(), form.getEmail(),
                     encoder.encode(form.getPassword()), form.getInviteCode());
+
+            Optional<User> user = userRepository.findById(invitedUser.getUserId());
+
+
+            if (user.isPresent()) {
+                String payload = new NewUserPayload(user.get()).build();
+                template.convertAndSend("/topic/new-user", payload);
+            }
+
+
         } catch (DataAccessException e) {
             if (e.getClass() == DuplicateKeyException.class) {
                 throw new EmailAlreadyInUseException("Email already in use");
@@ -115,9 +129,16 @@ public class AuthService {
         }
 
         try {
+            InvitedUser invitedUser = userRepository.addGoogleUser(
+                    claims.getClaim("name").toString(), claims.getClaim("email").toString(),
+                    claims.getSubject(), form.getInviteCode());
 
-            userRepository.addGoogleUser(claims.getClaim("name").toString(),
-                    claims.getClaim("email").toString(), claims.getSubject(), form.getInviteCode());
+            Optional<User> user = userRepository.findById(invitedUser.getUserId());
+
+            if (user.isPresent()) {
+                String payload = new NewUserPayload(user.get()).build();
+                template.convertAndSend("/topic/new-user", payload);
+            }
         } catch (DataAccessException e) {
             if (e.getClass() == DuplicateKeyException.class) {
 

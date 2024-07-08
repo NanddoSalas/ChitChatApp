@@ -2,6 +2,7 @@ package com.chitchatzone.server.services;
 
 import java.util.List;
 
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,7 +13,8 @@ import com.chitchatzone.server.dtos.MemberDTO;
 import com.chitchatzone.server.models.Member;
 import com.chitchatzone.server.repositories.MemberRepository;
 import com.chitchatzone.server.repositories.RoomRepository;
-
+import com.chitchatzone.server.stomp.DeleteRoomMemberPayload;
+import com.chitchatzone.server.stomp.NewRoomMemberPayload;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -21,6 +23,7 @@ public class MemberService {
 
     private final MemberRepository memberRepository;
     private final RoomRepository roomRepository;
+    private final SimpMessagingTemplate template;
 
     public List<MemberDTO> retrieveRoomMembers(int roomId) throws Exception {
         SecurityContext context = SecurityContextHolder.getContext();
@@ -51,7 +54,13 @@ public class MemberService {
             throw new Exception("Not authorized to modify that resource");
         }
 
-        return memberRepository.addMember(userId, roomId);
+        Member member = memberRepository.addMember(userId, roomId);
+
+        String payload = new NewRoomMemberPayload(roomId).build();
+
+        template.convertAndSendToUser(Integer.toString(userId), "/queue/new-room-member", payload);
+
+        return member;
     }
 
     public void kickUserOutOfARoom(int roomId, int userId) throws Exception {
@@ -66,7 +75,14 @@ public class MemberService {
             throw new Exception("Not authorized to modify that resource");
         }
 
-        memberRepository.deleteMember(userId, roomId);
+        Boolean isSuccess = memberRepository.deleteMember(userId, roomId);
+
+        if (isSuccess) {
+            String payload = new DeleteRoomMemberPayload(roomId).build();
+
+            template.convertAndSendToUser(Integer.toString(userId), "/queue/delete-room-member",
+                    payload);
+        }
     }
 
 }
