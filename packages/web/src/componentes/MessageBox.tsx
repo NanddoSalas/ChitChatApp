@@ -1,4 +1,4 @@
-import { useQueryClient } from '@tanstack/react-query';
+import { InfiniteData, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { useAuthMutation } from '../hooks/useAuthMutation';
 import { SendMessageErrors, SendMessageForm } from '../types/api/messages';
@@ -26,12 +26,24 @@ export const MessageBox: React.FC<MessageBoxProps> = ({
   >({
     mutationKey: [`/${target}s/${targetId}/messages`],
     onSuccess: (newMessage) => {
-      queryClient.setQueryData<Message[]>(
+      queryClient.setQueryData<InfiniteData<Message[]>>(
         [`/${target}s/${targetId}/messages`],
-        (oldData) => {
-          if (oldData) {
-            return [...oldData, newMessage];
+        (data) => {
+          if (data) {
+            const newState: InfiniteData<Message[]> = {
+              pages: [[newMessage], ...data.pages],
+              pageParams: [[newMessage.id], ...data.pageParams],
+            };
+
+            return newState;
           }
+
+          const newState: InfiniteData<Message[]> = {
+            pages: [[newMessage]],
+            pageParams: [[newMessage.id]],
+          };
+
+          return newState;
         },
       );
 

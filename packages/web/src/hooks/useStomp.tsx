@@ -1,5 +1,5 @@
 import { Client } from '@stomp/stompjs';
-import { useQueryClient } from '@tanstack/react-query';
+import { InfiniteData, useQueryClient } from '@tanstack/react-query';
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../AuthContext';
 import {
@@ -105,12 +105,24 @@ export const useStomp = () => {
           const { message, roomId }: NewRoomMessagePayload = JSON.parse(body);
 
           if (message.senderId !== me?.id) {
-            queryClient.setQueryData<Message[]>(
+            queryClient.setQueryData<InfiniteData<Message[]>>(
               [`/rooms/${roomId}/messages`],
-              (oldData) => {
-                if (oldData) {
-                  return [...oldData, message];
+              (data) => {
+                if (data) {
+                  const newState: InfiniteData<Message[]> = {
+                    pages: [[message], ...data.pages],
+                    pageParams: [[message.id], ...data.pageParams],
+                  };
+
+                  return newState;
                 }
+
+                const newState: InfiniteData<Message[]> = {
+                  pages: [[message]],
+                  pageParams: [[message.id]],
+                };
+
+                return newState;
               },
             );
           }
@@ -137,12 +149,24 @@ export const useStomp = () => {
           const { message, roomId }: NewRoomMessagePayload = JSON.parse(body);
 
           if (message.senderId !== me?.id) {
-            queryClient.setQueryData<Message[]>(
+            queryClient.setQueryData<InfiniteData<Message[]>>(
               [`/rooms/${roomId}/messages`],
-              (oldData) => {
-                if (oldData) {
-                  return [...oldData, message];
+              (data) => {
+                if (data) {
+                  const newState: InfiniteData<Message[]> = {
+                    pages: [[message], ...data.pages],
+                    pageParams: [[message.id], ...data.pageParams],
+                  };
+
+                  return newState;
                 }
+
+                const newState: InfiniteData<Message[]> = {
+                  pages: [[message]],
+                  pageParams: [[message.id]],
+                };
+
+                return newState;
               },
             );
           }
@@ -152,12 +176,24 @@ export const useStomp = () => {
           const { message }: NewDirectMessagePayload = JSON.parse(body);
 
           if (message.senderId !== me?.id) {
-            queryClient.setQueryData<Message[]>(
+            queryClient.setQueryData<InfiniteData<Message[]>>(
               [`/users/${message.senderId}/messages`],
-              (oldData) => {
-                if (oldData) {
-                  return [...oldData, message];
+              (data) => {
+                if (data) {
+                  const newState: InfiniteData<Message[]> = {
+                    pages: [[message], ...data.pages],
+                    pageParams: [[message.id], ...data.pageParams],
+                  };
+
+                  return newState;
                 }
+
+                const newState: InfiniteData<Message[]> = {
+                  pages: [[message]],
+                  pageParams: [[message.id]],
+                };
+
+                return newState;
               },
             );
           }
