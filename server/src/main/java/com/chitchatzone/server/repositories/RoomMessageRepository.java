@@ -14,50 +14,40 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class RoomMessageRepository {
 
-    private final JdbcTemplate template;
-    private final MessageMapper mapper;
+  private final JdbcTemplate template;
+  private final MessageMapper mapper;
 
-    public List<Message> findAll(int roomId, int cursor) {
-        if (cursor > 0) {
-            String sql = """
-                    SELECT *
-                    FROM (
-                        SELECT *
-                        FROM room_messages
-                        WHERE room_id = ?
-                          AND id > ?
-                        ORDER BY id DESC
-                        LIMIT 20
-                      ) m
-                    ORDER BY m.id ASC;
-                    """;
+  public List<Message> findAll(int roomId, int cursor) {
+    if (cursor > 0) {
+      String sql = """
+          SELECT *
+          FROM room_messages
+          WHERE room_id = ?
+            AND id < ?
+          ORDER BY id DESC
+          LIMIT 10""";
 
-            return template.query(sql, mapper, roomId, cursor);
-        }
-
-        String sql = """
-                SELECT *
-                FROM (
-                    SELECT *
-                    FROM room_messages
-                    WHERE room_id = ?
-                    ORDER BY id DESC
-                    LIMIT 20
-                  ) m
-                ORDER BY m.id ASC;
-                """;
-
-        return template.query(sql, mapper, roomId);
+      return template.query(sql, mapper, roomId, cursor);
     }
 
-    public Message createMessage(int senderId, int roomId, String body) {
-        String sql = """
-                INSERT INTO room_messages (sender_id, room_id, body)
-                VALUES (?, ?, ?)
-                RETURNING *;
-                """;
+    String sql = """
+        SELECT *
+        FROM room_messages
+        WHERE room_id = ?
+        ORDER BY id DESC
+        LIMIT 10""";
 
-        return template.query(sql, mapper, senderId, roomId, body).get(0);
-    }
+    return template.query(sql, mapper, roomId);
+  }
+
+  public Message createMessage(int senderId, int roomId, String body) {
+    String sql = """
+        INSERT INTO room_messages (sender_id, room_id, body)
+        VALUES (?, ?, ?)
+        RETURNING *;
+        """;
+
+    return template.query(sql, mapper, senderId, roomId, body).get(0);
+  }
 
 }
