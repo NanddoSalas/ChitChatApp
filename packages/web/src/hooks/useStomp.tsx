@@ -82,11 +82,20 @@ export const useStomp = () => {
 
           queryClient.setQueryData<Room[]>(['/rooms'], (oldData) => {
             if (oldData) {
-              return oldData.map((room) =>
-                room.id === roomId
-                  ? { ...room, roomName, private: isPrivate }
-                  : room,
-              );
+              return oldData.map((room) => {
+                if (room.id === roomId) {
+                  if (room.private && !isPrivate) {
+                    queryClient.invalidateQueries({
+                      exact: true,
+                      queryKey: [`/rooms/${roomId}/messages`],
+                    });
+                  }
+
+                  return { ...room, roomName, private: isPrivate };
+                }
+
+                return room;
+              });
             }
           });
         });
@@ -201,6 +210,11 @@ export const useStomp = () => {
 
         client.subscribe(NewRoomMemberDestination, (message) => {
           const { roomId }: NewRoomMemberPayload = JSON.parse(message.body);
+
+          queryClient.invalidateQueries({
+            exact: true,
+            queryKey: [`/rooms/${roomId}/messages`],
+          });
 
           queryClient.setQueryData<Room[]>(['/rooms'], (oldData) => {
             if (oldData) {
