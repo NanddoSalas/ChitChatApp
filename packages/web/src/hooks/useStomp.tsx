@@ -66,6 +66,9 @@ export const useStomp = () => {
         client.subscribe(NewRoomDestination, (message) => {
           const { room }: NewRoomPayload = JSON.parse(message.body);
 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          room.private = (room as any).isPrivate;
+
           if (room.creatorId !== me!.id) {
             queryClient.setQueryData<Room[]>(['/rooms'], (oldData) => {
               if (oldData) {
