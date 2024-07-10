@@ -29,7 +29,7 @@ export const MessagesList: React.FC<MessagesListProps> = ({
           ? messages[messages.length - 1].id - messages.length
           : undefined
       }
-      initialTopMostItemIndex={messages.length - 1}
+      initialTopMostItemIndex={{ behavior: 'auto', index: 'LAST' }}
       alignToBottom
       context={{ user: me! }}
     />
