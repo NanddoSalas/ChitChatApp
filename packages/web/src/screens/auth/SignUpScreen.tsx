@@ -33,10 +33,16 @@ export const SignUpScreen = () => {
       email: 'nanddosalas@gmail.com',
       password: 'password',
       inviteCode: 'INVITE1234',
-      inviteCode2: '',
     },
     onSubmit: async ({ value }) => {
       passwordSignUp.mutate(value);
+    },
+    validatorAdapter: zodValidator,
+  });
+
+  const form2 = useForm({
+    defaultValues: {
+      inviteCode: 'INVITE1234',
     },
     validatorAdapter: zodValidator,
   });
@@ -46,13 +52,13 @@ export const SignUpScreen = () => {
     onSuccess: async (codeResponse) => {
       googleSignUp.mutate({
         code: codeResponse.code,
-        inviteCode: form.getFieldValue('inviteCode2'),
+        inviteCode: form2.getFieldValue('inviteCode'),
       });
     },
   });
 
   const handleGoogleLogin = async () => {
-    const err = await form.validateField('inviteCode2', 'blur');
+    const err = await form2.validateField('inviteCode', 'blur');
 
     if (err.length === 0) {
       googleLogin();
@@ -307,8 +313,8 @@ export const SignUpScreen = () => {
                   <span className="label-text">Invitation Code</span>
                 </div>
 
-                <form.Field
-                  name="inviteCode2"
+                <form2.Field
+                  name="inviteCode"
                   validators={{
                     onBlur: z.string().nonempty(),
                   }}
