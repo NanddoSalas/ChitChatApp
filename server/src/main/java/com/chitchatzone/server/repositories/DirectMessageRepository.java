@@ -35,7 +35,7 @@ public class DirectMessageRepository {
           )
           AND id < ?
           ORDER BY id DESC
-          LIMIT 10;""";
+          LIMIT 20;""";
 
       return template.query(sql, mapper, senderId, receiverId, receiverId, senderId, cursor);
     }
@@ -52,7 +52,7 @@ public class DirectMessageRepository {
         AND receiver_id = ?
         )
         ORDER BY id DESC
-        LIMIT 10""";
+        LIMIT 20""";
 
     return template.query(sql, mapper, senderId, receiverId, receiverId, senderId);
   }

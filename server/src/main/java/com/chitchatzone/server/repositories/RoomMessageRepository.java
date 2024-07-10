@@ -25,7 +25,7 @@ public class RoomMessageRepository {
           WHERE room_id = ?
             AND id < ?
           ORDER BY id DESC
-          LIMIT 10""";
+          LIMIT 20""";
 
       return template.query(sql, mapper, roomId, cursor);
     }
@@ -35,7 +35,7 @@ public class RoomMessageRepository {
         FROM room_messages
         WHERE room_id = ?
         ORDER BY id DESC
-        LIMIT 10""";
+        LIMIT 20""";
 
     return template.query(sql, mapper, roomId);
   }
