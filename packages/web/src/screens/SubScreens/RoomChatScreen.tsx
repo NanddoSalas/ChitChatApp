@@ -48,13 +48,11 @@ export const RoomChatScreen = () => {
         end={<></>}
       />
 
-      {messages ? (
-        messages.length === 0 ? (
-          <EmptyPlaceholder />
-        ) : (
-          <MessagesList messages={messages} onFetchMore={fetchNextPage} />
-        )
-      ) : (
+      {messages?.length === 0 && <EmptyPlaceholder />}
+
+      <MessagesList messages={messages || []} onFetchMore={fetchNextPage} />
+
+      {isPending && (
         <div className="h-full flex flex-col">
           <div className="flex-1" />
           <MessageSkeleton />

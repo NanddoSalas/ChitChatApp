@@ -15,7 +15,10 @@ export const UserChatScreen = () => {
   });
   const user = useGetUser()(parseInt(userId));
 
-  const { fetchNextPage, ...result } = useInfiniteMessagesQuery('user', userId);
+  const { fetchNextPage, isPending, ...result } = useInfiniteMessagesQuery(
+    'user',
+    userId,
+  );
 
   const EmptyPlaceholder = () => (
     <div className="h-full flex justify-center items-center flex-col">
@@ -47,13 +50,11 @@ export const UserChatScreen = () => {
         end={<></>}
       />
 
-      {messages ? (
-        messages.length === 0 ? (
-          <EmptyPlaceholder />
-        ) : (
-          <MessagesList messages={messages} onFetchMore={fetchNextPage} />
-        )
-      ) : (
+      {messages?.length === 0 && <EmptyPlaceholder />}
+
+      <MessagesList messages={messages || []} onFetchMore={fetchNextPage} />
+
+      {isPending && (
         <div className="h-full flex flex-col">
           <div className="flex-1" />
           <MessageSkeleton />
