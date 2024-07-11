@@ -4,12 +4,10 @@
 
 <br />
 <div align="center">
-  <img src="" alt="todo: get a logo" width="80" height="80" />
-
-  <h3 align="center">ChitChatZone</h3>
+  <img src="./assets/logo.png" alt="todo: get a logo" style="border-radius: 12px;" />
 
   <p align="center">
-    todo: project description
+    Full Stack room-based Chat Application
     <br />
     <a href="#"><strong>Try Demo</strong></a>
   </p>
@@ -57,9 +55,25 @@
 
 ## About The Project
 
-![todo: get a screen shoot of the project]()
+![todo: get a screen shoot of the project](./assets/screenshot.jpg)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+ChitChatZone is a room-based chat application. This Full Stack project enables users to create, join, and engage in chat rooms seamlessly. With a focus on real-time communication
+ChitChatZone is built with a modern tech stack, combining powerful backend technologies with sleek front-end frameworks to deliver a smooth and engaging user experience.
+
+### Features
+
+- **Room Creation and Management:** Easily create and manage multiple chat rooms.
+- **User Authentication:** Secure user login and registration using modern authentication techniques.
+- **Responsive Design:** Accessible on both desktop and mobile devices for a seamless experience.
+- **Real-Time Messaging:** Enjoy instant messaging powered by WebSockets for real-time communication.
+
+### Motivation
+
+The primary motivation behind creating ChitChatZone was to enhance my skills in both backend and frontend development. This project serves as a hands-on platform to achieve the following goals:
+
+- **Learn a New Backend Technology:** One of the key objectives was to gain proficiency in Java and Spring. By integrating these technologies, I aimed to build a robust and scalable backend system that supports real-time communication and efficient data management.
+
+- **Enhance Frontend Development Skills:** Another important goal was to deepen my knowledge as a frontend developer. This project provided an opportunity to work with modern frontend frameworks and tools, focusing on creating a seamless and responsive user interface that enhances the user experience.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
