@@ -45,7 +45,7 @@ public class InvitationController {
     public ResponseEntity<ResponseDTO> revokeInvitation(@PathVariable String invitationId) {
         invitationService.revokeInvitation(Integer.parseInt(invitationId));
 
-        return ResponseEntity.ok(null);
+        return ResponseDTO.ok(null);
     }
 
 }
