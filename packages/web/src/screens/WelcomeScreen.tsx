@@ -26,7 +26,9 @@ export const WelcomeScreen = () => {
 
             <GitHubButton
               placeholder="Source Code"
-              onClick={() => window.open('https://github.com/NanddoSalas')}
+              onClick={() =>
+                window.open('https://github.com/NanddoSalas/ChitChatApp')
+              }
             />
           </div>
         </div>
