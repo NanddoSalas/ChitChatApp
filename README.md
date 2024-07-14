@@ -54,8 +54,8 @@
 
 ![project screenshot](./assets/screenshot.jpg)
 
-ChitChatZone is a room-based chat application. This Full Stack project enables users to create, join, and engage in chat rooms seamlessly. With a focus on real-time communication
-ChitChatZone is built with a modern tech stack, combining powerful backend technologies with sleek front-end frameworks to deliver a smooth and engaging user experience.
+ChitChatApp is a room-based chat application. This Full Stack project enables users to create, join, and engage in chat rooms seamlessly. With a focus on real-time communication
+ChitChatApp is built with a modern tech stack, combining powerful backend technologies with sleek front-end frameworks to deliver a smooth and engaging user experience.
 
 ### Features
 
@@ -66,7 +66,7 @@ ChitChatZone is built with a modern tech stack, combining powerful backend techn
 
 ### Motivation
 
-The primary motivation behind creating ChitChatZone was to enhance my skills in both backend and frontend development. This project serves as a hands-on platform to achieve the following goals:
+The primary motivation behind creating ChitChatApp was to enhance my skills in both backend and frontend development. This project serves as a hands-on platform to achieve the following goals:
 
 - **Learn a New Backend Technology:** One of the key objectives was to gain proficiency in Java and Spring. By integrating these technologies, I aimed to build a robust and scalable backend system that supports real-time communication and efficient data management.
 

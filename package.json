@@ -1,5 +1,5 @@
 {
-  "name": "chitchatzone",
+  "name": "chitchatapp",
   "private": true,
   "workspaces": [
     "packages/*"

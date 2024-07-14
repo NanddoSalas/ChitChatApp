@@ -28,7 +28,7 @@ export const Logo = () => {
         </div>
 
         <div className="chat-bubble prose">
-          <h3 className="text-gray-100">{'ChitChatZone'}</h3>
+          <h3 className="text-gray-100">{'ChitChatApp'}</h3>
         </div>
       </div>
     </div>

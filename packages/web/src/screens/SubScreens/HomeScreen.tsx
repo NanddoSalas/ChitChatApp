@@ -31,7 +31,7 @@ const HomeScreen = () => {
     <SubScreenContainer>
       <Header
         start={<OpenDraweButton />}
-        center={<span className="text-white font-semibold">ChitChatZone</span>}
+        center={<span className="text-white font-semibold">ChitChatApp</span>}
         end={<></>}
       />
 
