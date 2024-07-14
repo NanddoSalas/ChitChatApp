@@ -9,7 +9,7 @@
   <p align="center">
     Full Stack room-based Chat Application
     <br />
-    <a href="#"><strong>Try Demo</strong></a>
+    <a href="https://chitchatapp.xyz" target="_blank"><strong>Try Demo</strong></a>
   </p>
 </div>
 
