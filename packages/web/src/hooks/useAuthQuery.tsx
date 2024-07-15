@@ -11,7 +11,7 @@ export const useAuthQuery = <TQueryFnData, TError, TData = TQueryFnData>(
   return useQuery<TQueryFnData, TError, TData>({
     queryFn: async ({ queryKey }) => {
       try {
-        const res = await axios.get('http://localhost:8080' + queryKey, {
+        const res = await axios.get(import.meta.env.VITE_API_URL + queryKey, {
           headers: {
             Authorization: accessToken ? `Bearer ${accessToken}` : undefined,
           },

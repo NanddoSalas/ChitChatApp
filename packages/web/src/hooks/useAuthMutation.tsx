@@ -24,7 +24,7 @@ export const useAuthMutation = <
     mutationFn: async (form) => {
       try {
         let res: AxiosResponse;
-        const url = 'http://localhost:8080' + options?.mutationKey;
+        const url = import.meta.env.VITE_API_URL + options?.mutationKey;
         const config: AxiosRequestConfig = {
           validateStatus: (status) => {
             return status < 500;

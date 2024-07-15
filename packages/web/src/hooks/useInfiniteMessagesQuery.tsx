@@ -14,7 +14,7 @@ export const useInfiniteMessagesQuery = (
     queryKey: [`/${target}s/${targetId}/messages`],
     queryFn: async ({ pageParam, queryKey }) => {
       try {
-        const res = await axios.get('http://localhost:8080' + queryKey, {
+        const res = await axios.get(import.meta.env.VITE_API_URL + queryKey, {
           headers: {
             Authorization: accessToken ? `Bearer ${accessToken}` : undefined,
           },
