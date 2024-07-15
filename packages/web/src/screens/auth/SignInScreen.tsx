@@ -49,8 +49,8 @@ export const SignInScreen = () => {
 
   const form = useForm({
     defaultValues: {
-      email: 'alice.johnson@example.com',
-      password: 'password',
+      email: '',
+      password: '',
     },
     onSubmit: async ({ value }) => {
       passwordSignIn.mutate(value);

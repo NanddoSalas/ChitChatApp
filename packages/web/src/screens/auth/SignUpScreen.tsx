@@ -29,10 +29,10 @@ export const SignUpScreen = () => {
 
   const form = useForm({
     defaultValues: {
-      fullName: 'Luis Fernando Cano Salas',
-      email: 'nanddosalas@gmail.com',
-      password: 'password',
-      inviteCode: 'INVITE1234',
+      fullName: '',
+      email: '',
+      password: '',
+      inviteCode: '',
     },
     onSubmit: async ({ value }) => {
       passwordSignUp.mutate(value);
@@ -42,7 +42,7 @@ export const SignUpScreen = () => {
 
   const form2 = useForm({
     defaultValues: {
-      inviteCode: 'INVITE1234',
+      inviteCode: '',
     },
     validatorAdapter: zodValidator,
   });
