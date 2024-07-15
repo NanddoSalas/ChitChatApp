@@ -32,7 +32,7 @@ export const SignUpScreen = () => {
       fullName: '',
       email: '',
       password: '',
-      inviteCode: '',
+      inviteCode: 'PrbCCHQMH1OdhOt8',
     },
     onSubmit: async ({ value }) => {
       passwordSignUp.mutate(value);
@@ -42,7 +42,7 @@ export const SignUpScreen = () => {
 
   const form2 = useForm({
     defaultValues: {
-      inviteCode: '',
+      inviteCode: 'PrbCCHQMH1OdhOt8',
     },
     validatorAdapter: zodValidator,
   });

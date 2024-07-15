@@ -76,7 +76,7 @@ VALUES
 INSERT INTO
   invitations (invite_code, uses, max_uses, revoked, creator_id)
 VALUES
-  ('INVITE1234', 2, 10, FALSE, 1),
+  ('PrbCCHQMH1OdhOt8', 2, 0, FALSE, 1),
   ('INVITE5678', 5, 5, TRUE, 2),
   ('INVITE91011', 1, 3, FALSE, 3);
 
