@@ -1040,12 +1040,79 @@ Endpoints where a client can suscribe to:
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+### Packages
+
+This project is made up of 2 packages.
+
+- `server/` (Spring server)
+- `packages/web/` (React app)
 
 ### Prerequisites
 
+- Java 17
+- Node.js v17
+- PostgreSQL database
+- Google Client ID and Secret for Google Authentication
+
 ### Installation
+
+1. Get the code into your local machine
+
+```bash
+git clone https://github.com/NanddoSalas/ChitChatApp.git
+cd ChitChatApp
+```
+
+2. Install React app dependencies
+
+```bash
+yarn install
+```
+
+2. Setup React app environment at `packages/web/.env`
+
+```bash
+cp packages/web/.env.example packages/web/.env
+```
+
+Sample environment
+
+```
+VITE_GOOGLE_CLIENT_ID=
+VITE_API_URL=http://localhost:8080
+VITE_STOMP_URL=ws://localhost:8080/socket
+```
+
+3. Start React app
+
+```bash
+yarn dev
+```
+
+4. Setup Spring server application properties at `server/src/main/resources/application.properties`
+
+Sample application properties
+
+```
+spring.application.name=ChitChatApp Server
+spring.datasource.url=jdbc:postgresql://localhost:5432/chitchatapp
+spring.datasource.username=user
+spring.datasource.password=password
+spring.sql.init.mode=always
+secret.key=defautlSecret
+google.clientId=
+google.clientSecret=
+google.redirectUri=http://localhost:5173
+```
+
+5. Start Spring server
+
+```bash
+cd server
+./mvnw spring-boot:run
+```
+
+### Spring server
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
