@@ -1112,8 +1112,6 @@ cd server
 ./mvnw spring-boot:run
 ```
 
-### Spring server
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LICENSE -->
