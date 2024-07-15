@@ -1,6 +1,9 @@
 {
   "name": "chitchatapp",
   "private": true,
+  "scripts": {
+    "dev": "lerna run dev --scope @chitchatapp/web"
+  },
   "workspaces": [
     "packages/*"
   ],
